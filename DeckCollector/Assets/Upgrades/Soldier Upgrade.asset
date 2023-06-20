@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f5336f9c147bc428e65dd00540d096, type: 3}
+  m_Name: Soldier Upgrade
+  m_EditorClassIdentifier: 
+  unit: {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
+  id: 1
+  upgradeName: Soldier Upgrade
+  upgradeLvl: 0
+  maxUpgradeLvl: 3
+  cost: 01000000050000000a000000
+  hpIncrease: 05000000070000000a0000000f000000
+  dmgIncrease: 01000000020000000300000005000000
