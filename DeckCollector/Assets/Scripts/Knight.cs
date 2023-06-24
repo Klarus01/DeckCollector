@@ -53,10 +53,10 @@ public class Knight : Unit
 
     public void SetUpStats()
     {
-        ID = 1;
-        maxHealth = soldierUpgrade.hpIncrease[soldierUpgrade.upgradeLvl];
+        Upgrade.UpgradeLevel level = soldierUpgrade.upgradeLevels[soldierUpgrade.upgradeLvl];
+        maxHealth = level.hp;
         health = maxHealth;
-        damage = soldierUpgrade.dmgIncrease[soldierUpgrade.upgradeLvl];
+        damage = level.dmg;
         speed = 5f;
     }
 

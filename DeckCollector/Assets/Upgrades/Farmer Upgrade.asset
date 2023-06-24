@@ -15,8 +15,18 @@ MonoBehaviour:
   unit: {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
   id: 0
   upgradeName: Farmer Upgrade
-  upgradeLvl: 0
+  upgradeLvl: 1
   maxUpgradeLvl: 3
-  cost: 01000000050000000a000000
-  hpIncrease: 02000000030000000500000008000000
-  dmgIncrease: 
+  upgradeLevels:
+  - costForNextLvl: 1
+    hp: 2
+    dmg: 0
+  - costForNextLvl: 3
+    hp: 3
+    dmg: 0
+  - costForNextLvl: 5
+    hp: 5
+    dmg: 0
+  - costForNextLvl: 10
+    hp: 8
+    dmg: 0

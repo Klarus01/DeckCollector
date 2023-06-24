@@ -116,11 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01bf60abc6e3984da1c0078e8b87871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: -8520574983349684398}
-  health: 0
-  maxHealth: 0
-  damage: 0
-  ID: 1
+  unitData: {fileID: 11400000, guid: 6e670d2b4923af84da55f2d9d931795a, type: 2}
+  id: 1
   soldierUpgrade: {fileID: 11400000, guid: 5c0777fed8c17524998c5e19453b106e, type: 2}
 --- !u!50 &2974267296073911228
 Rigidbody2D:

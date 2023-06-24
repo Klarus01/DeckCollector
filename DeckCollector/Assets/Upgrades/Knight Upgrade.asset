@@ -10,13 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14f5336f9c147bc428e65dd00540d096, type: 3}
-  m_Name: Soldier Upgrade
+  m_Name: Knight Upgrade
   m_EditorClassIdentifier: 
   unit: {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
   id: 1
-  upgradeName: Soldier Upgrade
-  upgradeLvl: 0
+  upgradeName: Knight Upgrade
+  upgradeLvl: 3
   maxUpgradeLvl: 3
-  cost: 01000000050000000a000000
-  hpIncrease: 05000000070000000a0000000f000000
-  dmgIncrease: 01000000020000000300000005000000
+  upgradeLevels:
+  - costForNextLvl: 1
+    hp: 5
+    dmg: 1
+  - costForNextLvl: 5
+    hp: 7
+    dmg: 2
+  - costForNextLvl: 10
+    hp: 10
+    dmg: 3
+  - costForNextLvl: 100
+    hp: 15
+    dmg: 5

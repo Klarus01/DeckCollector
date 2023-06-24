@@ -4,14 +4,13 @@ public class Unit : MonoBehaviour
 {
     protected Animator animator;
     protected Transform target;
-    protected int closest;
-    protected float rangeOfVision = 5f;
-    protected float rangeOfAction = .5f;
+    public float rangeOfVision = 5f;
+    public float rangeOfAction = 1f;
     public float health;
     public float maxHealth;
-    protected float speed;
+    public float speed;
     public int damage;
-    public int ID;
+    public int id;
 
     private void OnMouseDrag()
     {

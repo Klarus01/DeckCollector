@@ -1,15 +1,20 @@
 using TMPro;
+using UnityEngine;
 
-public class UIManager : SingletonMonobehaviour<UIManager>
+public class UIManager : MonoBehaviour
 {
     public TMP_Text goldText;
     public TMP_Text partsText;
-    public TMP_Text costFarmer;
-    public TMP_Text costKnight;
 
     private void Start()
     {
+        GameManager.Instance.OnUIUpdate += UpdateUI;
         UpdateUI();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnUIUpdate -= UpdateUI;
     }
 
     public void UpdateUI()

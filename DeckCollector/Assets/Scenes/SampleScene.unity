@@ -208,7 +208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2005030699}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
         m_MethodName: OnUpgradeBuy
         m_Mode: 2
@@ -448,7 +448,7 @@ Animator:
   m_GameObject: {fileID: 108700987}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 05a0c83097367e04698ea31bb0457d99, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8ffa8b3a4fec989468c577c3c2aa95b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -620,7 +620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000096772, y: -30.73}
+  m_AnchoredPosition: {x: -0.00000096772, y: -30.729996}
   m_SizeDelta: {x: 100, y: 38.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216945240
@@ -841,8 +841,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldText: {fileID: 2145216616}
   partsText: {fileID: 66787407}
-  costFarmer: {fileID: 1042202096}
-  costKnight: {fileID: 995016106}
 --- !u!1001 &308776572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1074,7 +1072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000096772, y: -30.73}
+  m_AnchoredPosition: {x: -0.00000096772, y: -30.729996}
   m_SizeDelta: {x: 100, y: 38.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433991270
@@ -1720,11 +1718,11 @@ RectTransform:
   m_Father: {fileID: 517329386}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 274.99988, y: 0.000030518}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0.000030518}
   m_SizeDelta: {x: 50, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &688510708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1768,19 +1766,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688510709}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2005030699}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradePanelAnim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &688510709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1830,6 +1816,7 @@ GameObject:
   - component: {fileID: 692883531}
   - component: {fileID: 692883534}
   - component: {fileID: 692883533}
+  - component: {fileID: 692883535}
   - component: {fileID: 692883532}
   m_Layer: 0
   m_Name: FarmerUpgrade
@@ -1903,19 +1890,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 692883533}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2005030699}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: OnUpgradeBuy
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7482567008b266b479e9f473d58a9793, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Upgrade, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &692883533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1954,6 +1929,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692883530}
   m_CullTransparentMesh: 1
+--- !u!114 &692883535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692883530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1905fa452b686d247a5781d50145a39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgrade: {fileID: 11400000, guid: 7482567008b266b479e9f473d58a9793, type: 2}
+  button: {fileID: 692883532}
+  buttonText: {fileID: 1476453283}
+  costText: {fileID: 1042202096}
 --- !u!4 &825189716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 217157262251365093, guid: 9341fa3e4bf470b46bca9d4f0bb8d93a, type: 3}
@@ -1994,7 +1985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000096772, y: -30.73}
+  m_AnchoredPosition: {x: -0.00000096772, y: -30.729996}
   m_SizeDelta: {x: 100, y: 38.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &852657034
@@ -2190,7 +2181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000085831, y: -30.73}
+  m_AnchoredPosition: {x: 0.0000085831, y: -30.729996}
   m_SizeDelta: {x: 100, y: 38.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &896277315
@@ -2414,7 +2405,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2005030699}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
         m_MethodName: OnUpgradeBuy
         m_Mode: 2
@@ -2504,8 +2495,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000085831, y: 71.6}
-  m_SizeDelta: {x: 288.86, y: 42.68}
+  m_AnchoredPosition: {x: 0, y: 95}
+  m_SizeDelta: {x: 300, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &986654798
 MonoBehaviour:
@@ -2561,8 +2552,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2835,7 +2826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000085831, y: -30.73}
+  m_AnchoredPosition: {x: 0, y: -30.73}
   m_SizeDelta: {x: 100, y: 38.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042202096
@@ -2946,6 +2937,7 @@ GameObject:
   - component: {fileID: 1165127001}
   - component: {fileID: 1165127004}
   - component: {fileID: 1165127003}
+  - component: {fileID: 1165127005}
   - component: {fileID: 1165127002}
   m_Layer: 0
   m_Name: KnightUpgrade
@@ -3019,19 +3011,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1165127003}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2005030699}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: OnUpgradeBuy
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 5c0777fed8c17524998c5e19453b106e, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Upgrade, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1165127003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3070,6 +3050,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165127000}
   m_CullTransparentMesh: 1
+--- !u!114 &1165127005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165127000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1905fa452b686d247a5781d50145a39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgrade: {fileID: 11400000, guid: 5c0777fed8c17524998c5e19453b106e, type: 2}
+  button: {fileID: 1165127002}
+  buttonText: {fileID: 986654798}
+  costText: {fileID: 995016106}
 --- !u!4 &1261749826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5669318210321102179, guid: 312836d71190db04e813d25aa41e2b5c, type: 3}
@@ -3293,9 +3289,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2005030699}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradePanelAnim
+      - m_Target: {fileID: 1394147496}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: ShopPanelAnim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3352,6 +3348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1394147495}
+  - component: {fileID: 1394147496}
   m_Layer: 0
   m_Name: ShopManager
   m_TagString: Untagged
@@ -3380,6 +3377,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1394147496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394147494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18724e2c459f83a41bedfd883344aebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 108700989}
 --- !u!4 &1416150930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5669318210321102179, guid: 312836d71190db04e813d25aa41e2b5c, type: 3}
@@ -3420,8 +3430,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000066785, y: 76}
-  m_SizeDelta: {x: 309.12, y: 42.68}
+  m_AnchoredPosition: {x: 0, y: 95}
+  m_SizeDelta: {x: 300, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476453283
 MonoBehaviour:
@@ -3477,8 +3487,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3671,7 +3681,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2005030699}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
         m_MethodName: OnUpgradeBuy
         m_Mode: 2
@@ -4169,7 +4179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2005030700}
-  - component: {fileID: 2005030699}
+  - component: {fileID: 2005030701}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
@@ -4177,22 +4187,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2005030699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005030698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6191c81f622119741b6bfb44f3a28f71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 517329389}
-  upgrades:
-  - {fileID: 11400000, guid: 7482567008b266b479e9f473d58a9793, type: 2}
-  - {fileID: 11400000, guid: 5c0777fed8c17524998c5e19453b106e, type: 2}
 --- !u!224 &2005030700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4214,6 +4208,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &2005030701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005030698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2900419147d15964bae28404ffc857e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 517329389}
+  sliderButton: {fileID: 688510708}
+  upgradeButtons:
+  - {fileID: 692883535}
+  - {fileID: 1165127005}
 --- !u!1 &2009449637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4299,7 +4310,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2005030699}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
         m_MethodName: OnUpgradeBuy
         m_Mode: 2

@@ -14,7 +14,7 @@ public class CardManager : MonoBehaviour
         numberOfCards = GameManager.Instance.deck.Count;
         for (int i = 0; i < numberOfCards; i++)
         {
-            GameObject card = Instantiate(cardPrefab[GameManager.Instance.deck[i].ID], transform);
+            GameObject card = Instantiate(cardPrefab[GameManager.Instance.deck[i].id], transform);
             cards.Add(card);
         }
 

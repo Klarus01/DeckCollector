@@ -116,11 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edbf1d839d6f8f4280da54fdc347a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8025996513951263953}
-  health: 0
-  maxHealth: 0
-  damage: 0
-  ID: 0
+  unitData: {fileID: 11400000, guid: 01283598b71a5594597d3d9b963d04b2, type: 2}
   farmerUpgrade: {fileID: 11400000, guid: 7482567008b266b479e9f473d58a9793, type: 2}
 --- !u!50 &4475383207683729762
 Rigidbody2D:

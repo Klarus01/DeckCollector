@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             GameManager.Instance.partsCount++;
-            UIManager.Instance.UpdateUI();
+            GameManager.Instance.UpdateUI();
             Destroy(gameObject);
         }
     }

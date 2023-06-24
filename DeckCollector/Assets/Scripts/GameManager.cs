@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
@@ -7,4 +8,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public List<Unit> unitsOnBoard = new();
     public List<Unit> deck = new();
     public List<Unit> units = new();
+    public event Action OnUIUpdate;
+
+    public void UpdateUI()
+    {
+        OnUIUpdate?.Invoke();
+    }
 }

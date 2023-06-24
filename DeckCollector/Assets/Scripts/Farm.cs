@@ -24,7 +24,7 @@ public class Farm : MonoBehaviour
             if (timer >= interval)
             {
                 GameManager.Instance.goldCount++;
-                UIManager.Instance.UpdateUI();
+                GameManager.Instance.UpdateUI();
                 goldAvailableOnFarm--;
                 if (goldAvailableOnFarm.Equals(0))
                 {

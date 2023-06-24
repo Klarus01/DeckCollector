@@ -44,8 +44,8 @@ public class Farmer : Unit
 
     public void SetUpStats()
     {
-        ID = 0;
-        maxHealth = farmerUpgrade.hpIncrease[farmerUpgrade.upgradeLvl];
+        Upgrade.UpgradeLevel level = farmerUpgrade.upgradeLevels[farmerUpgrade.upgradeLvl];
+        maxHealth = level.hp;
         health = maxHealth;
         speed = 3f;
     }
