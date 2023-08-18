@@ -1,27 +1,34 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
-public class UpgradeManager
+public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
 {
-    public static void OnUpgradeBuy(Upgrade upgrade)
-    {
-        if (upgrade.unit is Farmer)
-        {
-            Farmer[] farmers = Object.FindObjectsOfType<Farmer>();
-            upgrade.upgradeLvl++;
-            foreach (Farmer f in farmers)
-            {
-                f.SetUpStats();
-            }
-        }
+    private Dictionary<Type, Unit[]> unitDictionary;
 
-        if (upgrade.unit is Knight)
+    public void OnUpgradeBuy(Upgrade upgrade)
+    {
+        RefreshUnitDictionary();
+        upgrade.upgradeLvl++;
+
+        Type unitType = upgrade.unit.GetType();
+
+        if (unitDictionary.TryGetValue(unitType, out Unit[] units))
         {
-            Knight[] knights = Object.FindObjectsOfType<Knight>();
-            upgrade.upgradeLvl++;
-            foreach (Knight k in knights)
+            foreach (Unit unit in units)
             {
-                k.SetUpStats();
+                unit.ApplyUpgrade(upgrade);
             }
         }
+    }
+
+    public void RefreshUnitDictionary()
+    {
+        unitDictionary = new Dictionary<Type, Unit[]>
+        {
+            { typeof(Farmer), FindObjectsOfType<Farmer>() },
+            { typeof(Knight), FindObjectsOfType<Knight>() },
+            { typeof(Assasin), FindObjectsOfType<Assasin>() },
+            { typeof(Axeman), FindObjectsOfType<Axeman>() }
+        };
     }
 }

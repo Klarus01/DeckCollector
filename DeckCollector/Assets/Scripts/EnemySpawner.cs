@@ -30,7 +30,6 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timeBetweenWaves);
-            Debug.Log("Wave start");
             if (currentWaveIndex < waves.Length)
             {
                 Wave currentWave = waves[currentWaveIndex];
@@ -54,7 +53,6 @@ public class EnemySpawner : MonoBehaviour
                 liveEnemies = liveEnemies.Where(enemy => enemy != null).ToArray();
                 yield return new WaitForSeconds(.1f);
             }
-            Debug.Log("XD");
         }
     }
 }

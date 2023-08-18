@@ -89,8 +89,9 @@ GameObject:
   - component: {fileID: 2423056134933911384}
   - component: {fileID: 875075660810606548}
   - component: {fileID: 1085651013916660834}
+  - component: {fileID: 8420348063512254462}
   m_Layer: 5
-  m_Name: CardSoldier
+  m_Name: CardKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
+  isAboveSellPoint: 0
 --- !u!212 &1085651013916660834
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -220,3 +222,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &8420348063512254462
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423056134933911381}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 126, y: 176}
+  m_EdgeRadius: 0

@@ -5,13 +5,12 @@ public class Enemy : MonoBehaviour
     private Transform target;
     private Animator animator;
 
-    private int closest;
-    private float shortestDist;
     private float health = 3f;
     private float speed = 4f;
     private float damage = 1f;
     private float attackSpeed = 1f;
     private float timer = 1f;
+    private float rangeOfVision = 100f;
 
     private void Awake()
     {
@@ -37,6 +36,10 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Unit>(out Unit Unit))
         {
+            if (Unit.isInvisible)
+            {
+                return;
+            }
             if (timer >= attackSpeed)
             {
                 animator.SetTrigger("Attack");
@@ -46,26 +49,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void CheckClosestUnit()
+    protected void CheckClosestUnit()
     {
-        if (GameManager.Instance.unitsOnBoard.Equals(null))
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+        float closestDistance = Mathf.Infinity;
+        Transform closestTarget = null;
+        foreach (Collider2D target in targets)
         {
-            animator.SetBool("isWalking", false);
-            return;
-        }
-
-        shortestDist = 8f;
-        closest = 0;
-        for (int i = 0; i < GameManager.Instance.unitsOnBoard.Count; i++)
-        {
-            if (Vector2.Distance(transform.position, GameManager.Instance.unitsOnBoard[i].transform.position) < shortestDist)
+            if (target.TryGetComponent<Unit>(out Unit unit))
             {
-                closest = i;
-                shortestDist = Vector2.Distance(transform.position, GameManager.Instance.unitsOnBoard[i].transform.position);
+                if (!unit.isInvisible)
+                {
+                    float distanceToUnit = Vector2.Distance(transform.position, unit.transform.position);
+                    if (distanceToUnit < closestDistance)
+                    {
+                        closestDistance = distanceToUnit;
+                        closestTarget = unit.transform;
+                    }
+                }
             }
-            target = GameManager.Instance.unitsOnBoard[closest].transform;
         }
+        target = closestTarget;
     }
+
     public void GetDamage(float damage)
     {
         health -= damage;

@@ -4,8 +4,7 @@ using UnityEngine;
 public class Upgrade : ScriptableObject
 {
     public Unit unit;
-    public int id;
-    public string upgradeName;
+    public Sprite unitSprite;
     public int upgradeLvl;
     public int maxUpgradeLvl = 3;
 

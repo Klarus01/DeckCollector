@@ -5,22 +5,42 @@ public class CardManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] cardPrefab;
     [SerializeField] private GameObject cardHolder;
-    private List<GameObject> cards = new();
-    private int numberOfCards;
-    private float cardSpacing = 4f;
+    [SerializeField] private List<GameObject> cards = new();
+    private List<Unit> cardsToPlay = new();
 
     private void Start()
     {
-        numberOfCards = GameManager.Instance.deck.Count;
-        for (int i = 0; i < numberOfCards; i++)
+        cardsToPlay = GameManager.Instance.deck.deck;
+        GameManager.Instance.OnHandUpdate += PrepareForNewDraw;
+
+        PrepareForNewDraw();
+    }
+
+    private void PrepareForNewDraw()
+    {
+        DeleteCards();
+        CreateCards();
+        ShuffleCards();
+    }
+
+    private void DeleteCards()
+    {
+        for (int i = 0; i < cards.Count; i++)
         {
-            GameObject card = Instantiate(cardPrefab[GameManager.Instance.deck[i].id], transform);
+            Destroy(cards[i]);
+        }
+        cards.Clear();
+    }
+
+    private void CreateCards()
+    {
+        //zszufluj tutaj, beka
+        for (int i = 0; i < cardsToPlay.Count; i++)
+        {
+            GameObject card = Instantiate(cardPrefab[cardsToPlay[i].id], cardHolder.transform);
             cards.Add(card);
         }
-
-        ShuffleCards();
-
-        ArrangeCards();
+        cardsToPlay = GameManager.Instance.deck.cardsInHand;
     }
 
     private void ShuffleCards()
@@ -32,29 +52,5 @@ public class CardManager : MonoBehaviour
             cards[i] = cards[randomIndex];
             cards[randomIndex] = temp;
         }
-    }
-
-    private void ArrangeCards()
-    {
-        Vector3 cardHolderPosition = cardHolder.transform.position;
-
-        float totalWidth = numberOfCards * cardSpacing;
-        float startX = cardHolderPosition.x - (totalWidth / 2f);
-
-        for (int i = 0; i < cards.Count; i++)
-        {
-            float xPosition = startX + i * cardSpacing;
-            float yPosition = cardHolderPosition.y;
-            Vector3 newPosition = new(xPosition, yPosition, cardHolderPosition.z);
-            cards[i].transform.position = newPosition;
-        }
-    }
-
-
-    public void ShiftCards()
-    {
-        cards.RemoveAt(0);
-
-        ArrangeCards();
     }
 }

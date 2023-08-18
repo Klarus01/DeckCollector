@@ -5,7 +5,8 @@ public class Farm : MonoBehaviour
     private Animator animator;
     private float timer = 0f;
     private float interval = 5f;
-    private bool isCollision;
+    public bool isCollision;
+    public int numberOfEmployees = 0;
 
     public int goldAvailableOnFarm = 5;
 
@@ -16,17 +17,17 @@ public class Farm : MonoBehaviour
 
     private void Update()
     {
+        CheckHowManyFarmers();
         if (isCollision)
         {
             animator.SetBool("isAction", true);
-            timer += Time.deltaTime;
+            timer += numberOfEmployees * Time.deltaTime;
 
             if (timer >= interval)
             {
-                GameManager.Instance.goldCount++;
-                GameManager.Instance.UpdateUI();
+                GameManager.Instance.GoldCount++;
                 goldAvailableOnFarm--;
-                if (goldAvailableOnFarm.Equals(0))
+                if (goldAvailableOnFarm <= 0)
                 {
                     Destroy(gameObject);
                 }
@@ -35,17 +36,22 @@ public class Farm : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CheckHowManyFarmers()
     {
-        if (collision.GetComponent<Farmer>())
+        numberOfEmployees = 0;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+        foreach (Collider2D collider in colliders)
         {
-            isCollision = true;
+            if (collider.TryGetComponent<Farmer>(out Farmer farmer))
+            {
+                if (!farmer.isDragged)
+                {
+                    numberOfEmployees++;
+                }
+            }
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Farmer>())
+        isCollision = true;
+        if (numberOfEmployees.Equals(0))
         {
             animator.SetBool("isAction", false);
             isCollision = false;

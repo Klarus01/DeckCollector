@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4718745188b0e8f4a8747ab74f766fc2, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: -1837951994, guid: d79760a4fd4970548907388dc3320435, type: 3}
   unit: {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
-  id: 1
-  shopItemName: Knight

@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af67ca98dc6856944bf4ec6276c9c24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldAvailableOnFarm: 1
+  goldAvailableOnFarm: 3
 --- !u!95 &8066623136492592994
 Animator:
   serializedVersion: 5

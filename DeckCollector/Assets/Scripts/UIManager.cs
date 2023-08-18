@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text goldText;
     public TMP_Text partsText;
+    public TMP_Text shopCostText;
 
     private void Start()
     {
@@ -12,14 +13,10 @@ public class UIManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void OnDestroy()
-    {
-        GameManager.Instance.OnUIUpdate -= UpdateUI;
-    }
-
     public void UpdateUI()
     {
-        goldText.text = GameManager.Instance.goldCount.ToString();
-        partsText.text = GameManager.Instance.partsCount.ToString();
+        goldText.SetText(GameManager.Instance.GoldCount.ToString());
+        partsText.SetText(GameManager.Instance.partsCount.ToString());
+        shopCostText.SetText($"Unit cost: {GameManager.Instance.ShopCost}");
     }
 }

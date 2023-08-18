@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4718745188b0e8f4a8747ab74f766fc2, type: 3}
   m_Name: Farmer
   m_EditorClassIdentifier: 
+  unitSprite: {fileID: -1372420322, guid: 3678f2a8c05851147bcde25e8350297e, type: 3}
   unit: {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
-  id: 0
-  shopItemName: Farmer
