@@ -15,10 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Enemy[] liveEnemies;
     private float timeBetweenWaves = 2f;
-    public int waveNumber = 0;
     private int currentWaveIndex = 0;
-
-
 
     private void Start()
     {
@@ -27,32 +24,29 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnWaves()
     {
-        while (true)
+        while (currentWaveIndex < waves.Length)
         {
             yield return new WaitForSeconds(timeBetweenWaves);
-            if (currentWaveIndex < waves.Length)
+            Wave currentWave = waves[currentWaveIndex];
+            liveEnemies = new Enemy[currentWave.count];
+            for (int i = 0; i < currentWave.count; i++)
             {
-                Wave currentWave = waves[currentWaveIndex];
-                liveEnemies = new Enemy[currentWave.count];
-                for (int i = 0; i < currentWave.count; i++)
-                {
-                    Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                    Vector3 randPos = new(Random.Range(randomSpawnPoint.position.x - .7f, randomSpawnPoint.position.x + .7f), Random.Range(randomSpawnPoint.position.y - .7f, randomSpawnPoint.position.y + .7f));
-                    liveEnemies[i] = Instantiate(enemy, randPos, Quaternion.identity);
-                }
-                currentWaveIndex++;
+                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                Vector3 randPos = randomSpawnPoint.position + new Vector3(Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f), 0f);
+                liveEnemies[i] = Instantiate(enemy, randPos, Quaternion.identity);
             }
-            else
-            {
-                Debug.Log("Przeszed³eœ wszystkie fale!");
-                break;
-            }
+            currentWaveIndex++;
 
-            while (liveEnemies.Length > 0)
-            {
-                liveEnemies = liveEnemies.Where(enemy => enemy != null).ToArray();
-                yield return new WaitForSeconds(.1f);
-            }
+            yield return StartCoroutine(WaitForWaveCompletion());
+        }
+        Debug.Log("Przeszed³eœ wszystkie fale!");
+    }
+    private IEnumerator WaitForWaveCompletion()
+    {
+        while (liveEnemies.Length > 0)
+        {
+            liveEnemies = liveEnemies.Where(enemy => enemy != null).ToArray();
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

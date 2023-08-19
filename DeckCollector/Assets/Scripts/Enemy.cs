@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform target;
-    private Animator animator;
+    [SerializeField] private Transform target;
+    [SerializeField] private Animator animator;
+    [SerializeField] private float health = 3f;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private float damage = 1f;
+    [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] private float rangeOfVision = 100f;
 
-    private float health = 3f;
-    private float speed = 4f;
-    private float damage = 1f;
-    private float attackSpeed = 1f;
     private float timer = 1f;
-    private float rangeOfVision = 100f;
 
     private void Awake()
     {
@@ -34,16 +34,16 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Unit>(out Unit Unit))
+        if (collision.gameObject.TryGetComponent<Unit>(out Unit unit))
         {
-            if (Unit.isInvisible)
+            if (unit.isInvisible)
             {
                 return;
             }
             if (timer >= attackSpeed)
             {
                 animator.SetTrigger("Attack");
-                Unit.GetDamage(damage);
+                unit.GetDamage(damage);
                 timer = 0f;
             }
         }
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            GameManager.Instance.partsCount++;
+            GameManager.Instance.PartCount++;
             GameManager.Instance.UpdateUI();
             Destroy(gameObject);
         }

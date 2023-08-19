@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82238467aa6c0949971f3b32f64de13, type: 3}
   m_Name: FarmerData
   m_EditorClassIdentifier: 
+  unit: {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
+  cardSprite: {fileID: -1372420322, guid: 3678f2a8c05851147bcde25e8350297e, type: 3}
   maxHealth: 2
   rangeOfVision: 10
   rangeOfAction: 1.5

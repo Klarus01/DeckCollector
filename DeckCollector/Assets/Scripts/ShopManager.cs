@@ -2,31 +2,15 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private ShopButtonUI[] shopButtons;
+    [SerializeField] private ShopUIController shopUIController;
     [SerializeField] private ShopItem[] shopItems;
     public ShopItem[] displayedItems;
-    private int refreshCost = 1;
+    private readonly int refreshCost = 1;
 
     private void Start()
     {
-        displayedItems = new ShopItem[shopButtons.Length];
+        displayedItems = new ShopItem[shopUIController.shopButtons.Length];
         RefreshShopItems();
-    }
-
-    public void ShopPanelAnim()
-    {
-        animator.SetTrigger("ShowTrigger");
-    }
-
-    public void SetUpShopPanel()
-    {
-        for (int i = 0; i < displayedItems.Length; i++)
-        {
-            ShopItem item = displayedItems[i];
-            shopButtons[i].gameObject.SetActive(true);
-            shopButtons[i].SetShopItem(item);
-        }
     }
 
     public void RefreshShopItems()
@@ -39,7 +23,7 @@ public class ShopManager : MonoBehaviour
                 ShopItem randomItem = GetRandomItem();
                 displayedItems[i] = randomItem;
             }
-            SetUpShopPanel();
+            shopUIController.SetShopButtons(displayedItems);
         }
     }
 

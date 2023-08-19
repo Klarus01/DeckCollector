@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82238467aa6c0949971f3b32f64de13, type: 3}
   m_Name: AxemanData
   m_EditorClassIdentifier: 
+  unit: {fileID: 8893078822102297094, guid: 89f779046fd8403408402955f29c744b, type: 3}
+  cardSprite: {fileID: -173673758, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
   maxHealth: 7
   rangeOfVision: 10
   rangeOfAction: 2

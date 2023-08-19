@@ -41,12 +41,12 @@ public class UpgradeButtonUI : MonoBehaviour
             return false;
         }
 
-        if (level.costForNextLvl > GameManager.Instance.partsCount)
+        if (level.costForNextLvl > GameManager.Instance.PartCount)
         {
             return false;
         }
 
-        GameManager.Instance.partsCount -= level.costForNextLvl;
+        GameManager.Instance.PartCount -= level.costForNextLvl;
         return true;
     }
 

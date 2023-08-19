@@ -15,13 +15,14 @@ public class Unit : MonoBehaviour
 
     public int id;
 
-    protected float health;
-    protected float maxHealth;
+    public float maxHealth;
+    public float health;
     protected float rangeOfVision = 10f;
     protected float rangeOfAction = 1f;
     protected int damage;
     protected float attackSpeed = 1f;
     public bool isInvisible = false;
+    public bool isAboveDropPoint;
     public bool isDragged;
     protected float speed;
     protected float timer;
@@ -44,10 +45,15 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public virtual void OnMouseDown()
+    {
+        GameManager.Instance.cardManager.ToggleDropZone();
+        animator.SetBool("isDragged", true);
+    }
+
     private void OnMouseDrag()
     {
         isDragged = true;
-        animator.SetBool("isDragged", true);
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = -1f;
         transform.position = mousePos;
@@ -57,6 +63,12 @@ public class Unit : MonoBehaviour
     {
         isDragged = false;
         animator.SetBool("isDragged", false);
+        if (isAboveDropPoint)
+        {
+            GameManager.Instance.cardManager.ToggleDropZone();
+            GameManager.Instance.cardManager.BackUnitToHand(this);
+            Destroy(gameObject);
+        }
     }
 
     public virtual void SetUpStats(Upgrade upgrade)
@@ -123,5 +135,13 @@ public class Unit : MonoBehaviour
             }
         }
         target = closestTarget;
+    }
+
+    protected void MoveTowardsTarget()
+    {
+        if (target != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
     }
 }

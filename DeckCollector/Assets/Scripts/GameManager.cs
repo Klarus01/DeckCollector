@@ -7,10 +7,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public int ShopCost { get { return shopItemCost; } set { shopItemCost = value; OnUIUpdate?.Invoke(); } }
     private int goldCount = 5;
     public int GoldCount { get { return goldCount; } set { goldCount = value; OnUIUpdate?.Invoke(); } }
-    public int partsCount = 6;
+    private int partCount = 6;
+    public int PartCount { get { return partCount; } set { partCount = value; OnUIUpdate?.Invoke(); } }
     public int maxDeckSize = 8;
     public List<Unit> units = new();
     public Deck deck;
+    public CardManager cardManager;
     public event Action OnUIUpdate;
     public event Action OnHandUpdate;
 

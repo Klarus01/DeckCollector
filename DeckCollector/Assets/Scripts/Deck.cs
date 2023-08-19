@@ -15,8 +15,8 @@ public class Deck : MonoBehaviour
     public void PlayCard(Unit unit, Transform trans)
     {
         Unit newUnit = Instantiate(unit, trans.position, Quaternion.identity);
-        GameManager.Instance.deck.cardsOnBoard.Add(newUnit);
-        GameManager.Instance.deck.cardsInHand.Remove(unit);
+        cardsOnBoard.Add(newUnit);
+        cardsInHand.Remove(unit);
     }
 
     public void AddCard(Unit unit)

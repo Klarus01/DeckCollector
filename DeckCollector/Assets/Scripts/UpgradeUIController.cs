@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeManagerUI : MonoBehaviour
+public class UpgradeUIController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private Button sliderButton;
+    [SerializeField] private Button slideButton;
     [SerializeField] private UpgradeButtonUI[] upgradeButtons;
 
     private void Start()
     {
-        sliderButton.onClick.AddListener(UpgradePanelAnim);
+        slideButton.onClick.AddListener(UpgradePanelAnim);
     }
 
     public void UpgradePanelAnim()

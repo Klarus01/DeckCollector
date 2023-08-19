@@ -1,56 +1,31 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] cardPrefab;
-    [SerializeField] private GameObject cardHolder;
-    [SerializeField] private List<GameObject> cards = new();
-    private List<Unit> cardsToPlay = new();
+    [SerializeField] private Deck deck;
+    [SerializeField] private CardUIController cardUIController;
+    public Transform cardInUse;
 
     private void Start()
     {
-        cardsToPlay = GameManager.Instance.deck.deck;
         GameManager.Instance.OnHandUpdate += PrepareForNewDraw;
-
         PrepareForNewDraw();
     }
 
     private void PrepareForNewDraw()
     {
-        DeleteCards();
-        CreateCards();
-        ShuffleCards();
+        cardUIController.PrepareForNewDraw(GameManager.Instance.deck.deck);
     }
 
-    private void DeleteCards()
+    public void BackUnitToHand(Unit unit)
     {
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Destroy(cards[i]);
-        }
-        cards.Clear();
+        GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);
+        GameManager.Instance.deck.cardsOnBoard.Remove(unit);
+        cardUIController.CardBackToHand(unit);
     }
 
-    private void CreateCards()
+    public void ToggleDropZone()
     {
-        //zszufluj tutaj, beka
-        for (int i = 0; i < cardsToPlay.Count; i++)
-        {
-            GameObject card = Instantiate(cardPrefab[cardsToPlay[i].id], cardHolder.transform);
-            cards.Add(card);
-        }
-        cardsToPlay = GameManager.Instance.deck.cardsInHand;
-    }
-
-    private void ShuffleCards()
-    {
-        for (int i = 0; i < cards.Count; i++)
-        {
-            int randomIndex = Random.Range(i, cards.Count);
-            GameObject temp = cards[i];
-            cards[i] = cards[randomIndex];
-            cards[randomIndex] = temp;
-        }
+        cardUIController.ToggleDropZone();
     }
 }

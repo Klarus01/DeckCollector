@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82238467aa6c0949971f3b32f64de13, type: 3}
   m_Name: AssasinData
   m_EditorClassIdentifier: 
+  unit: {fileID: 7614349338531286103, guid: c6cc5d257692793468b0df0a7d7cb14b, type: 3}
+  cardSprite: {fileID: 1808876003, guid: 6656a143b8a028c47bd2bf508e027ba2, type: 3}
   maxHealth: 1
   rangeOfVision: 3
   rangeOfAction: 1

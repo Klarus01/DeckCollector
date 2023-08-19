@@ -25,13 +25,18 @@ public class Farmer : Unit
 
             if (distanceToTarget < rangeOfAction)
             {
-                animator.SetBool("isGathering", true);
+                GatherResources();
             }
             else
             {
                 animator.SetBool("isGathering", false);
-                transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                MoveTowardsTarget();
             }
         }
+    }
+
+    private void GatherResources()
+    {
+        animator.SetBool("isGathering", true);
     }
 }

@@ -22,10 +22,7 @@ public class Axeman : Unit
             timer += Time.deltaTime;
         }
 
-        if (target != null)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
+        MoveTowardsTarget();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -50,18 +47,24 @@ public class Axeman : Unit
             return;
         }
 
+        PerformAttack();
+
+        isAttacking = false;
+    }
+
+    private void PerformAttack()
+    {
         isAttacking = true;
 
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfAction);
         foreach (Collider2D target in targets)
         {
-            if (enemy != null)
+            if (target.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.GetDamage(damage);
             }
         }
         animator.SetTrigger("Attack");
         timer = 0f;
-        isAttacking = false;
     }
 }

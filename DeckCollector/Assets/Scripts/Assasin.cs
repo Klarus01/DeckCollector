@@ -24,6 +24,26 @@ public class Assasin : Unit
             timer += Time.deltaTime;
         }
 
+        ManageInvisibility();
+
+        MoveTowardsTarget();
+    }
+
+    public override void OnMouseDown()
+    {
+        base.OnMouseDown();
+        isInvisible = true;
+        invisibleTimer = Mathf.Infinity;
+    }
+
+    public override void OnMouseUp()
+    {
+        base.OnMouseUp();
+        invisibleTimer = .5f;
+    }
+
+    private void ManageInvisibility()
+    {
         if (isInvisible)
         {
             spriteRenderer.color = new Color(1f, 1f, 1f, .5f);
@@ -35,22 +55,5 @@ public class Assasin : Unit
                 invisibleTimer = invisible;
             }
         }
-
-        if (target != null)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
-    }
-
-    public void OnMouseDown()
-    {
-        isInvisible = true;
-        invisibleTimer = Mathf.Infinity;
-    }
-
-    public override void OnMouseUp()
-    {
-        base.OnMouseUp();
-        invisibleTimer = .5f;
     }
 }

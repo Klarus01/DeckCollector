@@ -20,19 +20,24 @@ public class Farm : MonoBehaviour
         CheckHowManyFarmers();
         if (isCollision)
         {
-            animator.SetBool("isAction", true);
-            timer += numberOfEmployees * Time.deltaTime;
+            ManageGathering();
+        }
+    }
 
-            if (timer >= interval)
+    private void ManageGathering()
+    {
+        animator.SetBool("isAction", true);
+        timer += numberOfEmployees * Time.deltaTime;
+
+        if (timer >= interval)
+        {
+            GameManager.Instance.GoldCount++;
+            goldAvailableOnFarm--;
+            if (goldAvailableOnFarm <= 0)
             {
-                GameManager.Instance.GoldCount++;
-                goldAvailableOnFarm--;
-                if (goldAvailableOnFarm <= 0)
-                {
-                    Destroy(gameObject);
-                }
-                timer = 0f;
+                Destroy(gameObject);
             }
+            timer = 0f;
         }
     }
 

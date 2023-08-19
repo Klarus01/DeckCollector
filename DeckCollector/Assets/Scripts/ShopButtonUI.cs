@@ -10,7 +10,7 @@ public class ShopButtonUI : MonoBehaviour
 
     private void Start()
     {
-        button.onClick.AddListener(() => { OnButtonClick(unit); });
+        button.onClick.AddListener(OnButtonClick);
     }
 
     public void SetShopItem(ShopItem shopItem)
@@ -19,19 +19,31 @@ public class ShopButtonUI : MonoBehaviour
         image.sprite = shopItem.unitSprite;
     }
 
-    public void OnButtonClick(Unit unit)
+    public void OnButtonClick()
     {
-        int cardCount = GameManager.Instance.deck.deck.Count;
-        if (cardCount.Equals(GameManager.Instance.maxDeckSize))
+        if (ShouldPurchaseCard())
         {
-            return;
+            PerformCardPurchase();
         }
+    }
 
-        if (GameManager.Instance.GoldCount < GameManager.Instance.ShopCost)
-        {
-            return;
-        }
+    private bool ShouldPurchaseCard()
+    {
+        return CanAddCardToDeck() && HasEnoughGold();
+    }
 
+    private bool CanAddCardToDeck()
+    {
+        return GameManager.Instance.deck.deck.Count < GameManager.Instance.maxDeckSize;
+    }
+
+    private bool HasEnoughGold()
+    {
+        return GameManager.Instance.GoldCount >= GameManager.Instance.ShopCost;
+    }
+
+    private void PerformCardPurchase()
+    {
         GameManager.Instance.GoldCount -= GameManager.Instance.ShopCost;
         GameManager.Instance.ShopCost *= 2;
         GameManager.Instance.deck.AddCard(unit);

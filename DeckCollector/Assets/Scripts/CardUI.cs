@@ -1,36 +1,83 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class CardUI : MonoBehaviour, IDragHandler, IEndDragHandler
+public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private Unit unitPrefab;
+    public Image cardImage;
+    public Unit unit;
     private int cardValue = 2;
+    public float unitHealth;
+    public float unitMaxHealth;
     public bool isAboveSellPoint;
+    public bool isAboveDropPoint;
+    public Transform orginalParent;
+    public Slider slider;
+    private float restTimer = 5f;
+
+    private void Start()
+    {
+        orginalParent = transform.parent;
+        ResetTimeCalculation();
+        SetRestSlider();
+    }
+
+    private void Update()
+    {
+        if (restTimer > 0f)
+        {
+            restTimer -= Time.deltaTime;
+            slider.value = restTimer;
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        transform.SetParent(GameManager.Instance.cardManager.cardInUse);
+        GameManager.Instance.cardManager.ToggleDropZone();
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        transform.Translate(mousePos);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = mousePos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (isAboveSellPoint)
         {
-            Debug.Log("SOLD!");
             GameManager.Instance.GoldCount += cardValue;
-            GameManager.Instance.deck.SellCard(unitPrefab);
+            GameManager.Instance.deck.SellCard(unit);
             Destroy(gameObject);
+        }
+        else if (isAboveDropPoint)
+        {
+            GameManager.Instance.UpdateHand();
         }
         else
         {
             PlayCard();
         }
+
+        transform.SetParent(orginalParent);
+        GameManager.Instance.cardManager.ToggleDropZone();
     }
 
     private void PlayCard()
     {
-        GameManager.Instance.deck.PlayCard(unitPrefab, transform);
+        GameManager.Instance.deck.PlayCard(unit, transform);
         Destroy(gameObject);
+    }
+
+    public void SetRestSlider()
+    {
+        slider.maxValue = restTimer;
+        slider.value = restTimer;
+    }
+
+    private void ResetTimeCalculation()
+    {
+        restTimer = (unitMaxHealth - unitHealth);
     }
 }

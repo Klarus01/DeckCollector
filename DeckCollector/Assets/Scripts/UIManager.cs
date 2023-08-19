@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public TMP_Text goldText;
-    public TMP_Text partsText;
-    public TMP_Text shopCostText;
+    [Header("UI Elements")]
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private TMP_Text partsText;
+    [SerializeField] private TMP_Text shopCostText;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class UIManager : MonoBehaviour
     public void UpdateUI()
     {
         goldText.SetText(GameManager.Instance.GoldCount.ToString());
-        partsText.SetText(GameManager.Instance.partsCount.ToString());
+        partsText.SetText(GameManager.Instance.PartCount.ToString());
         shopCostText.SetText($"Unit cost: {GameManager.Instance.ShopCost}");
     }
 }
