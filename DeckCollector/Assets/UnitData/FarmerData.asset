@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
   cardSprite: {fileID: -1372420322, guid: 3678f2a8c05851147bcde25e8350297e, type: 3}
+  upgrade: {fileID: 11400000, guid: 7482567008b266b479e9f473d58a9793, type: 2}
   maxHealth: 2
   rangeOfVision: 10
   rangeOfAction: 1.5

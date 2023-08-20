@@ -1747,7 +1747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e19f5b06c7c3e47984fd7fd99f69b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck: {fileID: 664744782}
   cardUIController: {fileID: 629954374}
   cardInUse: {fileID: 1717161226}
 --- !u!4 &629954373
@@ -1780,6 +1779,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 875075660810606548, guid: 429c971362eed1749884d09114d44dd5, type: 3}
   cardHolder: {fileID: 1707809009}
   dropZone: {fileID: 1661622269}
+  cards: []
 --- !u!1 &664744778
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,7 +3692,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880532857}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaccccf9cd85e7e43bf8ef71135dc3f1, type: 3}
   m_Name: 

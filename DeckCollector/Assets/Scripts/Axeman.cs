@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class Axeman : Unit
 {
-    public Upgrade upgrade;
     private bool isAttacking = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        SetUpStats(upgrade);
-        attackSpeed = 2f;
+        SetUpStats(unitData.upgrade);
         timer = attackSpeed;
-        rangeOfAction = 2f;
     }
 
     private void Update()
     {
         SearchForTarget();
-        if (isDragged && timer < attackSpeed)
+        if (!isDragged && timer < attackSpeed)
         {
             timer += Time.deltaTime;
         }

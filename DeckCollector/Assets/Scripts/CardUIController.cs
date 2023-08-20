@@ -6,7 +6,7 @@ public class CardUIController : MonoBehaviour
     [SerializeField] private CardUI cardPrefab;
     [SerializeField] private GameObject cardHolder;
     [SerializeField] private GameObject dropZone;
-    private List<GameObject> cards = new();
+    [SerializeField] private List<CardUI> cards = new();
     private bool isDropZoneActive = false;
 
     public void PrepareForNewDraw(List<Unit> cardsToPlay)
@@ -17,9 +17,9 @@ public class CardUIController : MonoBehaviour
 
     private void DeleteCards()
     {
-        foreach (GameObject card in cards)
+        foreach (CardUI cardUI in cards)
         {
-            Destroy(card);
+            Destroy(cardUI);
         }
         cards.Clear();
     }
@@ -33,7 +33,7 @@ public class CardUIController : MonoBehaviour
         }
     }
 
-    public void CardBackToHand(Unit unit)
+    public void UnitBackToHand(Unit unit)
     {
         CardUI cardUI = Instantiate(cardPrefab, cardHolder.transform);
         CreateCard(cardUI, unit);
@@ -45,7 +45,7 @@ public class CardUIController : MonoBehaviour
         cardUI.cardImage.sprite = unit.unitData.cardSprite;
         cardUI.unitHealth = unit.health;
         cardUI.unitMaxHealth = unit.maxHealth;
-        cards.Add(cardUI.gameObject);
+        cards.Add(cardUI);
     }
 
     public void ToggleDropZone()

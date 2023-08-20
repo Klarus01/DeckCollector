@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private Deck deck;
     [SerializeField] private CardUIController cardUIController;
     public Transform cardInUse;
 
@@ -21,7 +20,7 @@ public class CardManager : MonoBehaviour
     {
         GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);
         GameManager.Instance.deck.cardsOnBoard.Remove(unit);
-        cardUIController.CardBackToHand(unit);
+        cardUIController.UnitBackToHand(unit);
     }
 
     public void ToggleDropZone()

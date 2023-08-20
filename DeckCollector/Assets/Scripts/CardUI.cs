@@ -12,12 +12,14 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     public bool isAboveSellPoint;
     public bool isAboveDropPoint;
     public Transform orginalParent;
+    public Vector3 orginalPosition;
     public Slider slider;
     private float restTimer = 5f;
 
     private void Start()
     {
         orginalParent = transform.parent;
+        orginalPosition = transform.position;
         ResetTimeCalculation();
         SetRestSlider();
     }
@@ -33,18 +35,33 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (restTimer > 0f)
+        {
+            return;
+        }
+
         transform.SetParent(GameManager.Instance.cardManager.cardInUse);
         GameManager.Instance.cardManager.ToggleDropZone();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (restTimer > 0f)
+        {
+            return;
+        }
+
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (restTimer > 0f)
+        {
+            return;
+        }
+
         if (isAboveSellPoint)
         {
             GameManager.Instance.GoldCount += cardValue;
@@ -53,14 +70,14 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         }
         else if (isAboveDropPoint)
         {
-            GameManager.Instance.UpdateHand();
+            transform.position = orginalPosition;
+            transform.SetParent(orginalParent);
         }
         else
         {
             PlayCard();
         }
 
-        transform.SetParent(orginalParent);
         GameManager.Instance.cardManager.ToggleDropZone();
     }
 
@@ -79,5 +96,9 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private void ResetTimeCalculation()
     {
         restTimer = (unitMaxHealth - unitHealth);
+        if (unitHealth.Equals(0))
+        {
+            restTimer *= 2f;
+        }
     }
 }

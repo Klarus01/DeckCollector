@@ -5,8 +5,8 @@ public class Farm : MonoBehaviour
     private Animator animator;
     private float timer = 0f;
     private float interval = 5f;
-    public bool isCollision;
-    public int numberOfEmployees = 0;
+    private bool isCollision;
+    private int numberOfEmployees = 0;
 
     public int goldAvailableOnFarm = 5;
 
@@ -45,21 +45,20 @@ public class Farm : MonoBehaviour
     {
         numberOfEmployees = 0;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+
         foreach (Collider2D collider in colliders)
         {
-            if (collider.TryGetComponent<Farmer>(out Farmer farmer))
+            if (collider.TryGetComponent<Farmer>(out Farmer farmer) && !farmer.isDragged)
             {
-                if (!farmer.isDragged)
-                {
-                    numberOfEmployees++;
-                }
+                numberOfEmployees++;
             }
         }
-        isCollision = true;
+
         if (numberOfEmployees.Equals(0))
         {
             animator.SetBool("isAction", false);
-            isCollision = false;
         }
+
+        isCollision = numberOfEmployees > 0;
     }
 }

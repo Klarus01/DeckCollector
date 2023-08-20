@@ -5,6 +5,7 @@ public class UnitData : ScriptableObject
 {
     public Unit unit;
     public Sprite cardSprite;
+    public Upgrade upgrade;
     public float maxHealth;
     public float rangeOfVision;
     public float rangeOfAction;

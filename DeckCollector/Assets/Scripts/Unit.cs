@@ -49,11 +49,11 @@ public class Unit : MonoBehaviour
     {
         GameManager.Instance.cardManager.ToggleDropZone();
         animator.SetBool("isDragged", true);
+        isDragged = true;
     }
 
     private void OnMouseDrag()
     {
-        isDragged = true;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = -1f;
         transform.position = mousePos;
@@ -61,14 +61,15 @@ public class Unit : MonoBehaviour
 
     public virtual void OnMouseUp()
     {
-        isDragged = false;
-        animator.SetBool("isDragged", false);
         if (isAboveDropPoint)
         {
-            GameManager.Instance.cardManager.ToggleDropZone();
             GameManager.Instance.cardManager.BackUnitToHand(this);
             Destroy(gameObject);
         }
+
+        GameManager.Instance.cardManager.ToggleDropZone();
+        isDragged = false;
+        animator.SetBool("isDragged", false);
     }
 
     public virtual void SetUpStats(Upgrade upgrade)
@@ -97,7 +98,7 @@ public class Unit : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            GameManager.Instance.deck.cardsOnBoard.Remove(this);
+            GameManager.Instance.cardManager.BackUnitToHand(this);
             Destroy(gameObject);
         }
     }

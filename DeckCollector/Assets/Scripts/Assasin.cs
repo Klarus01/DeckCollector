@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Assasin : Unit
 {
-    public Upgrade upgrade;
     public float invisible = .5f;
     private float invisibleTimer = .5f;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -10,9 +9,7 @@ public class Assasin : Unit
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        SetUpStats(upgrade);
-        rangeOfVision = 2f;
-        attackSpeed = .5f;
+        SetUpStats(unitData.upgrade);
         timer = attackSpeed;
     }
 
@@ -39,7 +36,7 @@ public class Assasin : Unit
     public override void OnMouseUp()
     {
         base.OnMouseUp();
-        invisibleTimer = .5f;
+        invisibleTimer = invisible;
     }
 
     private void ManageInvisibility()
