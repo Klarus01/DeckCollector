@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 566368821404962819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.34981155, y: -8.642919, z: 5}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -117,10 +117,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: 1e7db322f7fcfd842932b63779a9361b, type: 2}
+  unitType: 0
   id: 3
+  maxHealth: 0
+  health: 0
   isInvisible: 0
+  isAboveDropPoint: 0
   isDragged: 0
-  upgrade: {fileID: 11400000, guid: 931d92ec4d6105e4e9e2aa5eb3756f6f, type: 2}
 --- !u!50 &566368821404963064
 Rigidbody2D:
   serializedVersion: 4

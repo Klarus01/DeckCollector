@@ -13,6 +13,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public List<Unit> units = new();
     public Deck deck;
     public CardManager cardManager;
+    public CameraManager cameraManager;
+    public BuildingManager buildingManager;
+    public WaveManager waveManager;
     public event Action OnUIUpdate;
     public event Action OnHandUpdate;
 

@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974267296073911111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.21, y: -5.2, z: 5}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -117,10 +117,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: a6e9b5f55d170614ea512d5a78019bd8, type: 2}
+  unitType: 0
   id: 1
+  maxHealth: 0
+  health: 0
   isInvisible: 0
+  isAboveDropPoint: 0
   isDragged: 0
-  upgrade: {fileID: 11400000, guid: 5c0777fed8c17524998c5e19453b106e, type: 2}
 --- !u!50 &2974267296073911228
 Rigidbody2D:
   serializedVersion: 4

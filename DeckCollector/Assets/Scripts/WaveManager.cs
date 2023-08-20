@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
     [System.Serializable]
     public class Wave
@@ -12,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private Wave[] waves;
     [SerializeField] private Enemy enemy;
-    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private Enemy[] liveEnemies;
     private float timeBetweenWaves = 2f;
     private int currentWaveIndex = 0;
@@ -22,6 +23,18 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnWaves());
     }
 
+    private void FindSpawnPoints()
+    {
+        spawnPoints.Clear();
+        foreach (Spawner spawner in GameObject.FindObjectsOfType<Spawner>())
+        {
+            if (spawner.TryGetComponent<Transform>(out Transform objTransform))
+            {
+                spawnPoints.Add(objTransform);
+            }
+        }
+    }
+
     private IEnumerator SpawnWaves()
     {
         while (currentWaveIndex < waves.Length)
@@ -29,9 +42,10 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenWaves);
             Wave currentWave = waves[currentWaveIndex];
             liveEnemies = new Enemy[currentWave.count];
+            FindSpawnPoints();
             for (int i = 0; i < currentWave.count; i++)
             {
-                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                 Vector3 randPos = randomSpawnPoint.position + new Vector3(Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f), 0f);
                 liveEnemies[i] = Instantiate(enemy, randPos, Quaternion.identity);
             }
@@ -48,5 +62,7 @@ public class EnemySpawner : MonoBehaviour
             liveEnemies = liveEnemies.Where(enemy => enemy != null).ToArray();
             yield return new WaitForSeconds(0.1f);
         }
+        GameManager.Instance.cameraManager.UpdateCameraLimits();
+        GameManager.Instance.buildingManager.SpawnBuildings();
     }
 }
