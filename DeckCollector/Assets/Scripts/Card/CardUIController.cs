@@ -7,7 +7,6 @@ public class CardUIController : MonoBehaviour
     [SerializeField] private GameObject cardHolder;
     [SerializeField] private GameObject dropZone;
     [SerializeField] private List<CardUI> cards = new();
-    private bool isDropZoneActive = false;
 
     public void PrepareForNewDraw(List<Unit> cardsToPlay)
     {
@@ -48,10 +47,15 @@ public class CardUIController : MonoBehaviour
         cards.Add(cardUI);
     }
 
-    public void ToggleDropZone()
+    public void DropZoneOff()
     {
-        dropZone.SetActive(!dropZone.activeSelf);
-        cardHolder.SetActive(!cardHolder.activeSelf);
-        isDropZoneActive = !isDropZoneActive;
+        dropZone.SetActive(false);
+        cardHolder.SetActive(true);
+    }
+
+    public void DropZoneOn()
+    {
+        dropZone.SetActive(true);
+        cardHolder.SetActive(false);
     }
 }

@@ -5,6 +5,7 @@ public class RefreshShopButton : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private ShopManager shopManager;
+    private readonly int refreshCost = 1;
 
     private void Start()
     {
@@ -13,6 +14,10 @@ public class RefreshShopButton : MonoBehaviour
 
     public void RefreshShop()
     {
-        shopManager.RefreshShopItems();
+        if (GameManager.Instance.GoldCount >= refreshCost)
+        {
+            GameManager.Instance.GoldCount -= refreshCost;
+            shopManager.RefreshShopItems();
+        }
     }
 }

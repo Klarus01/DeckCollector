@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
@@ -23,8 +24,33 @@ public class CardManager : MonoBehaviour
         cardUIController.UnitBackToHand(unit);
     }
 
-    public void ToggleDropZone()
+    public void NewCardBought(Unit unit)
     {
-        cardUIController.ToggleDropZone();
+        GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);
+        cardUIController.UnitBackToHand(unit);
+    }
+
+    public void CollectAllCardsToHand()
+    {
+        List<Unit> cardsToMove = new(GameManager.Instance.deck.cardsOnBoard);
+
+        foreach (Unit cardOnBoard in cardsToMove)
+        {
+            if (cardOnBoard.gameObject != null)
+            {
+                BackUnitToHand(cardOnBoard);
+                Destroy(cardOnBoard.gameObject);
+            }
+        }
+    }
+
+    public void DropZoneOn()
+    {
+        cardUIController.DropZoneOn();
+    }
+
+    public void DropZoneOff()
+    {
+        cardUIController.DropZoneOff();
     }
 }

@@ -4,8 +4,7 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopUIController shopUIController;
     [SerializeField] private ShopItem[] shopItems;
-    public ShopItem[] displayedItems;
-    private readonly int refreshCost = 1;
+    [SerializeField] private ShopItem[] displayedItems;
 
     private void Start()
     {
@@ -15,16 +14,12 @@ public class ShopManager : MonoBehaviour
 
     public void RefreshShopItems()
     {
-        if (GameManager.Instance.GoldCount >= refreshCost)
+        for (int i = 0; i < displayedItems.Length; i++)
         {
-            GameManager.Instance.GoldCount -= refreshCost;
-            for (int i = 0; i < displayedItems.Length; i++)
-            {
-                ShopItem randomItem = GetRandomItem();
-                displayedItems[i] = randomItem;
-            }
-            shopUIController.SetShopButtons(displayedItems);
+            ShopItem randomItem = GetRandomItem();
+            displayedItems[i] = randomItem;
         }
+        shopUIController.SetShopButtons(displayedItems);
     }
 
     public ShopItem GetRandomItem()

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2601754963408348173}
   - component: {fileID: 6264781710433160425}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -2096958604, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
+  m_Sprite: {fileID: -353742871, guid: 10809a4a5544532469b78d2493de64e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,12 +117,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  animator: {fileID: 0}
-  health: 3
+  animator: {fileID: 6264781710433160425}
+  maxHealth: 2
+  health: 2
   speed: 4
   damage: 1
-  attackSpeed: 1
+  attackSpeed: 1.5
   rangeOfVision: 100
+  dropChance: 0.5
 --- !u!50 &2601754963408348173
 Rigidbody2D:
   serializedVersion: 4
@@ -154,7 +156,7 @@ Animator:
   m_GameObject: {fileID: 2601754963408348406}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d658690bf0f241a48b4fb7df61e6d441, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5606908faf219bd4f8087e50f27d7924, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

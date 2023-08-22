@@ -1887,8 +1887,6 @@ MonoBehaviour:
   cardsInHand: []
   cardsOnBoard: []
   deck:
-  - {fileID: 7614349338531286103, guid: c6cc5d257692793468b0df0a7d7cb14b, type: 3}
-  - {fileID: 8893078822102297094, guid: 89f779046fd8403408402955f29c744b, type: 3}
   - {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
   - {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
 --- !u!114 &664744783
@@ -3488,11 +3486,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - count: 1
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 1
+    isBossWave: 0
   - count: 2
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 1
+    isBossWave: 0
   - count: 2
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.5
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 1
+    isBossWave: 0
   - count: 3
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.7
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 1
+    isBossWave: 0
   - count: 5
-  enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.5
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 1
+    isBossWave: 1
+  - count: 3
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.4
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 0.8
+    - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+      spawnChance: 1
+    isBossWave: 0
+  - count: 2
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+      spawnChance: 1
+    isBossWave: 0
+  - count: 5
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.35
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 0.7
+    - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+      spawnChance: 1
+    isBossWave: 0
+  - count: 8
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.5
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 1
+    isBossWave: 0
+  - count: 10
+    enemies:
+    - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+      spawnChance: 0.4
+    - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+      spawnChance: 0.8
+    - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+      spawnChance: 1
+    isBossWave: 1
   spawnPoints: []
   liveEnemies: []
 --- !u!4 &1880532859

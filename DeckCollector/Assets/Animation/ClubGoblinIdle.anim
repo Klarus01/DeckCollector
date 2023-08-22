@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyIdle
+  m_Name: ClubGoblinIdle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2096958604, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
+      value: {fileID: -821919381, guid: f56e4d698d28f8b42928f86c1303bf66, type: 3}
     - time: 0.21666667
-      value: {fileID: 360207590, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
+      value: {fileID: -1209540256, guid: f56e4d698d28f8b42928f86c1303bf66, type: 3}
     - time: 0.41666666
-      value: {fileID: -2096958604, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
+      value: {fileID: -821919381, guid: f56e4d698d28f8b42928f86c1303bf66, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -2096958604, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
-    - {fileID: 360207590, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
-    - {fileID: -2096958604, guid: fe7d0facf7d24764c825b69082f800ae, type: 3}
+    - {fileID: -821919381, guid: f56e4d698d28f8b42928f86c1303bf66, type: 3}
+    - {fileID: -1209540256, guid: f56e4d698d28f8b42928f86c1303bf66, type: 3}
+    - {fileID: -821919381, guid: f56e4d698d28f8b42928f86c1303bf66, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -5,9 +5,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 {
     private int shopItemCost = 2;
     public int ShopCost { get { return shopItemCost; } set { shopItemCost = value; OnUIUpdate?.Invoke(); } }
-    private int goldCount = 5;
+    private int goldCount = 0;
     public int GoldCount { get { return goldCount; } set { goldCount = value; OnUIUpdate?.Invoke(); } }
-    private int partCount = 6;
+    private int partCount = 0;
     public int PartCount { get { return partCount; } set { partCount = value; OnUIUpdate?.Invoke(); } }
     public int maxDeckSize = 8;
     public List<Unit> units = new();

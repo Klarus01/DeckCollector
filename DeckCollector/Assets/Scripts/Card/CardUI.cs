@@ -41,7 +41,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         }
 
         transform.SetParent(GameManager.Instance.cardManager.cardInUse);
-        GameManager.Instance.cardManager.ToggleDropZone();
+        GameManager.Instance.cardManager.DropZoneOn();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -78,7 +78,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
             PlayCard();
         }
 
-        GameManager.Instance.cardManager.ToggleDropZone();
+        GameManager.Instance.cardManager.DropZoneOff();
     }
 
     private void PlayCard()

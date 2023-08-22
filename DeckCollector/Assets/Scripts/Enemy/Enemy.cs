@@ -77,9 +77,13 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            GameManager.Instance.PartCount++;
-            GameManager.Instance.UpdateUI();
+            DropLoot();
             Destroy(gameObject);
         }
+    }
+
+    public void DropLoot()
+    {
+        GameManager.Instance.PartCount++;
     }
 }
