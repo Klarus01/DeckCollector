@@ -24,7 +24,7 @@ public class Axeman : Unit
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        if (!collision.gameObject.TryGetComponent<Enemy>(out _))
         {
             return;
         }

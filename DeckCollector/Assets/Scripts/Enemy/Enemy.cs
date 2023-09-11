@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private Animator animator;
+    [SerializeField] private EnemyData enemyData;
     [SerializeField] private float health = 3f;
     [SerializeField] private float speed = 4f;
     [SerializeField] private float damage = 1f;
@@ -12,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     private float timer = 1f;
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
     }
@@ -23,11 +24,12 @@ public class Enemy : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        CheckClosestUnit();
+
+        FindClosestTarget();
+
         if (target != null)
         {
-            animator.SetBool("isWalking", true);
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            MoveTowardsTarget();
         }
 
     }
@@ -49,7 +51,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void CheckClosestUnit()
+    protected void FindClosestTarget()
     {
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
         float closestDistance = Mathf.Infinity;
@@ -85,5 +87,11 @@ public class Enemy : MonoBehaviour
     public void DropLoot()
     {
         GameManager.Instance.PartCount++;
+    }
+
+    public void MoveTowardsTarget()
+    {
+        animator.SetBool("isWalking", true);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 }

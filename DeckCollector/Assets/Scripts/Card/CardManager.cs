@@ -17,6 +17,11 @@ public class CardManager : MonoBehaviour
         cardUIController.PrepareForNewDraw(GameManager.Instance.deck.deck);
     }
 
+    public void CardPlayed(CardUI card)
+    {
+        cardUIController.CardPlayed(card);
+    }
+
     public void BackUnitToHand(Unit unit)
     {
         GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);

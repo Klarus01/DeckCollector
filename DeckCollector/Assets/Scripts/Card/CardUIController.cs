@@ -14,6 +14,11 @@ public class CardUIController : MonoBehaviour
         CreateHand(cardsToPlay);
     }
 
+    public void CardPlayed(CardUI card)
+    {
+        cards.Remove(card);
+    }
+
     private void DeleteCards()
     {
         foreach (CardUI cardUI in cards)
@@ -36,6 +41,7 @@ public class CardUIController : MonoBehaviour
     {
         CardUI cardUI = Instantiate(cardPrefab, cardHolder.transform);
         CreateCard(cardUI, unit);
+        DropZoneOff();
     }
 
     private void CreateCard(CardUI cardUI, Unit unit)

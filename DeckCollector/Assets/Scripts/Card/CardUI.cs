@@ -83,7 +83,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private void PlayCard()
     {
-        GameManager.Instance.deck.PlayCard(unit, transform);
+        GameManager.Instance.deck.PlayCard(unit, transform, this);
         Destroy(gameObject);
     }
 

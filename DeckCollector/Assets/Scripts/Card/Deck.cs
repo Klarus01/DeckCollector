@@ -12,11 +12,12 @@ public class Deck : MonoBehaviour
         cardsInHand.AddRange(deck);
     }
 
-    public void PlayCard(Unit unit, Transform trans)
+    public void PlayCard(Unit unit, Transform trans, CardUI card)
     {
         Unit newUnit = Instantiate(unit, trans.position, Quaternion.identity);
         cardsOnBoard.Add(newUnit);
         cardsInHand.Remove(unit);
+        GameManager.Instance.cardManager.CardPlayed(card);
     }
 
     public void AddCard(Unit unit)

@@ -29,20 +29,43 @@ public class Unit : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        if (isDragged)
         {
-            if (isDragged)
-            {
-                return;
-            }
-
-            if (timer >= attackSpeed)
-            {
-                animator.SetTrigger("Attack");
-                enemy.GetDamage(damage);
-                timer = 0f;
-            }
+            return;
         }
+
+        if (target == null)
+        {
+            return;
+        }
+
+        Attack();
+    }
+
+    public virtual void SetUpStats(Upgrade upgrade)
+    {
+        SetBaseStats(unitData);
+        ApplyUpgrade(upgrade);
+    }
+
+    private void SetBaseStats(UnitData data)
+    {
+        maxHealth = data.maxHealth;
+        health = maxHealth;
+        damage = data.damage;
+        rangeOfVision = data.rangeOfVision;
+        rangeOfAction = data.rangeOfAction;
+        attackSpeed = data.attackSpeed;
+        speed = data.speed;
+    }
+
+    public void ApplyUpgrade(Upgrade upgrade)
+    {
+        Upgrade.UpgradeLevel level = upgrade.upgradeLevels[upgrade.upgradeLvl];
+
+        maxHealth = level.hp;
+        health = maxHealth;
+        damage = level.dmg;
     }
 
     public virtual void OnMouseDown()
@@ -52,7 +75,7 @@ public class Unit : MonoBehaviour
         isDragged = true;
     }
 
-    private void OnMouseDrag()
+    public void OnMouseDrag()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = -1f;
@@ -72,27 +95,6 @@ public class Unit : MonoBehaviour
         animator.SetBool("isDragged", false);
     }
 
-    public virtual void SetUpStats(Upgrade upgrade)
-    {
-        maxHealth = unitData.maxHealth;
-        health = maxHealth;
-        damage = unitData.damage;
-        rangeOfVision = unitData.rangeOfVision;
-        rangeOfAction = unitData.rangeOfAction;
-        attackSpeed = unitData.attackSpeed;
-        speed = unitData.speed;
-        ApplyUpgrade(upgrade);
-    }
-
-    public virtual void ApplyUpgrade(Upgrade upgrade)
-    {
-        Upgrade.UpgradeLevel level = upgrade.upgradeLevels[upgrade.upgradeLvl];
-
-        maxHealth = level.hp;
-        health = maxHealth;
-        damage = level.dmg;
-    }
-
     public void GetDamage(float damage)
     {
         health -= damage;
@@ -107,43 +109,56 @@ public class Unit : MonoBehaviour
     protected void SearchForTarget()
     {
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+
+        if (unitType == UnitType.Fighter)
+        {
+            target = FindClosestTarget<Enemy>(targets);
+        }
+        else if (unitType == UnitType.Gatherer)
+        {
+            target = FindClosestTarget<Farm>(targets);
+        }
+    }
+
+    protected Transform FindClosestTarget<T>(Collider2D[] targets) where T : Component
+    {
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
+
         foreach (Collider2D target in targets)
         {
-            if (unitType == UnitType.Fighter)
+            if (target.TryGetComponent<T>(out T targetComponent))
             {
-                if (target.TryGetComponent<Enemy>(out Enemy enemy))
+                float distanceToTarget = Vector2.Distance(transform.position, targetComponent.transform.position);
+                if (distanceToTarget < closestDistance)
                 {
-                    float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-                    if (distanceToEnemy < closestDistance)
-                    {
-                        closestDistance = distanceToEnemy;
-                        closestTarget = enemy.transform;
-                    }
-                }
-            }
-            else if (unitType == UnitType.Gatherer)
-            {
-                if (target.TryGetComponent<Farm>(out Farm farm))
-                {
-                    float distanceToFarm = Vector2.Distance(transform.position, farm.transform.position);
-                    if (distanceToFarm < closestDistance)
-                    {
-                        closestDistance = distanceToFarm;
-                        closestTarget = farm.transform;
-                    }
+                    closestDistance = distanceToTarget;
+                    closestTarget = targetComponent.transform;
                 }
             }
         }
-        target = closestTarget;
+
+        return closestTarget;
     }
 
-    protected void MoveTowardsTarget()
+    public void MoveTowardsTarget()
     {
         if (target != null)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+    }
+
+    public void Attack()
+    {
+        if (target.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            if (timer >= attackSpeed)
+            {
+                animator.SetTrigger("Attack");
+                enemy.GetDamage(damage);
+                timer = 0f;
+            }
         }
     }
 }
