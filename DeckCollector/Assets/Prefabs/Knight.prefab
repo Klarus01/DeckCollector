@@ -117,13 +117,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: a6e9b5f55d170614ea512d5a78019bd8, type: 2}
+  animator: {fileID: 0}
   unitType: 0
   id: 1
   maxHealth: 0
   health: 0
   isInvisible: 0
   isAboveDropPoint: 0
-  isDragged: 0
+  isDragging: 0
 --- !u!50 &2974267296073911228
 Rigidbody2D:
   serializedVersion: 4

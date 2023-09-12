@@ -14,7 +14,7 @@ public class Axeman : Unit
     private void Update()
     {
         SearchForTarget();
-        if (!isDragged && timer < attackSpeed)
+        if (!isDragging && timer < attackSpeed)
         {
             timer += Time.deltaTime;
         }
@@ -29,7 +29,7 @@ public class Axeman : Unit
             return;
         }
 
-        if (isDragged)
+        if (isDragging)
         {
             return;
         }

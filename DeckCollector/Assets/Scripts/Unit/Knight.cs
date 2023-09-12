@@ -12,7 +12,7 @@ public class Knight : Unit
     private void Update()
     {
         SearchForTarget();
-        if (!isDragged && timer < attackSpeed)
+        if (!isDragging && timer < attackSpeed)
         {
             timer += Time.deltaTime;
         }

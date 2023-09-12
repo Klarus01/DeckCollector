@@ -3,7 +3,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public UnitData unitData;
-    protected Animator animator;
+    public Animator animator;
     protected Transform target;
     public enum UnitType
     {
@@ -23,13 +23,13 @@ public class Unit : MonoBehaviour
     protected float attackSpeed = 1f;
     public bool isInvisible = false;
     public bool isAboveDropPoint;
-    public bool isDragged;
+    public bool isDragging = false;
     protected float speed;
     protected float timer;
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (isDragged)
+        if (isDragging)
         {
             return;
         }
@@ -40,6 +40,14 @@ public class Unit : MonoBehaviour
         }
 
         Attack();
+    }
+
+    private void Update()
+    {
+        if (!isDragging)
+        {
+            return;
+        }
     }
 
     public virtual void SetUpStats(Upgrade upgrade)
@@ -66,33 +74,6 @@ public class Unit : MonoBehaviour
         maxHealth = level.hp;
         health = maxHealth;
         damage = level.dmg;
-    }
-
-    public virtual void OnMouseDown()
-    {
-        GameManager.Instance.cardManager.DropZoneOn();
-        animator.SetBool("isDragged", true);
-        isDragged = true;
-    }
-
-    public void OnMouseDrag()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = -1f;
-        transform.position = mousePos;
-    }
-
-    public virtual void OnMouseUp()
-    {
-        if (isAboveDropPoint)
-        {
-            GameManager.Instance.cardManager.BackUnitToHand(this);
-            Destroy(gameObject);
-        }
-
-        GameManager.Instance.cardManager.DropZoneOff();
-        isDragged = false;
-        animator.SetBool("isDragged", false);
     }
 
     public void GetDamage(float damage)

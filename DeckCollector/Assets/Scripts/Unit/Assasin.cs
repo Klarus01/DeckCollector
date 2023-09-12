@@ -16,7 +16,14 @@ public class Assasin : Unit
     private void Update()
     {
         SearchForTarget();
-        if (!isDragged && timer < attackSpeed)
+
+        if (isDragging)
+        {
+            isInvisible = true;
+            invisibleTimer = invisible;
+        }
+
+        if (!isDragging && timer < attackSpeed)
         {
             timer += Time.deltaTime;
         }
@@ -24,19 +31,6 @@ public class Assasin : Unit
         ManageInvisibility();
 
         MoveTowardsTarget();
-    }
-
-    public override void OnMouseDown()
-    {
-        base.OnMouseDown();
-        isInvisible = true;
-        invisibleTimer = Mathf.Infinity;
-    }
-
-    public override void OnMouseUp()
-    {
-        base.OnMouseUp();
-        invisibleTimer = invisible;
     }
 
     private void ManageInvisibility()

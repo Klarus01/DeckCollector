@@ -48,7 +48,7 @@ public class Farm : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.TryGetComponent<Farmer>(out Farmer farmer) && !farmer.isDragged)
+            if (collider.TryGetComponent<Farmer>(out Farmer farmer) && !farmer.isDragging)
             {
                 numberOfEmployees++;
             }
