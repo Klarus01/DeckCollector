@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -353742871, guid: 10809a4a5544532469b78d2493de64e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -118,13 +118,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   animator: {fileID: 6264781710433160425}
-  maxHealth: 2
+  enemyData: {fileID: 0}
   health: 2
   speed: 4
   damage: 1
   attackSpeed: 1.5
   rangeOfVision: 100
-  dropChance: 0.5
 --- !u!50 &2601754963408348173
 Rigidbody2D:
   serializedVersion: 4

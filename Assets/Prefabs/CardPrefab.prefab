@@ -253,6 +253,7 @@ MonoBehaviour:
   isAboveSellPoint: 0
   isAboveDropPoint: 0
   orginalParent: {fileID: 0}
+  orginalPosition: {x: 0, y: 0, z: 0}
   slider: {fileID: 6500690901142383041}
 --- !u!212 &1085651013916660834
 SpriteRenderer:
@@ -294,7 +295,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
