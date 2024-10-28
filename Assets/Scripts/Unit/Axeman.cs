@@ -1,25 +1,14 @@
 using UnityEngine;
 
-public class Axeman : Unit
+public class Axeman : FighterUnit
 {
     private bool isAttacking = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         animator = GetComponent<Animator>();
-        SetUpStats(unitData.upgrade);
         timer = attackSpeed;
-    }
-
-    private void Update()
-    {
-        SearchForTarget();
-        if (!isDragging && timer < attackSpeed)
-        {
-            timer += Time.deltaTime;
-        }
-
-        MoveTowardsTarget();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -53,12 +42,12 @@ public class Axeman : Unit
     {
         isAttacking = true;
 
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfAction);
+        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfAction);
         foreach (Collider2D target in targets)
         {
-            if (target.TryGetComponent<Enemy>(out Enemy enemy))
+            if (target.TryGetComponent<IDamageable>(out var enemy))
             {
-                enemy.GetDamage(damage);
+                enemy.TakeDamage(damage);
             }
         }
         animator.SetTrigger("Attack");

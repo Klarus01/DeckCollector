@@ -1,21 +1,22 @@
 using UnityEngine;
 
-public class Assasin : Unit
+public class Assasin : FighterUnit
 {
-    public float invisible = .5f;
-    private float invisibleTimer = .5f;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private float invisibleTimer = 0.5f;
+    
+    private float invisible = 0.5f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         animator = GetComponent<Animator>();
-        SetUpStats(unitData.upgrade);
         timer = attackSpeed;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        SearchForTarget();
+        base.Update();
 
         if (isDragging)
         {
@@ -30,7 +31,6 @@ public class Assasin : Unit
 
         ManageInvisibility();
 
-        MoveTowardsTarget();
     }
 
     private void ManageInvisibility()

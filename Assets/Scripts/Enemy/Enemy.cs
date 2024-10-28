@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable, IMovable, IAttackable
 {
     [SerializeField] private Transform target;
     [SerializeField] private Animator animator;
@@ -29,14 +29,14 @@ public class Enemy : MonoBehaviour
 
         if (target != null)
         {
-            MoveTowardsTarget();
+            MoveTowardsTarget(target);
         }
 
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Unit>(out Unit unit))
+        if (collision.gameObject.TryGetComponent<Unit>(out var unit))
         {
             if (unit.isInvisible)
             {
@@ -44,9 +44,8 @@ public class Enemy : MonoBehaviour
             }
             if (timer >= attackSpeed)
             {
-                animator.SetTrigger("Attack");
-                unit.GetDamage(damage);
-                timer = 0f;
+                unit.TakeDamage(damage);
+                Attack();
             }
         }
     }
@@ -74,7 +73,12 @@ public class Enemy : MonoBehaviour
         target = closestTarget;
     }
 
-    public void GetDamage(float damage)
+    public void DropLoot()
+    {
+        GameManager.Instance.PartCount++;
+    }
+    
+    public void TakeDamage(float amount)
     {
         health -= damage;
         if (health <= 0)
@@ -84,14 +88,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DropLoot()
-    {
-        GameManager.Instance.PartCount++;
-    }
-
-    public void MoveTowardsTarget()
+    public void MoveTowardsTarget(Transform target)
     {
         animator.SetBool("isWalking", true);
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    }
+
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
+        timer = 0f;
     }
 }

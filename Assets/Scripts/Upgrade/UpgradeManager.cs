@@ -16,7 +16,7 @@ public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
         {
             foreach (Unit unit in units)
             {
-                unit.ApplyUpgrade(upgrade);
+                //unit.ApplyUpgrade(upgrade);
             }
         }
     }
