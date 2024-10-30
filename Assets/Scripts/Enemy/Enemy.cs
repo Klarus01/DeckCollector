@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour, IDamageable, IMovable, IAttackable
     
     public void TakeDamage(float amount)
     {
-        health -= damage;
+        health -= amount;
         if (health <= 0)
         {
             DropLoot();

@@ -2,25 +2,26 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour, IDamageable, IMovable
 {
-    public UnitData unitData;
-    public Animator animator;
-    public Transform Target { get; set; }
-
-    public bool isInvisible;
-    public bool isAboveDropPoint;
-    public bool isDragging;
-    
-    public float health;
-    public float maxHealth;
-    
+    protected SpriteRenderer spriteRenderer;
     protected int damage;
     protected float speed;
     protected float rangeOfAction;
     protected float rangeOfVision;
+    
+    public UnitData unitData;
+    public Animator animator;
+    public bool isInvisible;
+    public bool isAboveDropPoint;
+    public bool isDragging;
+    public float health;
+    public float maxHealth;
+    
+    public Transform Target { get; set; }
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         SetBaseStats();
     }
     
@@ -59,5 +60,10 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
             GameManager.Instance.cardManager.BackUnitToHand(this);
             Destroy(gameObject);
         }
+    }
+    
+    public void SetHighlight(bool isActive)
+    {
+        spriteRenderer.color = isActive ? Color.yellow : Color.white;
     }
 }

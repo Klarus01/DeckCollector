@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class Assasin : FighterUnit
+public class Assassin : FighterUnit
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
     private float invisibleTimer = 0.5f;
-    
     private float invisible = 0.5f;
 
     protected override void Awake()

@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Sprite[] sprites;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        var random = Random.Range(0, 2);
+        spriteRenderer.sprite = sprites[random];
     }
 }

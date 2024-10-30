@@ -27,6 +27,7 @@ public class FighterUnit : Unit, IAttackable
 
     private void TryAttackTarget()
     {
+        if(isInvisible) return;
         if (timer >= attackSpeed && Target.TryGetComponent<IDamageable>(out var target))
         {
             Attack(target);
@@ -37,7 +38,7 @@ public class FighterUnit : Unit, IAttackable
     public void Attack(IDamageable target)
     {
         if (!Target) return;
-        
+
         animator.SetTrigger("Attack");
         target.TakeDamage(unitData.damage);
         timer = 0f;

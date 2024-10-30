@@ -27,7 +27,7 @@ public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
         {
             { typeof(Farmer), FindObjectsOfType<Farmer>() },
             { typeof(Knight), FindObjectsOfType<Knight>() },
-            { typeof(Assasin), FindObjectsOfType<Assasin>() },
+            { typeof(Assassin), FindObjectsOfType<Assassin>() },
             { typeof(Axeman), FindObjectsOfType<Axeman>() }
         };
     }

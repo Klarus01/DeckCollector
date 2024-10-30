@@ -4,32 +4,34 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> existingBuildings;
-    public GameObject goodBuildingPrefab;
-    public GameObject badBuildingPrefab;
-    public float buildingSpawnOffset = 1f;
-    public int maxGoodBuildings = 1;
-    public int maxGoodBuildingsIncrese = 2;
-    public int maxBadBuildings = 1;
-    public int maxBadBuildingsIncrese = 1;
-    public float minimumDistanceBetweenBuildings = 5f;
+    [SerializeField] private GameObject PlayerBuildingPrefab;
+    [SerializeField] private GameObject EnemyBuildingPrefab;
+    private float buildingSpawnOffset = 1f;
+    private int maxPlayerBuildings = 1;
+    private int maxPlayerBuildingsIncrese = 2;
+    private int maxEnemyBuildings = 1;
+    private int maxEnemyBuildingsIncrese = 1;
+    private float minimumDistanceBetweenBuildings = 5f;
+    private Camera mainCamera;
 
     private void Start()
     {
+        mainCamera = Camera.main;
         SpawnBuildings();
     }
 
     public void SpawnBuildings()
     {
         DestroyExistingBuildings();
-        maxGoodBuildings += maxGoodBuildingsIncrese;
-        maxBadBuildings += maxBadBuildingsIncrese;
-        SpawnRandomBuildings(goodBuildingPrefab, maxGoodBuildings);
-        SpawnRandomBuildings(badBuildingPrefab, maxBadBuildings);
+        maxPlayerBuildings += maxPlayerBuildingsIncrese;
+        maxEnemyBuildings += maxEnemyBuildingsIncrese;
+        SpawnRandomBuildings(PlayerBuildingPrefab, maxPlayerBuildings);
+        SpawnRandomBuildings(EnemyBuildingPrefab, maxEnemyBuildings);
     }
 
     private void DestroyExistingBuildings()
     {
-        foreach (GameObject building in existingBuildings)
+        foreach (var building in existingBuildings)
         {
             Destroy(building);
         }
@@ -38,31 +40,30 @@ public class BuildingManager : MonoBehaviour
 
     private void SpawnRandomBuildings(GameObject prefab, int count)
     {
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
-            Vector3 spawnPosition = GetRandomSpawnPosition();
-            GameObject building = Instantiate(prefab, spawnPosition + Vector3.up * buildingSpawnOffset, Quaternion.identity);
+            var spawnPosition = GetRandomSpawnPosition();
+            var building = Instantiate(prefab, spawnPosition + Vector3.up * buildingSpawnOffset, Quaternion.identity);
             existingBuildings.Add(building);
         }
     }
 
     private Vector3 GetRandomSpawnPosition()
     {
-        int maxAttempts = 100;
+        const int maxAttempts = 100;
 
-        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        for (var attempt = 0; attempt < maxAttempts; attempt++)
         {
-            Camera mainCamera = Camera.main;
-            float cameraHeight = 2f * mainCamera.orthographicSize;
-            float cameraWidth = cameraHeight * mainCamera.aspect;
+            var cameraHeight = 2f * mainCamera.orthographicSize;
+            var cameraWidth = cameraHeight * mainCamera.aspect;
 
-            float maxX = cameraWidth / 2f + GameManager.Instance.cameraManager.currentCameraLimits.x - 5f;
-            float maxY = cameraHeight / 2f + GameManager.Instance.cameraManager.currentCameraLimits.y - 5f;
-            float minX = -maxX;
-            float minY = -maxY;
+            var maxX = cameraWidth / 2f + GameManager.Instance.cameraManager.currentCameraLimits.x - 5f;
+            var maxY = cameraHeight / 2f + GameManager.Instance.cameraManager.currentCameraLimits.y - 5f;
+            var minX = -maxX;
+            var minY = -maxY;
 
-            float x = Random.Range(minX, maxX);
-            float y = Random.Range(minY, maxY);
+            var x = Random.Range(minX, maxX);
+            var y = Random.Range(minY, maxY);
 
             Vector3 spawnPosition = new(x, y, 0f);
 
@@ -76,9 +77,9 @@ public class BuildingManager : MonoBehaviour
 
     private bool IsPositionNearOtherBuildings(Vector3 position)
     {
-        foreach (GameObject building in existingBuildings)
+        foreach (var building in existingBuildings)
         {
-            float distance = Vector3.Distance(position, building.transform.position);
+            var distance = Vector3.Distance(position, building.transform.position);
 
             if (distance < minimumDistanceBetweenBuildings)
             {

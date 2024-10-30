@@ -12,94 +12,94 @@ public class WaveManager : MonoBehaviour
         public class EnemyEntry
         {
             public Enemy enemy;
-            [Range(0f, 1f)]
-            public float spawnChance;
+            public int count;
         }
 
-        public int count;
         public List<EnemyEntry> enemies = new();
         public bool isBossWave;
     }
 
+    [System.Serializable]
+    public class Stage
+    {
+        public Wave[] waves = new Wave[5];
+    }
 
-    [SerializeField] private Wave[] waves;
-    [SerializeField] private List<Transform> spawnPoints = new();
-    [SerializeField] private Enemy[] liveEnemies;
-    private float timeBetweenWaves = 10f;
+    [SerializeField] private Stage[] stages;
+    
+    private List<Transform> spawnPoints = new();
+    private List<Enemy> liveEnemies = new();
+    private float timeBetweenWaves = 1f;
+    private int currentStageIndex = 0;
     private int currentWaveIndex = 0;
 
     private void Start()
     {
-        StartCoroutine(SpawnWaves());
+        StartCoroutine(StartStages());
     }
 
     private void FindSpawnPoints()
     {
         spawnPoints.Clear();
-
-        foreach (Spawner spawner in GameObject.FindObjectsOfType<Spawner>())
+        foreach (var spawner in FindObjectsOfType<Spawner>())
         {
-            if (spawner.TryGetComponent<Transform>(out Transform objTransform))
+            if (spawner.TryGetComponent<Transform>(out var objTransform))
             {
                 spawnPoints.Add(objTransform);
             }
         }
     }
 
-    private IEnumerator SpawnWaves()
+    private IEnumerator StartStages()
     {
-        while (currentWaveIndex < waves.Length)
+        while (currentStageIndex < stages.Length)
         {
-            Debug.Log(currentWaveIndex);
-            yield return new WaitForSeconds(timeBetweenWaves);
-            Wave currentWave = waves[currentWaveIndex];
-            liveEnemies = new Enemy[currentWave.count];
-            FindSpawnPoints();
-            yield return StartCoroutine(SpawnEnemy(currentWave));
-            yield return StartCoroutine(WaitForWaveCompletion());
-            currentWaveIndex++;
-
-            if (currentWave.isBossWave)
+            var currentStage = stages[currentStageIndex];
+            for (currentWaveIndex = 0; currentWaveIndex < currentStage.waves.Length; currentWaveIndex++)
             {
-                BossWaveDefeated();
+                var currentWave = currentStage.waves[currentWaveIndex];
+                Debug.Log($"Stage {currentStageIndex + 1}, Wave {currentWaveIndex + 1}");
+
+                yield return new WaitForSeconds(timeBetweenWaves);
+                FindSpawnPoints();
+
+                liveEnemies.Clear();
+                yield return StartCoroutine(SpawnEnemies(currentWave));
+                yield return StartCoroutine(WaitForWaveCompletion());
+
+                if (currentWave.isBossWave)
+                {
+                    BossWaveDefeated();
+                }
             }
+            currentStageIndex++;
         }
-        Debug.Log("Przeszed³eœ wszystkie fale!");
+
+        GameCompleted();
     }
 
-    private IEnumerator SpawnEnemy(Wave currentWave)
+    private IEnumerator SpawnEnemies(Wave currentWave)
     {
-        for (int i = 0; i < currentWave.count; i++)
+        foreach (var enemyEntry in currentWave.enemies)
         {
-            Enemy selectedEnemy = null;
-
-            foreach (var enemyEntry in currentWave.enemies)
+            for (var i = 0; i < enemyEntry.count; i++)
             {
-                float spawnRoll = Random.Range(0f, 1f);
-                if (spawnRoll <= enemyEntry.spawnChance)
-                {
-                    selectedEnemy = enemyEntry.enemy;
-                    break;
-                }
-                spawnRoll -= enemyEntry.spawnChance;
-            }
+                var randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                var randPos = randomSpawnPoint.position + new Vector3(Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f), 0f);
 
-            if (selectedEnemy != null)
-            {
-                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-                Vector3 randPos = randomSpawnPoint.position + new Vector3(Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f), 0f);
-                liveEnemies[i] = Instantiate(selectedEnemy, randPos, Quaternion.identity);
-            }
+                Enemy spawnedEnemy = Instantiate(enemyEntry.enemy, randPos, Quaternion.identity);
+                liveEnemies.Add(spawnedEnemy);
 
-            yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+                yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+            }
         }
     }
 
     private IEnumerator WaitForWaveCompletion()
     {
-        while (liveEnemies.Length > 0)
+        while (liveEnemies.Any(enemy => enemy != null))
         {
-            liveEnemies = liveEnemies.Where(enemy => enemy != null).ToArray();
+            liveEnemies.RemoveAll(enemy => enemy == null);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -109,5 +109,11 @@ public class WaveManager : MonoBehaviour
         GameManager.Instance.cameraManager.UpdateCameraLimits();
         GameManager.Instance.buildingManager.SpawnBuildings();
         GameManager.Instance.cardManager.CollectAllCardsToHand();
+    }
+
+    private void GameCompleted()
+    {
+        Debug.Log("Congratulations! You have completed all stages!");
+        //GameManager.Instance.ShowCompletionScreen();
     }
 }
