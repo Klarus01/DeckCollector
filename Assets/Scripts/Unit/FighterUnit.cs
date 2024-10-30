@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FighterUnit : Unit, IAttackable
 {
-    protected int damage;
     protected float attackSpeed;
     protected float timer;
 
@@ -23,31 +22,34 @@ public class FighterUnit : Unit, IAttackable
     protected override void SetBaseStats()
     {
         base.SetBaseStats();
-        damage = unitData.damage;
         attackSpeed = unitData.attackSpeed;
     }
 
-    public void Attack()
+    private void TryAttackTarget()
     {
-        if (!Target)
+        if (timer >= attackSpeed && Target.TryGetComponent<IDamageable>(out var target))
         {
-            return;
+            Attack(target);
         }
+    }
+
+    
+    public void Attack(IDamageable target)
+    {
+        if (!Target) return;
         
-        if (timer >= attackSpeed && Target.TryGetComponent<IDamageable>(out var enemy))
-        {
-            animator.SetTrigger("Attack");
-            enemy.TakeDamage(unitData.damage);
-            timer = 0f;
-        }
+        animator.SetTrigger("Attack");
+        target.TakeDamage(unitData.damage);
+        timer = 0f;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (timer >= attackSpeed) Attack();
+        if (!collision.gameObject.TryGetComponent<Enemy>(out var enemy)) return;
+        if (timer >= attackSpeed) TryAttackTarget();
     }
 
-    protected Transform SearchForTarget()
+    private Transform SearchForTarget()
     {
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
 

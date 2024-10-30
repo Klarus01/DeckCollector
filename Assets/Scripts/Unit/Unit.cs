@@ -13,6 +13,7 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     public float health;
     public float maxHealth;
     
+    protected int damage;
     protected float speed;
     protected float rangeOfAction;
     protected float rangeOfVision;
@@ -25,12 +26,21 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     
     protected virtual void SetBaseStats()
     {
-        health = unitData.maxHealth;
-        maxHealth = unitData.maxHealth;
         speed = unitData.speed;
         rangeOfAction = unitData.rangeOfAction;
         rangeOfVision = unitData.rangeOfVision;
+        ApplyUpgrade(unitData.upgrade);
     }
+
+    public void ApplyUpgrade(Upgrade upgrade)
+    {
+        var level = upgrade.upgradeLevels[upgrade.upgradeLvl];
+
+        maxHealth = level.hp;
+        health = maxHealth;
+        damage = level.dmg;
+    }
+    
 
     public void MoveTowardsTarget(Transform target)
     {

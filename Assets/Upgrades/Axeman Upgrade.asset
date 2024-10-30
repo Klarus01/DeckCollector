@@ -15,7 +15,7 @@ MonoBehaviour:
   unit: {fileID: 8893078822102297094, guid: 89f779046fd8403408402955f29c744b, type: 3}
   unitSprite: {fileID: -173673758, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
   upgradeLvl: 0
-  maxUpgradeLvl: 3
+  maxUpgradeLvl: 5
   upgradeLevels:
   - costForNextLvl: 1
     hp: 7
@@ -29,3 +29,9 @@ MonoBehaviour:
   - costForNextLvl: 20
     hp: 15
     dmg: 2
+  - costForNextLvl: 50
+    hp: 25
+    dmg: 2
+  - costForNextLvl: 100
+    hp: 40
+    dmg: 3

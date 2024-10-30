@@ -18,7 +18,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public WaveManager waveManager;
     public event Action OnUIUpdate;
     public event Action OnHandUpdate;
-
+    
     public void UpdateUI()
     {
         OnUIUpdate?.Invoke();

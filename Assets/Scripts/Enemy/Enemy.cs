@@ -36,18 +36,12 @@ public class Enemy : MonoBehaviour, IDamageable, IMovable, IAttackable
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Unit>(out var unit))
-        {
-            if (unit.isInvisible)
-            {
-                return;
-            }
-            if (timer >= attackSpeed)
-            {
-                unit.TakeDamage(damage);
-                Attack();
-            }
-        }
+        if (!collision.gameObject.TryGetComponent<Unit>(out var target)) return;
+        if (target.isInvisible) return;
+        if (!(timer >= attackSpeed)) return;
+        
+        target.TakeDamage(damage);
+        Attack(target);
     }
 
     protected void FindClosestTarget()
@@ -94,7 +88,7 @@ public class Enemy : MonoBehaviour, IDamageable, IMovable, IAttackable
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
-    public void Attack()
+    public void Attack(IDamageable target)
     {
         animator.SetTrigger("Attack");
         timer = 0f;
