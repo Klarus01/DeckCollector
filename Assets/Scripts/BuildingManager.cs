@@ -9,7 +9,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject enemyBuildingPrefab;
     [SerializeField] private GameObject treePrefab;
     private float buildingSpawnOffset = 1f;
-    private int maxTrees = 25;
+    private int maxTrees = 20;
     private int maxTreesIncrese = 5;
     private int maxPlayerBuildings = 1;
     private int maxPlayerBuildingsIncrese = 2;

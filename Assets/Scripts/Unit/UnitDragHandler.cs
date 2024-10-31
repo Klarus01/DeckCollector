@@ -25,6 +25,8 @@ public class UnitDragHandler : MonoBehaviour
         if (unit == null) return;
 
         GameManager.Instance.cardManager.DropZoneOn();
+        
+        if (!unit.animator) return;
         unit.animator.SetBool("isDragged", true);
         unit.isDragging = true;
         isDragging = true;
@@ -32,20 +34,21 @@ public class UnitDragHandler : MonoBehaviour
 
     private void StopDragging()
     {
-        if (isDragging)
-        {
-            unit.isDragging = false;
-            isDragging = false;
-            unit.animator.SetBool("isDragged", false);
-            
-            if (unit.isAboveDropPoint)
-            {
-                GameManager.Instance.cardManager.BackUnitToHand(unit);
-                Destroy(unit.gameObject);
-            }
+        if (!isDragging) return;
+        
+        unit.isDragging = false;
+        isDragging = false;
 
-            GameManager.Instance.cardManager.DropZoneOff();
+        if (!unit.animator) return;
+        unit.animator.SetBool("isDragged", false);
+            
+        if (unit.isAboveDropPoint)
+        {
+            GameManager.Instance.cardManager.BackUnitToHand(unit);
+            Destroy(unit.gameObject);
         }
+
+        GameManager.Instance.cardManager.DropZoneOff();
     }
 
     private void DragUnit()

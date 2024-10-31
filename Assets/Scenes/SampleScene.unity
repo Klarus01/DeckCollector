@@ -3668,27 +3668,7 @@ MonoBehaviour:
   stages:
   - waves:
     - enemies:
-      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
-        count: 1
-      isBossWave: 0
-    - enemies:
-      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
-        count: 1
-      isBossWave: 0
-    - enemies:
       - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
-        count: 1
-      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
-        count: 1
-      isBossWave: 0
-    - enemies:
-      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
-        count: 3
-      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
-        count: 1
-      isBossWave: 0
-    - enemies:
-      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
         count: 1
       isBossWave: 1
   - waves:

@@ -37,16 +37,17 @@ public class CardManager : MonoBehaviour
 
     public void CollectAllCardsToHand()
     {
-        List<Unit> cardsToMove = new(GameManager.Instance.deck.cardsOnBoard);
+        var cardsToMove = new List<Unit>(GameManager.Instance.deck.cardsOnBoard);
 
         foreach (Unit cardOnBoard in cardsToMove)
         {
-            if (cardOnBoard.gameObject != null)
+            if (cardOnBoard != null && cardOnBoard.gameObject != null)
             {
                 BackUnitToHand(cardOnBoard);
                 Destroy(cardOnBoard.gameObject);
             }
         }
+
     }
 
     public void DropZoneOn()
