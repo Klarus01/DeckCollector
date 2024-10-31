@@ -1,7 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class Spawner : MonoBehaviour
+public class Building : MonoBehaviour
 {
     [SerializeField] private Sprite[] sprites;
     private SpriteRenderer spriteRenderer;
@@ -13,7 +14,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        var random = Random.Range(0, 2);
+        var random = Random.Range(0, sprites.Length);
         spriteRenderer.sprite = sprites[random];
     }
 }

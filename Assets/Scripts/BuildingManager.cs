@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> existingBuildings;
-    [SerializeField] private GameObject PlayerBuildingPrefab;
-    [SerializeField] private GameObject EnemyBuildingPrefab;
+    [SerializeField] private GameObject playerBuildingPrefab;
+    [SerializeField] private GameObject enemyBuildingPrefab;
+    [SerializeField] private GameObject treePrefab;
     private float buildingSpawnOffset = 1f;
+    private int maxTrees = 25;
+    private int maxTreesIncrese = 5;
     private int maxPlayerBuildings = 1;
     private int maxPlayerBuildingsIncrese = 2;
     private int maxEnemyBuildings = 1;
@@ -25,8 +29,10 @@ public class BuildingManager : MonoBehaviour
         DestroyExistingBuildings();
         maxPlayerBuildings += maxPlayerBuildingsIncrese;
         maxEnemyBuildings += maxEnemyBuildingsIncrese;
-        SpawnRandomBuildings(PlayerBuildingPrefab, maxPlayerBuildings);
-        SpawnRandomBuildings(EnemyBuildingPrefab, maxEnemyBuildings);
+        maxTrees += maxTreesIncrese;
+        SpawnRandomBuildings(playerBuildingPrefab, maxPlayerBuildings);
+        SpawnRandomBuildings(enemyBuildingPrefab, maxEnemyBuildings);
+        SpawnRandomBuildings(treePrefab, maxTrees);
     }
 
     private void DestroyExistingBuildings()

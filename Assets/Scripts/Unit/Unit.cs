@@ -2,6 +2,10 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour, IDamageable, IMovable
 {
+    [SerializeField] private GameObject tombstonePrefab;
+    
+    private GameObject tombstoneInstance;
+
     protected SpriteRenderer spriteRenderer;
     protected int damage;
     protected float speed;
@@ -56,10 +60,22 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         health -= amount;
         if (health <= 0)
         {
-            GameManager.Instance.cardManager.DropZoneOff();
-            GameManager.Instance.cardManager.BackUnitToHand(this);
-            Destroy(gameObject);
+            OnDeath();
         }
+    }
+
+    private void OnDeath()
+    {
+        tombstoneInstance = Instantiate(tombstonePrefab, transform.position, Quaternion.identity);
+        tombstoneInstance.GetComponent<Tombstone>().originalUnit = this;
+        GameManager.Instance.cardManager.DropZoneOff();
+        Destroy(gameObject);
+    }
+
+    public void ReviveUnit()
+    {
+        if (tombstoneInstance != null) Destroy(tombstoneInstance);
+        GameManager.Instance.cardManager.BackUnitToHand(this);
     }
     
     public void SetHighlight(bool isActive)

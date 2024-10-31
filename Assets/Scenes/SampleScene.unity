@@ -823,8 +823,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   existingBuildings: []
-  PlayerBuildingPrefab: {fileID: 217157262251365095, guid: 9341fa3e4bf470b46bca9d4f0bb8d93a, type: 3}
-  EnemyBuildingPrefab: {fileID: 5669318210321102206, guid: 312836d71190db04e813d25aa41e2b5c, type: 3}
+  playerBuildingPrefab: {fileID: 217157262251365095, guid: 9341fa3e4bf470b46bca9d4f0bb8d93a, type: 3}
+  enemyBuildingPrefab: {fileID: 5669318210321102206, guid: 312836d71190db04e813d25aa41e2b5c, type: 3}
+  treePrefab: {fileID: 2003588936354189452, guid: b6be2ae7acfac0144a391de456cd4241, type: 3}
 --- !u!4 &302318599
 Transform:
   m_ObjectHideFlags: 0

@@ -116,15 +116,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10371260777ec94f902d4a925e95f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tombstonePrefab: {fileID: 2541474329055780625, guid: bfb73bdf74238014bb5b60176f9a7903, type: 3}
   unitData: {fileID: 11400000, guid: 1e7db322f7fcfd842932b63779a9361b, type: 2}
   animator: {fileID: 0}
-  unitType: 0
-  id: 3
-  maxHealth: 0
-  health: 0
   isInvisible: 0
   isAboveDropPoint: 0
   isDragging: 0
+  health: 0
+  maxHealth: 0
 --- !u!50 &566368821404963064
 Rigidbody2D:
   serializedVersion: 4
