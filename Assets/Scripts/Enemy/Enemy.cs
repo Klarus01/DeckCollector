@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, IDamageable, IMovable, IAttackable
     [SerializeField] private float rangeOfVision = 100f;
 
     private float timer = 1f;
+    private int pointsForEnemy = 100;
 
     private void Start()
     {
@@ -67,9 +68,10 @@ public class Enemy : MonoBehaviour, IDamageable, IMovable, IAttackable
         target = closestTarget;
     }
 
-    public void DropLoot()
+    private void DropLoot()
     {
         GameManager.Instance.PartCount++;
+        GameManager.Instance.AddPoints(pointsForEnemy);
     }
     
     public void TakeDamage(float amount)

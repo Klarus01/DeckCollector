@@ -27,7 +27,8 @@ public class FighterUnit : Unit, IAttackable
 
     private void TryAttackTarget()
     {
-        if(isInvisible) return;
+        if (isInvisible) return;
+        if (isDragging) return;
         if (timer >= attackSpeed && Target.TryGetComponent<IDamageable>(out var target))
         {
             Attack(target);
@@ -52,16 +53,16 @@ public class FighterUnit : Unit, IAttackable
 
     private Transform SearchForTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
 
-        float closestDistance = Mathf.Infinity;
+        var closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
 
-        foreach (Collider2D target in targets)
+        foreach (var target in targets)
         {
             if (target.TryGetComponent<Enemy>(out var targetComponent))
             {
-                float distanceToTarget = Vector2.Distance(transform.position, targetComponent.transform.position);
+                var distanceToTarget = Vector2.Distance(transform.position, targetComponent.transform.position);
                 if (distanceToTarget < closestDistance)
                 {
                     closestDistance = distanceToTarget;

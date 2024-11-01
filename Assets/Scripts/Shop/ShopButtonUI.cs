@@ -21,20 +21,10 @@ public class ShopButtonUI : MonoBehaviour
 
     public void OnButtonClick()
     {
-        if (ShouldPurchaseCard())
+        if (HasEnoughGold())
         {
             PerformCardPurchase();
         }
-    }
-
-    private bool ShouldPurchaseCard()
-    {
-        return CanAddCardToDeck() && HasEnoughGold();
-    }
-
-    private bool CanAddCardToDeck()
-    {
-        return GameManager.Instance.deck.deck.Count < GameManager.Instance.maxDeckSize;
     }
 
     private bool HasEnoughGold()

@@ -110,10 +110,17 @@ public class WaveManager : MonoBehaviour
         GameManager.Instance.buildingManager.SpawnBuildings();
         GameManager.Instance.cardManager.CollectAllCardsToHand();
     }
+    
+    public void ResetWaves()
+    {
+        currentWaveIndex = 0;
+        currentStageIndex = 0;
+        StopAllCoroutines();
+        StartCoroutine(StartStages());
+    }
 
     private void GameCompleted()
     {
-        Debug.Log("Congratulations! You have completed all stages!");
-        //GameManager.Instance.ShowCompletionScreen();
+        GameManager.Instance.ShowCompletionScreen();
     }
 }

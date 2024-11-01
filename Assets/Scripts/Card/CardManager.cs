@@ -11,10 +11,23 @@ public class CardManager : MonoBehaviour
         GameManager.Instance.OnHandUpdate += PrepareForNewDraw;
         PrepareForNewDraw();
     }
+    
+    public void ResetHand()
+    {
+        CollectAllCardsToHand();
+        GameManager.Instance.deck.cardsInHand.Clear();
 
+        foreach (var unit in GameManager.Instance.deck.startingUnits)
+        {
+            GameManager.Instance.deck.cardsInHand.Add(unit);
+        }
+
+        PrepareForNewDraw();
+    }
+    
     private void PrepareForNewDraw()
     {
-        cardUIController.PrepareForNewDraw(GameManager.Instance.deck.deck);
+        cardUIController.PrepareForNewDraw(GameManager.Instance.deck.cardsInHand);
     }
 
     public void CardPlayed(CardUI card)
@@ -31,7 +44,7 @@ public class CardManager : MonoBehaviour
 
     public void NewCardBought(Unit unit)
     {
-        GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);
+        GameManager.Instance.deck.AddCard(unit);
         cardUIController.UnitBackToHand(unit);
     }
 
@@ -39,7 +52,7 @@ public class CardManager : MonoBehaviour
     {
         var cardsToMove = new List<Unit>(GameManager.Instance.deck.cardsOnBoard);
 
-        foreach (Unit cardOnBoard in cardsToMove)
+        foreach (var cardOnBoard in cardsToMove)
         {
             if (cardOnBoard != null && cardOnBoard.gameObject != null)
             {
@@ -48,6 +61,15 @@ public class CardManager : MonoBehaviour
             }
         }
 
+        var tombstoneToMove = new List<Tombstone>(GameManager.Instance.deck.cardsAsTombstone);
+
+        foreach (var tombStone in tombstoneToMove)
+        {
+            BackUnitToHand(tombStone.originalUnit);
+            Destroy(tombStone.gameObject);
+        }
+
+        GameManager.Instance.deck.cardsAsTombstone.Clear();
     }
 
     public void DropZoneOn()

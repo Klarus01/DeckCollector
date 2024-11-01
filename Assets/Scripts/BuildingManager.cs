@@ -9,8 +9,8 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject enemyBuildingPrefab;
     [SerializeField] private GameObject treePrefab;
     private float buildingSpawnOffset = 1f;
-    private int maxTrees = 20;
-    private int maxTreesIncrese = 5;
+    private int maxTrees = 15;
+    private int maxTreesIncrese = 3;
     private int maxPlayerBuildings = 1;
     private int maxPlayerBuildingsIncrese = 2;
     private int maxEnemyBuildings = 1;
@@ -95,4 +95,20 @@ public class BuildingManager : MonoBehaviour
 
         return false;
     }
+    
+    public void ResetBuildings()
+    {
+        foreach (var building in existingBuildings)
+        {
+            Destroy(building);
+        }
+        existingBuildings.Clear();
+        
+        maxPlayerBuildings = 1;
+        maxEnemyBuildings = 1;
+        maxTrees = 15;
+        
+        SpawnBuildings();
+    }
+
 }

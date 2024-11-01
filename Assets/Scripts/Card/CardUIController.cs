@@ -21,25 +21,25 @@ public class CardUIController : MonoBehaviour
 
     private void DeleteCards()
     {
-        foreach (CardUI cardUI in cards)
+        foreach (var cardUI in cards)
         {
-            Destroy(cardUI);
+            Destroy(cardUI.gameObject);
         }
         cards.Clear();
     }
 
     private void CreateHand(List<Unit> cardsToPlay)
     {
-        foreach (Unit unit in cardsToPlay)
+        foreach (var unit in cardsToPlay)
         {
-            CardUI cardUI = Instantiate(cardPrefab, cardHolder.transform);
+            var cardUI = Instantiate(cardPrefab, cardHolder.transform);
             CreateCard(cardUI, unit);
         }
     }
 
     public void UnitBackToHand(Unit unit)
     {
-        CardUI cardUI = Instantiate(cardPrefab, cardHolder.transform);
+        var cardUI = Instantiate(cardPrefab, cardHolder.transform);
         CreateCard(cardUI, unit);
         DropZoneOff();
     }
