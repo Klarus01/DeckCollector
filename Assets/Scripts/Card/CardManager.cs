@@ -35,6 +35,11 @@ public class CardManager : MonoBehaviour
         cardUIController.CardPlayed(card);
     }
 
+    public void CardSold(CardUI card)
+    {
+        cardUIController.CardPlayed(card);
+    }
+
     public void BackUnitToHand(Unit unit)
     {
         GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);

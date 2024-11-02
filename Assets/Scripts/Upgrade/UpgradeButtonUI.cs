@@ -16,14 +16,21 @@ public class UpgradeButtonUI : MonoBehaviour
 
     private void Start()
     {
-        level = upgrade.upgradeLevels[upgrade.upgradeLvl];
-        UpdateButtonText();
+        InitializeUpgradeUI();
         button.onClick.AddListener(OnButtonClick);
         currentStatsText.gameObject.SetActive(false);
         nextStatsText.gameObject.SetActive(false);
     }
 
-    public void OnButtonClick()
+    private void InitializeUpgradeUI()
+    {
+        level = upgrade.upgradeLevels[upgrade.upgradeLvl];
+        UpdateButtonText();
+        ResetUpgradeStages();
+    }
+
+
+    private void OnButtonClick()
     {
         if (!TryIfUpgradeIsPossible())
         {
@@ -34,7 +41,7 @@ public class UpgradeButtonUI : MonoBehaviour
         OnMouseEnter();
     }
 
-    public bool TryIfUpgradeIsPossible()
+    private bool TryIfUpgradeIsPossible()
     {
         if (upgrade.upgradeLvl.Equals(upgrade.maxUpgradeLvl))
         {
@@ -50,17 +57,17 @@ public class UpgradeButtonUI : MonoBehaviour
         return true;
     }
 
-    public void OnMouseEnter()
+    private void OnMouseEnter()
     {
-        int nextLvl = upgrade.upgradeLvl + 1;
+        var nextLvl = upgrade.upgradeLvl + 1;
         currentStatsText.gameObject.SetActive(true);
         currentStatsText.SetText($"Current:\r\nHP: {level.hp}\r\nDMG: {level.dmg}");
-        if (!upgrade.upgradeLvl.Equals(upgrade.maxUpgradeLvl))
-        {
-            costText.gameObject.SetActive(false);
-            nextStatsText.gameObject.SetActive(true);
-            nextStatsText.SetText($"Next lvl:\r\nHP: {upgrade.upgradeLevels[nextLvl].hp}\r\nDMG: {upgrade.upgradeLevels[nextLvl].dmg}");
-        }
+        
+        if (upgrade.upgradeLvl.Equals(upgrade.maxUpgradeLvl)) return;
+        
+        costText.gameObject.SetActive(false);
+        nextStatsText.gameObject.SetActive(true);
+        nextStatsText.SetText($"Next lvl:\r\nHP: {upgrade.upgradeLevels[nextLvl].hp}\r\nDMG: {upgrade.upgradeLevels[nextLvl].dmg}");
     }
 
     private void OnMouseExit()
@@ -70,7 +77,7 @@ public class UpgradeButtonUI : MonoBehaviour
         costText.gameObject.SetActive(true);
     }
 
-    public void UpdateButtonText()
+    private void UpdateButtonText()
     {
         image.sprite = upgrade.unitSprite;
         level = upgrade.upgradeLevels[upgrade.upgradeLvl];
@@ -85,9 +92,20 @@ public class UpgradeButtonUI : MonoBehaviour
             costText.SetText($"Cost: {level.costForNextLvl}");
         }
 
-        for (int i = 0; i < upgrade.upgradeLvl; i++)
+        for (var i = 0; i < upgrade.upgradeLvl; i++)
         {
             upgradeStages[i].color = Color.green;
         }
+    }
+
+    public void ResetUpgradeStages()
+    {
+        foreach (Image stage in upgradeStages)
+        {
+            stage.color = Color.white;
+        }
+        upgrade.upgradeLvl = 0;
+        UpdateButtonText();
+
     }
 }

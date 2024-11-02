@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,14 +7,20 @@ using UnityEngine.SocialPlatforms.Impl;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text gameTimeText;
 
     private readonly int endScoreMultiplication = 10;
     private int points;
-    public int Points { get => points; set => points = value; } 
+    private float gameTime;
 
     public void Initialize()
     {
         StartScoreReduction();
+    }
+
+    private void Update()
+    {
+        gameTime += Time.deltaTime;
     }
 
     public void AddPoints(int amount)
@@ -43,6 +50,14 @@ public class ScoreManager : MonoBehaviour
     public void ShowFinalScore()
     {
         points = CalculateFinalScore();
+        var timePlayed = TimeSpan.FromSeconds(gameTime).ToString(@"hh\:mm\:ss");
+        gameTimeText.SetText(timePlayed);
         scoreText.SetText($"Score: {points}");
+    }
+
+    public void ResetScore()
+    {
+        points = 0;
+        gameTime = 0f;
     }
 }

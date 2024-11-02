@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
     [SerializeField] private GameObject completionScreen;
-    private int shopItemCost = 2;
-    private int goldCount = 5;
+    [SerializeField] private List<UpgradeButtonUI> upgradeButtons; 
+    private float shopItemCost = 2;
+    private int goldCount;
     private int partCount;
     public Deck deck;
     public CardManager cardManager;
@@ -14,10 +16,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public BuildingManager buildingManager;
     public WaveManager waveManager;
     public ScoreManager scoreManager;
+    public ShopManager shopManager;
     public event Action OnUIUpdate;
     public event Action OnHandUpdate;
     
-    public int ShopCost { get => shopItemCost; set { shopItemCost = value; OnUIUpdate?.Invoke(); } }
+    public float ShopCost { get => shopItemCost; set { shopItemCost = Mathf.Max(value, 2); OnUIUpdate?.Invoke(); } }
     public int GoldCount { get => goldCount; set { goldCount = value; OnUIUpdate?.Invoke(); } }
     public int PartCount { get => partCount; set { partCount = value; OnUIUpdate?.Invoke(); } }
 
@@ -49,20 +52,23 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     
     public void RestartGame()
     {
-        scoreManager.Points = 0;
         GoldCount = 0;
         PartCount = 0;
+        shopItemCost = 2;
 
         UpdateUI();
-        
+
+        scoreManager.ResetScore();
         cardManager.ResetHand();
-
         waveManager.ResetWaves();
-
+        shopManager.ResetShop();
+        UpgradeManager.Instance.UpgradesReset();
+        foreach (var button in upgradeButtons)
+        {
+            button.ResetUpgradeStages();
+        }
         buildingManager.ResetBuildings();
-
         completionScreen.SetActive(false);
-
         cameraManager.SetUpCameraToStartingPosition();
     }
 

@@ -19,6 +19,11 @@ public class CardUIController : MonoBehaviour
         cards.Remove(card);
     }
 
+    public void CardSold(CardUI card)
+    {
+        cards.Remove(card);
+    }
+
     private void DeleteCards()
     {
         foreach (var cardUI in cards)

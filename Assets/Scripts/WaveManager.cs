@@ -29,9 +29,9 @@ public class WaveManager : MonoBehaviour
     
     private List<Transform> spawnPoints = new();
     private List<Enemy> liveEnemies = new();
-    private float timeBetweenWaves = 1f;
-    private int currentStageIndex = 0;
-    private int currentWaveIndex = 0;
+    private float timeBetweenWaves = 10f;
+    private int currentStageIndex;
+    private int currentWaveIndex;
 
     private void Start()
     {

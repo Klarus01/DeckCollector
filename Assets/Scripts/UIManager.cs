@@ -26,6 +26,6 @@ public class UIManager : MonoBehaviour
     {
         goldText.SetText(GameManager.Instance.GoldCount.ToString());
         partsText.SetText(GameManager.Instance.PartCount.ToString());
-        shopCostText.SetText($"Unit cost: {GameManager.Instance.ShopCost}");
+        shopCostText.SetText($"Unit cost: {(int)GameManager.Instance.ShopCost}");
     }
 }

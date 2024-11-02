@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -64,9 +65,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
         if (isAboveSellPoint)
         {
-            GameManager.Instance.GoldCount += cardValue;
-            GameManager.Instance.deck.SellCard(unit);
-            Destroy(gameObject);
+            SellCard();
         }
         else if (isAboveDropPoint)
         {
@@ -81,6 +80,14 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         GameManager.Instance.cardManager.DropZoneOff();
     }
 
+    private void SellCard()
+    {
+        GameManager.Instance.GoldCount += cardValue;
+        GameManager.Instance.ShopCost /= 1.5f;
+        GameManager.Instance.deck.SellCard(unit, this);
+        Destroy(gameObject);
+    }
+    
     private void PlayCard()
     {
         GameManager.Instance.deck.PlayCard(unit, transform, this);

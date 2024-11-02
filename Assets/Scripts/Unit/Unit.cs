@@ -5,9 +5,11 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     [SerializeField] private GameObject tombstonePrefab;
     protected SpriteRenderer spriteRenderer;
     protected int damage;
-    protected float speed;
     protected float rangeOfAction;
     protected float rangeOfVision;
+    
+    private float speed;
+    private Color originalColor;
     
     public UnitData unitData;
     public Animator animator;
@@ -16,17 +18,18 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     public bool isDragging;
     public float health;
     public float maxHealth;
-    
-    public Transform Target { get; set; }
+
+    protected Transform Target { get; set; }
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
         SetBaseStats();
     }
     
-    protected virtual void SetBaseStats()
+    public virtual void SetBaseStats()
     {
         speed = unitData.speed;
         rangeOfAction = unitData.rangeOfAction;
@@ -41,6 +44,7 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         maxHealth = level.hp;
         health = maxHealth;
         damage = level.dmg;
+        UpdateColor();
     }
     
 
@@ -55,12 +59,21 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     public void TakeDamage(float amount)
     {
         health -= amount;
+        UpdateColor();
         if (health <= 0)
         {
             UnitDeath();
         }
     }
 
+    private void UpdateColor()
+    {
+        var healthPercentage = health / maxHealth;
+        originalColor = Color.Lerp(Color.red, Color.white, healthPercentage);
+        spriteRenderer.color = originalColor;
+
+    }
+    
     private void UnitDeath()
     {
         var tombstoneInstance = Instantiate(tombstonePrefab, transform.position, Quaternion.identity);
@@ -77,6 +90,6 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     
     public void SetHighlight(bool isActive)
     {
-        spriteRenderer.color = isActive ? Color.yellow : Color.white;
+        spriteRenderer.color = isActive ? Color.yellow : originalColor;
     }
 }

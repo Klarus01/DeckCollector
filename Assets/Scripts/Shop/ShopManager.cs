@@ -14,18 +14,23 @@ public class ShopManager : MonoBehaviour
 
     public void RefreshShopItems()
     {
-        for (int i = 0; i < displayedItems.Length; i++)
+        for (var i = 0; i < displayedItems.Length; i++)
         {
-            ShopItem randomItem = GetRandomItem();
+            var randomItem = GetRandomItem();
             displayedItems[i] = randomItem;
         }
         shopUIController.SetShopButtons(displayedItems);
     }
 
-    public ShopItem GetRandomItem()
+    private ShopItem GetRandomItem()
     {
-        int randomIndex = Random.Range(0, shopItems.Length);
-        ShopItem randomItem = shopItems[randomIndex];
+        var randomIndex = Random.Range(0, shopItems.Length);
+        var randomItem = shopItems[randomIndex];
         return randomItem;
+    }
+
+    public void ResetShop()
+    {
+        RefreshShopItems();
     }
 }

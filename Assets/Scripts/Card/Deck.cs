@@ -26,8 +26,9 @@ public class Deck : MonoBehaviour
         cardsInHand.Add(unit);
     }
 
-    public void SellCard(Unit unit)
+    public void SellCard(Unit unit, CardUI card)
     {
         cardsInHand.Remove(unit);
+        GameManager.Instance.cardManager.CardSold(card);
     }
 }

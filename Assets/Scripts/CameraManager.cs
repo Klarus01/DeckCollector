@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
     private Camera mainCamera;
     private Vector2 initialCameraLimits = new(4f, 3f);
     private Vector2 cameraLimitIncreasePerWave = new(3f, 2f);
-    private float cameraMoveSpeed = 5f;
+    private float cameraMoveSpeed = 16f;
     
     public Vector2 currentCameraLimits;
 

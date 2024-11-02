@@ -21,7 +21,7 @@ public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
         }
     }
 
-    public void RefreshUnitDictionary()
+    private void RefreshUnitDictionary()
     {
         unitDictionary = new Dictionary<Type, Unit[]>
         {
@@ -30,5 +30,18 @@ public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
             { typeof(Assassin), FindObjectsOfType<Assassin>() },
             { typeof(Axeman), FindObjectsOfType<Axeman>() }
         };
+    }
+
+    public void UpgradesReset()
+    {
+        RefreshUnitDictionary();
+
+        foreach (var key in unitDictionary)
+        {
+            foreach (var unit in key.Value)
+            {
+                unit.SetBaseStats();
+            }
+        }
     }
 }

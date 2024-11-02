@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static GameManager;
 
 public class ShopButtonUI : MonoBehaviour
 {
@@ -34,8 +35,8 @@ public class ShopButtonUI : MonoBehaviour
 
     private void PerformCardPurchase()
     {
-        GameManager.Instance.GoldCount -= GameManager.Instance.ShopCost;
-        GameManager.Instance.ShopCost *= 2;
+        GameManager.Instance.GoldCount -= (int)GameManager.Instance.ShopCost;
+        GameManager.Instance.ShopCost *= 1.5f;
         GameManager.Instance.cardManager.NewCardBought(unit);
         gameObject.SetActive(false);
     }
