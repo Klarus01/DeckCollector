@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private CardUIController cardUIController;
+    public CardUIController cardUIController;
     public Transform cardInUse;
 
     private void Start()

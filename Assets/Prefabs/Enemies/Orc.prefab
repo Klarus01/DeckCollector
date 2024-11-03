@@ -113,17 +113,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2601754963408348406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1e05d73842dd3f40b8df24691855865, type: 3}
+  m_Script: {fileID: 11500000, guid: 35585b500d57e02479d8073a8db066c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 6e209828b17c913478801fce28f1044d, type: 2}
   target: {fileID: 0}
-  animator: {fileID: 6264781710433160425}
-  enemyData: {fileID: 0}
-  health: 2
-  speed: 4
-  damage: 1
-  attackSpeed: 1.5
-  rangeOfVision: 100
+  animator: {fileID: 0}
 --- !u!50 &2601754963408348173
 Rigidbody2D:
   serializedVersion: 4

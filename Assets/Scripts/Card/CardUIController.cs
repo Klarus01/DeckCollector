@@ -69,4 +69,9 @@ public class CardUIController : MonoBehaviour
         dropZone.SetActive(true);
         cardHolder.SetActive(false);
     }
+
+    public void SwitchCardHolderVisibility()
+    {
+        cardHolder.SetActive(!cardHolder.activeSelf);
+    }
 }

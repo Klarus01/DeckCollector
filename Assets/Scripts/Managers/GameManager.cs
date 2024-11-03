@@ -46,6 +46,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void ShowCompletionScreen()
     {
+        cardManager.cardUIController.SwitchCardHolderVisibility();
         completionScreen.SetActive(true);
         scoreManager.ShowFinalScore();
     }
@@ -57,9 +58,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         shopItemCost = 2;
 
         UpdateUI();
-
-        scoreManager.ResetScore();
+        cardManager.cardUIController.SwitchCardHolderVisibility();
         cardManager.ResetHand();
+        scoreManager.ResetScore();
         waveManager.ResetWaves();
         shopManager.ResetShop();
         UpgradeManager.Instance.UpgradesReset();
