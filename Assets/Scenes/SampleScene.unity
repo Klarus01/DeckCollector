@@ -554,7 +554,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &212313721
 PrefabInstance:
@@ -772,7 +772,7 @@ RectTransform:
   - {fileID: 66787409}
   - {fileID: 909472545}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1345,7 +1345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374355259
 GameObject:
@@ -1409,7 +1409,7 @@ Transform:
   m_Children:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &493499474
 MonoBehaviour:
@@ -2183,7 +2183,7 @@ MonoBehaviour:
   cardManager: {fileID: 629954372}
   cameraManager: {fileID: 493499474}
   buildingManager: {fileID: 302318598}
-  waveManager: {fileID: 1880532858}
+  waveManager: {fileID: 1505673523}
   scoreManager: {fileID: 1169247601}
   shopManager: {fileID: 1394147496}
 --- !u!4 &664744780
@@ -2868,7 +2868,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1091635047
 PrefabInstance:
@@ -3235,7 +3235,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1204938882 stripped
 MonoBehaviour:
@@ -3868,13 +3868,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1505673524}
   - component: {fileID: 1505673523}
+  - component: {fileID: 1505673525}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1505673523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3912,8 +3913,62 @@ MonoBehaviour:
     - enemies:
       - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
         count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 1
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 2
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 2
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 8
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 3
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 5
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 4
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 4
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 4
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
+        count: 3
       isBossWave: 1
   - waves:
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 1
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 1
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 2
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
+        count: 1
+      isBossWave: 0
     - enemies:
       - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
         count: 1
@@ -3957,8 +4012,35 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1505673525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505673522}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaccccf9cd85e7e43bf8ef71135dc3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stages:
+  - waves:
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 2
+      isBossWave: 1
+  - waves:
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 1
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 1
+      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 1
+      isBossWave: 0
 --- !u!114 &1505721682 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3253029291771192729, guid: cf71244eafc96e541bb571f576e7db91, type: 3}
@@ -4560,66 +4642,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1880532857
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1880532859}
-  - component: {fileID: 1880532858}
-  m_Layer: 0
-  m_Name: TestingWaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1880532858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880532857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaccccf9cd85e7e43bf8ef71135dc3f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stages:
-  - waves:
-    - enemies:
-      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
-        count: 2
-      isBossWave: 1
-  - waves:
-    - enemies:
-      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
-        count: 1
-      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
-        count: 1
-      - enemy: {fileID: 2601754963408348174, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
-        count: 1
-      isBossWave: 0
---- !u!4 &1880532859
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880532857}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881881533
 GameObject:

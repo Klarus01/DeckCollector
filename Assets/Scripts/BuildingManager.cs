@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -9,14 +8,17 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject enemyBuildingPrefab;
     [SerializeField] private GameObject treePrefab;
     private float buildingSpawnOffset = 1f;
-    private int maxTrees = 15;
-    private int maxTreesIncrese = 3;
+    private int maxTrees = 120;
+    private int maxTreesIncrease = 30;
     private int maxPlayerBuildings = 1;
-    private int maxPlayerBuildingsIncrese = 2;
+    private int maxPlayerBuildingsIncrease = 4;
     private int maxEnemyBuildings = 1;
-    private int maxEnemyBuildingsIncrese = 1;
-    private float minimumDistanceBetweenBuildings = 5f;
+    private int maxEnemyBuildingsIncrease = 2;
+    private float minimumDistanceBetweenBuildings = 4.5f;
+    private float minimumDistanceBetweenTrees = 2f;
     private Camera mainCamera;
+    
+    private List<GameObject> trees = new();
 
     private void Start()
     {
@@ -27,12 +29,13 @@ public class BuildingManager : MonoBehaviour
     public void SpawnBuildings()
     {
         DestroyExistingBuildings();
-        maxPlayerBuildings += maxPlayerBuildingsIncrese;
-        maxEnemyBuildings += maxEnemyBuildingsIncrese;
-        maxTrees += maxTreesIncrese;
+        maxPlayerBuildings += maxPlayerBuildingsIncrease;
+        maxEnemyBuildings += maxEnemyBuildingsIncrease;
+        maxTrees += maxTreesIncrease;
+        
         SpawnRandomBuildings(playerBuildingPrefab, maxPlayerBuildings);
         SpawnRandomBuildings(enemyBuildingPrefab, maxEnemyBuildings);
-        SpawnRandomBuildings(treePrefab, maxTrees);
+        SpawnRandomBuildings(treePrefab, maxTrees, true);
     }
 
     private void DestroyExistingBuildings()
@@ -42,19 +45,29 @@ public class BuildingManager : MonoBehaviour
             Destroy(building);
         }
         existingBuildings.Clear();
+        
+        foreach (var tree in trees)
+        {
+            Destroy(tree);
+        }
+        trees.Clear();
     }
 
-    private void SpawnRandomBuildings(GameObject prefab, int count)
+    private void SpawnRandomBuildings(GameObject prefab, int count, bool isTree = false)
     {
         for (var i = 0; i < count; i++)
         {
-            var spawnPosition = GetRandomSpawnPosition();
-            var building = Instantiate(prefab, spawnPosition + Vector3.up * buildingSpawnOffset, Quaternion.identity);
-            existingBuildings.Add(building);
+            var spawnPosition = GetRandomSpawnPosition(isTree);
+
+            if (spawnPosition != Vector3.zero)
+            {
+                var building = Instantiate(prefab, spawnPosition, Quaternion.identity);
+                existingBuildings.Add(building);
+            }
         }
     }
-
-    private Vector3 GetRandomSpawnPosition()
+    
+    private Vector3 GetRandomSpawnPosition(bool isTree)
     {
         const int maxAttempts = 100;
 
@@ -71,44 +84,46 @@ public class BuildingManager : MonoBehaviour
             var x = Random.Range(minX, maxX);
             var y = Random.Range(minY, maxY);
 
-            Vector3 spawnPosition = new(x, y, 0f);
+            var spawnPosition = new Vector3(x, y, 0f);
 
-            if (!IsPositionNearOtherBuildings(spawnPosition))
-            {
-                return spawnPosition;
-            }
+            if (IsPositionNearOtherObjects(spawnPosition, isTree)) return spawnPosition;
         }
+        
         return Vector3.zero;
     }
 
-    private bool IsPositionNearOtherBuildings(Vector3 position)
+    private bool IsPositionNearOtherObjects(Vector3 position, bool isTree)
     {
         foreach (var building in existingBuildings)
         {
             var distance = Vector3.Distance(position, building.transform.position);
-
-            if (distance < minimumDistanceBetweenBuildings)
+            if (isTree && building.TryGetComponent<Tree>(out _))
             {
-                return true;
+                if (distance < minimumDistanceBetweenTrees)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (distance < minimumDistanceBetweenBuildings)
+                {
+                    return false;
+                }
             }
         }
 
-        return false;
+        return true;
     }
-    
+
     public void ResetBuildings()
     {
-        foreach (var building in existingBuildings)
-        {
-            Destroy(building);
-        }
-        existingBuildings.Clear();
+        DestroyExistingBuildings();
         
         maxPlayerBuildings = 1;
         maxEnemyBuildings = 1;
-        maxTrees = 15;
+        maxTrees = 120;
         
         SpawnBuildings();
     }
-
 }

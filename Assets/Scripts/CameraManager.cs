@@ -5,8 +5,8 @@ public class CameraManager : MonoBehaviour
 {
     private Vector3 startPoint = new(0, 0, -10);
     private Camera mainCamera;
-    private Vector2 initialCameraLimits = new(4f, 3f);
-    private Vector2 cameraLimitIncreasePerWave = new(3f, 2f);
+    private Vector2 initialCameraLimits = new(8f, 6f);
+    private Vector2 cameraLimitIncreasePerWave = new(4f, 3f);
     private float cameraMoveSpeed = 16f;
     
     public Vector2 currentCameraLimits;
