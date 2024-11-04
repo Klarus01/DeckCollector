@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tombstonePrefab: {fileID: 2541474329055780625, guid: bfb73bdf74238014bb5b60176f9a7903, type: 3}
+  placingParitclePrefab: {fileID: 2116159519470791252, guid: 8b08eb477f2df4e4c898dbe7e5123711, type: 3}
   unitData: {fileID: 11400000, guid: 1e7db322f7fcfd842932b63779a9361b, type: 2}
   animator: {fileID: 0}
   isInvisible: 0

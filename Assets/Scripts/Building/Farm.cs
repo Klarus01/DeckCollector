@@ -1,14 +1,17 @@
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Farm : MonoBehaviour
 {
+    [SerializeField] private GameObject coinAnimPrefab;
+    
     private Animator animator;
-    private float timer = 0f;
-    private float interval = 5f;
+    private float timer;
+    private readonly float interval = 5f;
     private bool isCollision;
-    private int numberOfEmployees = 0;
-
-    public int goldAvailableOnFarm = 5;
+    private int numberOfEmployees;
+    private int goldAvailableOnFarm = 5;
 
     private void Awake()
     {
@@ -33,6 +36,7 @@ public class Farm : MonoBehaviour
         {
             GameManager.Instance.GoldCount++;
             goldAvailableOnFarm--;
+            Instantiate(coinAnimPrefab, transform);
             if (goldAvailableOnFarm <= 0)
             {
                 Destroy(gameObject);
@@ -44,11 +48,11 @@ public class Farm : MonoBehaviour
     private void CheckHowManyFarmers()
     {
         numberOfEmployees = 0;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
 
-        foreach (Collider2D collider in colliders)
+        foreach (var coll in colliders)
         {
-            if (collider.TryGetComponent<Farmer>(out Farmer farmer) && !farmer.isDragging)
+            if (coll.TryGetComponent<Farmer>(out var farmer) && !farmer.isDragging)
             {
                 numberOfEmployees++;
             }

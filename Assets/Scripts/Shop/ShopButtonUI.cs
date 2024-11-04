@@ -30,7 +30,7 @@ public class ShopButtonUI : MonoBehaviour
 
     private bool HasEnoughGold()
     {
-        return GameManager.Instance.GoldCount >= GameManager.Instance.ShopCost;
+        return GameManager.Instance.GoldCount >= (int)GameManager.Instance.ShopCost;
     }
 
     private void PerformCardPurchase()

@@ -40,7 +40,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         {
             return;
         }
-
+        
         transform.SetParent(GameManager.Instance.cardManager.cardInUse);
         GameManager.Instance.cardManager.DropZoneOn();
     }

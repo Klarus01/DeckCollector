@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour, IDamageable, IMovable
 {
     [SerializeField] private GameObject tombstonePrefab;
+    [SerializeField] private ParticleSystem placingParitcle;
     protected SpriteRenderer spriteRenderer;
     protected int damage;
     protected float rangeOfAction;
@@ -26,6 +27,7 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+        Instantiate(placingParitcle, transform);
         SetBaseStats();
     }
     
