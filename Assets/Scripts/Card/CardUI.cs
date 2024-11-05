@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +14,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     public bool isAboveDropPoint;
     public Transform orginalParent;
     public Vector3 orginalPosition;
+    private Color originalColor;
     public Slider slider;
     private float restTimer = 5f;
 
@@ -21,6 +22,8 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     {
         orginalParent = transform.parent;
         orginalPosition = transform.position;
+        originalColor = cardImage.color;
+
         ResetTimeCalculation();
         SetRestSlider();
     }
@@ -40,7 +43,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         {
             return;
         }
-        
+
         transform.SetParent(GameManager.Instance.cardManager.cardInUse);
         GameManager.Instance.cardManager.DropZoneOn();
     }
@@ -87,14 +90,14 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         GameManager.Instance.deck.SellCard(unit, this);
         Destroy(gameObject);
     }
-    
+
     private void PlayCard()
     {
         GameManager.Instance.deck.PlayCard(unit, transform, this);
         Destroy(gameObject);
     }
 
-    public void SetRestSlider()
+    private void SetRestSlider()
     {
         slider.maxValue = restTimer;
         slider.value = restTimer;
@@ -107,5 +110,25 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         {
             restTimer *= 2f;
         }
+
+        FlashGold();
+        //add border to card
+    }
+
+    private void FlashGold()
+    {
+        StartCoroutine(FlashGoldCoroutine());
+    }
+
+    private IEnumerator FlashGoldCoroutine()
+    {
+        while (restTimer > 0)
+        {
+            yield return new WaitForSeconds(restTimer);
+        }
+
+        cardImage.color = new Color(1f, 0.92f, 0.016f, 1f);
+        yield return new WaitForSeconds(0.5f);
+        cardImage.color = originalColor;
     }
 }

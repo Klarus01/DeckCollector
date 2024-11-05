@@ -43,9 +43,9 @@ public class WaveManager : MonoBehaviour
         spawnPoints.Clear();
         foreach (var spawner in FindObjectsOfType<Spawner>())
         {
-            if (spawner.TryGetComponent<Transform>(out var objTransform))
+            if (spawner.transform)
             {
-                spawnPoints.Add(objTransform);
+                spawnPoints.Add(spawner.transform);
             }
         }
     }
@@ -87,7 +87,7 @@ public class WaveManager : MonoBehaviour
                 var randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                 var randPos = randomSpawnPoint.position + new Vector3(Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f), 0f);
 
-                Enemy spawnedEnemy = Instantiate(enemyEntry.enemy, randPos, Quaternion.identity);
+                var spawnedEnemy = Instantiate(enemyEntry.enemy, randPos, Quaternion.identity);
                 liveEnemies.Add(spawnedEnemy);
 
                 yield return new WaitForSeconds(Random.Range(0f, 0.5f));
