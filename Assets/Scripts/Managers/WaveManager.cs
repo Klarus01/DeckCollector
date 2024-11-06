@@ -25,11 +25,11 @@ public class WaveManager : MonoBehaviour
         public Wave[] waves = new Wave[5];
     }
 
+    [SerializeField] private float timeBetweenWaves = 10f;
     [SerializeField] private Stage[] stages;
     
     private List<Transform> spawnPoints = new();
     private List<Enemy> liveEnemies = new();
-    private float timeBetweenWaves = 10f;
     private int currentStageIndex;
     private int currentWaveIndex;
 
