@@ -86,7 +86,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private void SellCard()
     {
         GameManager.Instance.GoldCount += cardValue;
-        GameManager.Instance.ShopCost /= 1.5f;
+        GameManager.Instance.ShopCost /= 1.25f;
         GameManager.Instance.deck.SellCard(unit, this);
         Destroy(gameObject);
     }
@@ -105,10 +105,10 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private void ResetTimeCalculation()
     {
-        restTimer = (unitMaxHealth - unitHealth);
+        restTimer = (unitMaxHealth - unitHealth) * 0.75f;
         if (unitHealth.Equals(0))
         {
-            restTimer *= 2f;
+            restTimer *= 1.5f;
         }
 
         FlashGold();

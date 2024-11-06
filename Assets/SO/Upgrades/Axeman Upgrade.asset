@@ -18,17 +18,17 @@ MonoBehaviour:
   maxUpgradeLvl: 5
   upgradeLevels:
   - costForNextLvl: 1
-    hp: 7
+    hp: 10
     dmg: 0
   - costForNextLvl: 5
-    hp: 9
-    dmg: 1
-  - costForNextLvl: 10
     hp: 12
     dmg: 1
-  - costForNextLvl: 20
+  - costForNextLvl: 10
     hp: 15
-    dmg: 2
+    dmg: 1
+  - costForNextLvl: 20
+    hp: 20
+    dmg: 1
   - costForNextLvl: 50
     hp: 25
     dmg: 2

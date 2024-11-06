@@ -36,7 +36,7 @@ public class ShopButtonUI : MonoBehaviour
     private void PerformCardPurchase()
     {
         GameManager.Instance.GoldCount -= (int)GameManager.Instance.ShopCost;
-        GameManager.Instance.ShopCost *= 1.5f;
+        GameManager.Instance.ShopCost *= 1.25f;
         GameManager.Instance.cardManager.NewCardBought(unit);
         gameObject.SetActive(false);
     }

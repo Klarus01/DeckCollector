@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de38769f6342f4840a9dba7fe941f105, type: 3}
-  m_Name: GoblinArcherData
+  m_Name: OrcMageData
   m_EditorClassIdentifier: 
-  health: 3
-  speed: 5
-  damage: 2
-  attackSpeed: 1.5
+  health: 5
+  speed: 4
+  damage: 3
+  attackSpeed: 1
   rangeOfVision: 200

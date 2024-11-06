@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35585b500d57e02479d8073a8db066c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 6e209828b17c913478801fce28f1044d, type: 2}
+  enemyData: {fileID: 11400000, guid: 3e5d158a28403064f9dd76022bb61ffb, type: 2}
   target: {fileID: 0}
   animator: {fileID: 0}
 --- !u!50 &327698469797514916

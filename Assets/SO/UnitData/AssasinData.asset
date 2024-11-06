@@ -16,8 +16,8 @@ MonoBehaviour:
   cardSprite: {fileID: 1808876003, guid: 6656a143b8a028c47bd2bf508e027ba2, type: 3}
   upgrade: {fileID: 11400000, guid: 8c00edf4d9347b44e92e95474e30e4a7, type: 2}
   maxHealth: 1
-  rangeOfVision: 3
+  rangeOfVision: 5
   rangeOfAction: 1
-  speed: 7
+  speed: 10
   damage: 5
   attackSpeed: 1
