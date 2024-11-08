@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Tombstone : Building
 {
     public Unit originalUnit;
@@ -6,6 +8,7 @@ public class Tombstone : Building
     {
         originalUnit = unit;
         GameManager.Instance.deck.cardsAsTombstone.Add(this);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
     }
 
     private void OnMouseDown()
