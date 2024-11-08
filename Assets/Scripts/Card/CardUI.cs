@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,7 +17,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     public Vector3 orginalPosition;
     private Color originalColor;
     public Slider slider;
-    private float restTimer = 5f;
+    private float restTimer;
 
     private void Start()
     {
@@ -24,17 +25,15 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         orginalPosition = transform.position;
         originalColor = cardImage.color;
 
-        ResetTimeCalculation();
+        RestTimeCalculation();
         SetRestSlider();
     }
 
     private void Update()
     {
-        if (restTimer > 0f)
-        {
-            restTimer -= Time.deltaTime;
-            slider.value = restTimer;
-        }
+        if (!(restTimer > 0f)) return;
+        restTimer -= Time.deltaTime;
+        slider.value = restTimer;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -50,22 +49,12 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (restTimer > 0f)
-        {
-            return;
-        }
-
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (restTimer > 0f)
-        {
-            return;
-        }
-
         if (isAboveSellPoint)
         {
             SellCard();
@@ -103,7 +92,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         slider.value = restTimer;
     }
 
-    private void ResetTimeCalculation()
+    private void RestTimeCalculation()
     {
         restTimer = (unitMaxHealth - unitHealth) * 0.75f;
         if (unitHealth.Equals(0))
@@ -111,21 +100,24 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
             restTimer *= 1.5f;
         }
 
-        FlashGold();
-        //add border to card
+        if(!unitMaxHealth.Equals(unitHealth)) FlashGold();
     }
 
     private void FlashGold()
     {
-        StartCoroutine(FlashGoldCoroutine());
+        CoroutineRunner.StartCoroutine(FlashGoldCoroutine());
     }
 
     private IEnumerator FlashGoldCoroutine()
     {
+        Debug.Log(unit.name + " " + restTimer);
         while (restTimer > 0)
         {
-            yield return new WaitForSeconds(restTimer);
+            Debug.Log("running " + unit.name);
+            yield return new WaitForEndOfFrame();
         }
+        
+        Debug.Log(unit.name + " flashing");
 
         cardImage.color = new Color(1f, 0.92f, 0.016f, 1f);
         yield return new WaitForSeconds(0.5f);
