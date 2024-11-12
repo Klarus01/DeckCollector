@@ -15,7 +15,8 @@ public class BossEnemy : Enemy
         {
             animator.SetTrigger("Attack");
         }
-        timer = 0f;
+
+        ResetAttack();
     }
 
     private void LaunchProjectile()

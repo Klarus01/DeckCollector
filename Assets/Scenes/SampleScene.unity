@@ -2219,6 +2219,9 @@ MonoBehaviour:
   startingUnits:
   - {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
   - {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
+  - {fileID: 8893078822102297094, guid: 89f779046fd8403408402955f29c744b, type: 3}
+  - {fileID: 8893078822102297094, guid: 89f779046fd8403408402955f29c744b, type: 3}
+  - {fileID: 8893078822102297094, guid: 89f779046fd8403408402955f29c744b, type: 3}
 --- !u!114 &664744783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,7 +3930,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505673522}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaccccf9cd85e7e43bf8ef71135dc3f1, type: 3}
   m_Name: 
@@ -4084,7 +4087,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505673522}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaccccf9cd85e7e43bf8ef71135dc3f1, type: 3}
   m_Name: 
@@ -4093,7 +4096,7 @@ MonoBehaviour:
   stages:
   - waves:
     - enemies:
-      - enemy: {fileID: 4909138841947229086, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
         count: 1
       isBossWave: 0
     - enemies:

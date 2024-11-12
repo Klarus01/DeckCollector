@@ -110,14 +110,10 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private IEnumerator FlashGoldCoroutine()
     {
-        Debug.Log(unit.name + " " + restTimer);
         while (restTimer > 0)
         {
-            Debug.Log("running " + unit.name);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(restTimer);
         }
-        
-        Debug.Log(unit.name + " flashing");
 
         cardImage.color = new Color(1f, 0.92f, 0.016f, 1f);
         yield return new WaitForSeconds(0.5f);

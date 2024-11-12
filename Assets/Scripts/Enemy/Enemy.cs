@@ -5,7 +5,10 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     [SerializeField] protected EnemyData enemyData;
     [SerializeField] protected Transform target;
     [SerializeField] protected Animator animator;
+    
     private SpriteRenderer spriteRenderer;
+    private bool isAttacking;
+    
     protected float maxHealth;
     protected float health;
     protected float speed;
@@ -29,7 +32,10 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
             timer += Time.deltaTime;
         }
 
-        FindClosestTarget();
+        if (!isAttacking)
+        {
+            FindClosestTarget();
+        }
 
         if (target != null)
         {
@@ -39,14 +45,12 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Unit>(out var targetUnit) && timer >= attackSpeed)
-        {
-            if (!targetUnit.isInvisible)
-            {
-                targetUnit.TakeDamage(damage);
-                Attack();
-            }
-        }
+        if (!collision.gameObject.TryGetComponent<Unit>(out var targetUnit) || !(timer >= attackSpeed)) return;
+        if (targetUnit.isInvisible || isAttacking) return;
+        
+        isAttacking = true;
+        targetUnit.TakeDamage(damage);
+        Attack();
     }
 
     protected void InitializeStats(float eliteMultiplier = 1f)
@@ -61,14 +65,14 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
 
     protected void FindClosestTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
-        float closestDistance = Mathf.Infinity;
+        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+        var closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
-        foreach (Collider2D potentialTarget in targets)
+        foreach (var potentialTarget in targets)
         {
             if (potentialTarget.TryGetComponent<Unit>(out Unit unit) && !unit.isInvisible)
             {
-                float distance = Vector2.Distance(transform.position, unit.transform.position);
+                var distance = Vector2.Distance(transform.position, unit.transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -107,6 +111,12 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     {
         animator.SetBool("isWalking", true);
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    }
+    
+    protected void ResetAttack()
+    {
+        isAttacking = false;
+        timer = 0f;
     }
 
     protected abstract void Attack();

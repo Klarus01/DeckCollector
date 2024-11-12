@@ -6,7 +6,7 @@ public class RangedEnemy : Enemy
     [SerializeField] private float shootingRange = 10f;
     [SerializeField] private float attackCooldown = 2f;
     
-    private float attackTimer = 0f;
+    private float attackTimer;
 
     private void Update()
     {
@@ -20,7 +20,7 @@ public class RangedEnemy : Enemy
 
             if (!(attackTimer >= attackCooldown)) return;
             
-            Shoot();
+            Attack();
             attackTimer = 0f;
         }
         else if (target != null)
@@ -30,11 +30,6 @@ public class RangedEnemy : Enemy
     }
 
     protected override void Attack()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void Shoot()
     {
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         var projectileScript = projectile.GetComponent<Projectile>();
