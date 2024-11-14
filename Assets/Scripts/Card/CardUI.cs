@@ -1,28 +1,29 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
+    private Color originalColor;
+    private float restTimer;
+    
     public Image cardImage;
     public Unit unit;
-    private int cardValue = 2;
     public float unitHealth;
     public float unitMaxHealth;
+    public Transform originalParent;
+    public Vector3 originalPosition;
+    public Slider slider;
+    public bool isSelected;
+    public bool isDragged;
     public bool isAboveSellPoint;
     public bool isAboveDropPoint;
-    public Transform orginalParent;
-    public Vector3 orginalPosition;
-    private Color originalColor;
-    public Slider slider;
-    private float restTimer;
 
     private void Start()
     {
-        orginalParent = transform.parent;
-        orginalPosition = transform.position;
+        originalParent = transform.parent;
+        originalPosition = transform.position;
         originalColor = cardImage.color;
 
         RestTimeCalculation();
@@ -31,59 +32,56 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private void Update()
     {
-        if (!(restTimer > 0f)) return;
-        restTimer -= Time.deltaTime;
-        slider.value = restTimer;
+        if (restTimer > 0f)
+        {
+            restTimer -= Time.deltaTime;
+            slider.value = restTimer;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CardSelectionManager.Instance.ReturnAllSelectedCards();
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (restTimer > 0f) return;
+        if (isDragged) return;
+
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            CardSelectionManager.Instance.ToggleCardSelection(this);
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (restTimer > 0f)
-        {
-            return;
-        }
+        if (restTimer > 0f) return;
 
-        transform.SetParent(GameManager.Instance.cardManager.cardInUse);
-        GameManager.Instance.cardManager.DropZoneOn();
+        if (CardSelectionManager.Instance.selectedCards.Count == 0)
+        {
+            CardSelectionManager.Instance.ToggleCardSelection(this);
+        }
+        CardSelectionManager.Instance.BeginDragSelectedCards();
+        isDragged = true;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mousePos;
+        CardSelectionManager.Instance.DragSelectedCards(mousePos);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isAboveSellPoint)
-        {
-            SellCard();
-        }
-        else if (isAboveDropPoint)
-        {
-            transform.position = orginalPosition;
-            transform.SetParent(orginalParent);
-        }
-        else
-        {
-            PlayCard();
-        }
-
-        GameManager.Instance.cardManager.DropZoneOff();
+        isDragged = false;
+        CardSelectionManager.Instance.EndDragSelectedCards(this);
     }
 
-    private void SellCard()
+    public void HighlightCard(bool highlight)
     {
-        GameManager.Instance.GoldCount += cardValue;
-        GameManager.Instance.ShopCost /= 1.25f;
-        GameManager.Instance.deck.SellCard(unit, this);
-        Destroy(gameObject);
-    }
-
-    private void PlayCard()
-    {
-        GameManager.Instance.deck.PlayCard(unit, transform, this);
-        Destroy(gameObject);
+        cardImage.color = highlight ? new Color(1f, 0.8f, 0.8f, 1f) : originalColor;
     }
 
     private void SetRestSlider()
@@ -99,13 +97,12 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         {
             restTimer *= 1.5f;
         }
-
-        if(!unitMaxHealth.Equals(unitHealth)) FlashGold();
+        if (!unitMaxHealth.Equals(unitHealth)) FlashGold();
     }
 
     private void FlashGold()
     {
-        CoroutineRunner.StartCoroutine(FlashGoldCoroutine());
+        StartCoroutine(FlashGoldCoroutine());
     }
 
     private IEnumerator FlashGoldCoroutine()
@@ -114,7 +111,6 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         {
             yield return new WaitForSeconds(restTimer);
         }
-
         cardImage.color = new Color(1f, 0.92f, 0.016f, 1f);
         yield return new WaitForSeconds(0.5f);
         cardImage.color = originalColor;

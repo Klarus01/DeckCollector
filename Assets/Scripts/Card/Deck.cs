@@ -18,7 +18,7 @@ public class Deck : MonoBehaviour
         var newUnit = Instantiate(unit, trans.position, Quaternion.identity);
         cardsOnBoard.Add(newUnit);
         cardsInHand.Remove(unit);
-        GameManager.Instance.cardManager.CardPlayed(card);
+        CardManager.Instance.CardPlayed(card);
     }
 
     public void AddCard(Unit unit)
@@ -29,6 +29,6 @@ public class Deck : MonoBehaviour
     public void SellCard(Unit unit, CardUI card)
     {
         cardsInHand.Remove(unit);
-        GameManager.Instance.cardManager.CardSold(card);
+        CardManager.Instance.CardSold(card);
     }
 }

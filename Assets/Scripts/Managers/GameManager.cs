@@ -7,11 +7,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 {
     [SerializeField] private GameObject completionScreen;
     [SerializeField] private List<UpgradeButtonUI> upgradeButtons; 
+    
     private float shopItemCost = 2;
     private int goldCount;
     private int partCount;
+    
     public Deck deck;
-    public CardManager cardManager;
     public CameraManager cameraManager;
     public BuildingManager buildingManager;
     public WaveManager waveManager;
@@ -46,7 +47,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void ShowCompletionScreen()
     {
-        cardManager.cardUIController.SwitchCardHolderVisibility();
+        CardManager.Instance.cardUIController.SwitchCardHolderVisibility();
         completionScreen.SetActive(true);
         scoreManager.ShowFinalScore();
     }
@@ -58,8 +59,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         shopItemCost = 2;
 
         UpdateUI();
-        cardManager.cardUIController.SwitchCardHolderVisibility();
-        cardManager.ResetHand();
+        CardManager.Instance.cardUIController.SwitchCardHolderVisibility();
+        CardManager.Instance.ResetHand();
         scoreManager.ResetScore();
         waveManager.ResetWaves();
         shopManager.ResetShop();
@@ -72,5 +73,4 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         completionScreen.SetActive(false);
         cameraManager.SetUpCameraToStartingPosition();
     }
-
 }

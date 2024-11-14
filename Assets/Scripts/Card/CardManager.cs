@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardManager : MonoBehaviour
+public class CardManager : SingletonMonobehaviour<CardManager>
 {
     public CardUIController cardUIController;
     public Transform cardInUse;

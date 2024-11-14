@@ -24,7 +24,7 @@ public class UnitDragHandler : MonoBehaviour
         unit = FindClosestUnit();
         if (unit == null) return;
 
-        GameManager.Instance.cardManager.DropZoneOn();
+        CardManager.Instance.DropZoneOn();
         
         if (!unit.animator) return;
         unit.animator.SetBool("isDragged", true);
@@ -44,11 +44,11 @@ public class UnitDragHandler : MonoBehaviour
             
         if (unit.isAboveDropPoint)
         {
-            GameManager.Instance.cardManager.BackUnitToHand(unit);
+            CardManager.Instance.BackUnitToHand(unit);
             Destroy(unit.gameObject);
         }
 
-        GameManager.Instance.cardManager.DropZoneOff();
+        CardManager.Instance.DropZoneOff();
     }
 
     private void DragUnit()

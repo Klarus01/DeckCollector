@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CardDropZone : MonoBehaviour
 {
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<CardUI>(out CardUI card))
@@ -13,7 +12,6 @@ public class CardDropZone : MonoBehaviour
         {
             unit.isAboveDropPoint = true;
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

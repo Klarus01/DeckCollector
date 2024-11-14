@@ -108,7 +108,7 @@ public class WaveManager : MonoBehaviour
     {
         GameManager.Instance.cameraManager.UpdateCameraLimits();
         GameManager.Instance.buildingManager.SpawnBuildings();
-        GameManager.Instance.cardManager.CollectAllCardsToHand();
+        CardManager.Instance.CollectAllCardsToHand();
     }
     
     public void ResetWaves()

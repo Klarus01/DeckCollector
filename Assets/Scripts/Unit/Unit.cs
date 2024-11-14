@@ -4,21 +4,23 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
 {
     [SerializeField] private GameObject tombstonePrefab;
     [SerializeField] private ParticleSystem placingParitcle;
+    
+    private float speed;
+    private Color originalColor;
+    
     protected SpriteRenderer spriteRenderer;
     protected int damage;
     protected float rangeOfAction;
     protected float rangeOfVision;
     
-    private float speed;
-    private Color originalColor;
-    
     public UnitData unitData;
     public Animator animator;
+    public int cardValue = 2;
+    public float health;
+    public float maxHealth;
     public bool isInvisible;
     public bool isAboveDropPoint;
     public bool isDragging;
-    public float health;
-    public float maxHealth;
 
     protected Transform Target { get; set; }
 
@@ -80,14 +82,14 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     {
         var tombstoneInstance = Instantiate(tombstonePrefab, transform.position, Quaternion.identity);
         tombstoneInstance.GetComponent<Tombstone>().Initialize(this);
-        GameManager.Instance.cardManager.DropZoneOff();
+        CardManager.Instance.DropZoneOff();
         GameManager.Instance.deck.cardsOnBoard.Remove(this);
         Destroy(gameObject);
     }
 
     public void ReviveUnit()
     {
-        GameManager.Instance.cardManager.BackUnitToHand(this);
+        CardManager.Instance.BackUnitToHand(this);
     }
     
     public void SetHighlight(bool isActive)
