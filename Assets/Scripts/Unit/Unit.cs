@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Unit : MonoBehaviour, IDamageable, IMovable
@@ -32,7 +33,12 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         Instantiate(placingParitcle, transform);
         SetBaseStats();
     }
-    
+
+    private void LateUpdate()
+    {
+        ClampPositionToMapLimits();
+    }
+
     public virtual void SetBaseStats()
     {
         speed = unitData.speed;
@@ -51,6 +57,19 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         UpdateColor();
     }
     
+    private void ClampPositionToMapLimits()
+    {
+        if (GameManager.Instance.cameraManager == null) return;
+
+        var cameraLimits = GameManager.Instance.cameraManager.GetCameraLimits();
+        var clampedPosition = new Vector3(
+            Mathf.Clamp(transform.position.x, -cameraLimits.x, cameraLimits.x),
+            Mathf.Clamp(transform.position.y, -cameraLimits.y, cameraLimits.y),
+            transform.position.z
+        );
+
+        transform.position = clampedPosition;
+    }
 
     public void MoveTowardsTarget(Transform target)
     {

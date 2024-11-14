@@ -79,7 +79,6 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
     private void PlaySelectedCards()
     {
         var tempSelectedCards = new List<CardUI>(selectedCards);
-        Debug.Log(tempSelectedCards);
         foreach (var card in tempSelectedCards)
         {
             GameManager.Instance.deck.PlayCard(card.unit, card.transform, card);

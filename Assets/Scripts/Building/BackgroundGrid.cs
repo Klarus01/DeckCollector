@@ -3,8 +3,8 @@ using UnityEngine;
 public class BackgroundGrid : MonoBehaviour
 {
     [SerializeField] private Sprite[] backgroundSprites;
-    private int gridWidth = 100;
-    private int gridHeight = 100;
+    private int gridWidth = 200;
+    private int gridHeight = 200;
     private float tileSize = 1f;
     
     private void Start()

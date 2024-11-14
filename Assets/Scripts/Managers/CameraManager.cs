@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -58,5 +57,10 @@ public class CameraManager : MonoBehaviour
     {
         if (!mainCamera) return;
         mainCamera.transform.position = startPoint;
+    }
+
+    public Vector2 GetCameraLimits()
+    {
+        return new Vector2(currentCameraLimits.x + mainCamera.orthographicSize * 1.6f, currentCameraLimits.y + mainCamera.orthographicSize * 0.9f);
     }
 }
