@@ -30,13 +30,13 @@ public class ShopButtonUI : MonoBehaviour
 
     private bool HasEnoughGold()
     {
-        return GameManager.Instance.GoldCount >= (int)GameManager.Instance.ShopCost;
+        return GameManager.Instance.GoldCount >= (int)GameManager.Instance.ShopItemCost;
     }
 
     private void PerformCardPurchase()
     {
-        GameManager.Instance.GoldCount -= (int)GameManager.Instance.ShopCost;
-        GameManager.Instance.ShopCost *= 1.25f;
+        GameManager.Instance.GoldCount -= (int)GameManager.Instance.ShopItemCost;
+        GameManager.Instance.ShopItemCost *= 1.25f;
         CardManager.Instance.NewCardBought(unit);
         gameObject.SetActive(false);
     }

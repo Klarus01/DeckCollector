@@ -76,14 +76,4 @@ public class CardManager : SingletonMonobehaviour<CardManager>
 
         GameManager.Instance.deck.cardsAsTombstone.Clear();
     }
-
-    public void DropZoneOn()
-    {
-        cardUIController.DropZoneOn();
-    }
-
-    public void DropZoneOff()
-    {
-        cardUIController.DropZoneOff();
-    }
 }

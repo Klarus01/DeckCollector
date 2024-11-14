@@ -82,7 +82,6 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     {
         var tombstoneInstance = Instantiate(tombstonePrefab, transform.position, Quaternion.identity);
         tombstoneInstance.GetComponent<Tombstone>().Initialize(this);
-        CardManager.Instance.DropZoneOff();
         GameManager.Instance.deck.cardsOnBoard.Remove(this);
         Destroy(gameObject);
     }

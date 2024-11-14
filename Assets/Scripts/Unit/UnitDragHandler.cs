@@ -13,6 +13,8 @@ public class UnitDragHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) StartDragging();
         else if (Input.GetMouseButtonUp(0)) StopDragging();
 
+        if (Input.GetMouseButtonDown(1)) ReturnUnitToHand();
+        
         if (isDragging) DragUnit();
         else HighlightUnitUnderCursor();
     }
@@ -23,10 +25,8 @@ public class UnitDragHandler : MonoBehaviour
         
         unit = FindClosestUnit();
         if (unit == null) return;
-
-        CardManager.Instance.DropZoneOn();
-        
         if (!unit.animator) return;
+        
         unit.animator.SetBool("isDragged", true);
         unit.isDragging = true;
         isDragging = true;
@@ -47,8 +47,6 @@ public class UnitDragHandler : MonoBehaviour
             CardManager.Instance.BackUnitToHand(unit);
             Destroy(unit.gameObject);
         }
-
-        CardManager.Instance.DropZoneOff();
     }
 
     private void DragUnit()
@@ -62,7 +60,7 @@ public class UnitDragHandler : MonoBehaviour
 
     private void HighlightUnitUnderCursor()
     {
-        Unit closestUnit = FindClosestUnit();
+        var closestUnit = FindClosestUnit();
 
         if (highlightedUnit != closestUnit)
         {
@@ -77,14 +75,14 @@ public class UnitDragHandler : MonoBehaviour
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var targets = Physics2D.OverlapCircleAll(mousePos, highlightRange);
-        float closestDistance = Mathf.Infinity;
+        var closestDistance = Mathf.Infinity;
         Unit closestUnit = null;
 
         foreach (var target in targets)
         {
             if (target.TryGetComponent<Unit>(out var unit))
             {
-                float distanceToTarget = Vector2.Distance(mousePos, unit.transform.position);
+                var distanceToTarget = Vector2.Distance(mousePos, unit.transform.position);
                 if (distanceToTarget < closestDistance)
                 {
                     closestDistance = distanceToTarget;
@@ -94,5 +92,14 @@ public class UnitDragHandler : MonoBehaviour
         }
 
         return closestUnit;
+    }
+    
+    private void ReturnUnitToHand()
+    {
+        unit = FindClosestUnit();
+        if (isDragging || unit == null) return;
+        CardManager.Instance.BackUnitToHand(unit);
+        isDragging = false;
+        Destroy(unit.gameObject);
     }
 }

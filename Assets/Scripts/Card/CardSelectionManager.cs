@@ -38,7 +38,6 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         {
             card.transform.SetParent(CardManager.Instance.cardInUse);
         }
-        CardManager.Instance.DropZoneOn();
     }
 
     public void DragSelectedCards(Vector2 position)
@@ -63,15 +62,15 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         {
             PlaySelectedCards();
         }
-
-        CardManager.Instance.DropZoneOff();
     }
 
     private void SellSelectedCards()
     {
-        foreach (var card in selectedCards)
+        var tempSelectedCards = new List<CardUI>(selectedCards);
+        foreach (var card in tempSelectedCards)
         {
             GameManager.Instance.GoldCount += card.unit.cardValue;
+            GameManager.Instance.ShopItemCost /= 1.25f;
             GameManager.Instance.deck.SellCard(card.unit, card);
             ClearSelection(card);
         }
@@ -101,9 +100,10 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         var tempSelectedCards = new List<CardUI>(selectedCards);
         foreach (var card in tempSelectedCards)
         {
-            ToggleCardSelection(card);
+            card.isDragged = false;
             card.transform.SetParent(card.originalParent);
             card.transform.position = card.originalPosition;
+            DeselectCard(card);
         }
         selectedCards.Clear();
     }
