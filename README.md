@@ -25,3 +25,6 @@ We see that the player has purchased a new unit with axes and that his knight is
 
 ![deck5](https://github.com/Klarus01/DeckCollector/assets/44645536/31c4f262-19db-4a44-97c6-52ac505fe233)
 All the player's units are highlighted in red. We can also see the upgrade panel later in the game.
+
+!WORK WORK WORK!
+![image](https://github.com/user-attachments/assets/8f01fd2c-d2cb-4ce2-88f6-cbc8866f8419)
