@@ -1,16 +1,22 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UpgradeButtonUI : MonoBehaviour
 {
-    [SerializeField] private Image image;
+    [SerializeField] private Image unitImage;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text costText;
     [SerializeField] private TMP_Text currentStatsText;
     [SerializeField] private TMP_Text nextStatsText;
+    [SerializeField] private Image backgroundImage;
     [SerializeField] private Image[] upgradeStages;
 
+    private Color originalColor;
+    
     public Upgrade upgrade;
     public Upgrade.UpgradeLevel level;
 
@@ -20,6 +26,7 @@ public class UpgradeButtonUI : MonoBehaviour
         button.onClick.AddListener(OnButtonClick);
         currentStatsText.gameObject.SetActive(false);
         nextStatsText.gameObject.SetActive(false);
+        originalColor = backgroundImage.color;
     }
 
     private void InitializeUpgradeUI()
@@ -34,8 +41,12 @@ public class UpgradeButtonUI : MonoBehaviour
     {
         if (!TryIfUpgradeIsPossible())
         {
+            StartCoroutine(ChangeBackgroundColorTemporarily(new Color(0.86f, 0.2f, 0.2f, 1f)));
             return;
         }
+        StartCoroutine(ChangeBackgroundColorTemporarily(new Color(0.1f, 0.5f, 0.1f, 1f)));
+
+        GameManager.Instance.PartCount -= level.costForNextLvl;
         UpgradeManager.Instance.OnUpgradeBuy(upgrade);
         UpdateButtonText();
         OnMouseEnter();
@@ -53,7 +64,6 @@ public class UpgradeButtonUI : MonoBehaviour
             return false;
         }
 
-        GameManager.Instance.PartCount -= level.costForNextLvl;
         return true;
     }
 
@@ -79,13 +89,12 @@ public class UpgradeButtonUI : MonoBehaviour
 
     private void UpdateButtonText()
     {
-        image.sprite = upgrade.unitSprite;
+        unitImage.sprite = upgrade.unitSprite;
         level = upgrade.upgradeLevels[upgrade.upgradeLvl];
-
+        
         if (upgrade.upgradeLvl.Equals(upgrade.maxUpgradeLvl))
         {
             costText.SetText($"MAX LEVEL");
-
         }
         else
         {
@@ -98,14 +107,21 @@ public class UpgradeButtonUI : MonoBehaviour
         }
     }
 
+
     public void ResetUpgradeStages()
     {
-        foreach (Image stage in upgradeStages)
+        foreach (var stage in upgradeStages)
         {
             stage.color = Color.white;
         }
         upgrade.upgradeLvl = 0;
         UpdateButtonText();
-
+    }
+    
+    private IEnumerator ChangeBackgroundColorTemporarily(Color newColor)
+    {
+        backgroundImage.color = newColor;
+        yield return new WaitForSeconds(.2f);
+        backgroundImage.color = originalColor;
     }
 }

@@ -374,11 +374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1905fa452b686d247a5781d50145a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 2979983970194101236}
+  unitImage: {fileID: 2979983970194101236}
   button: {fileID: 51984758928081999}
   costText: {fileID: 51984759285787123}
   currentStatsText: {fileID: 930429888}
   nextStatsText: {fileID: 144575113}
+  backgroundImage: {fileID: 51984758928081998}
   upgradeStages:
   - {fileID: 2200941016057469742}
   - {fileID: 8805818048507048495}

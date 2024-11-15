@@ -29,6 +29,7 @@ public class FighterUnit : Unit, IAttackable
     {
         if (isInvisible) return;
         if (isDragging) return;
+        if (!Target) return;
         if (timer >= attackSpeed && Target.TryGetComponent<IDamageable>(out var target))
         {
             Attack(target);

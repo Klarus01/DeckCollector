@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3253029291771192729}
   - component: {fileID: 3253029291771192730}
   m_Layer: 0
-  m_Name: Slot
+  m_Name: ShopSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 3253029291771192730}
-  image: {fileID: 3253029290449004214}
+  unitImage: {fileID: 3253029290449004214}
+  backgroundImage: {fileID: 3253029291771192731}
 --- !u!114 &3253029291771192730
 MonoBehaviour:
   m_ObjectHideFlags: 0
