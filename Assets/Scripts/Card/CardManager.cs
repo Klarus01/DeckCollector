@@ -4,7 +4,7 @@ using UnityEngine;
 public class CardManager : SingletonMonobehaviour<CardManager>
 {
     public CardUIController cardUIController;
-    public Transform cardInUse;
+    //public Transform cardInUse;
 
     private void Start()
     {

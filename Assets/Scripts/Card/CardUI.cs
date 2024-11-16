@@ -7,6 +7,8 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 {
     private Color originalColor;
     private float restTimer;
+    private Vector2 initialMousePosition;
+    private const float dragThreshold = 20f;
     
     public Image cardImage;
     public Unit unit;
@@ -59,22 +61,35 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     {
         if (restTimer > 0f) return;
 
-        if (CardSelectionManager.Instance.selectedCards.Count == 0)
+        initialMousePosition = eventData.position;
+        
+        if (!isSelected)
         {
             CardSelectionManager.Instance.ToggleCardSelection(this);
         }
-        CardSelectionManager.Instance.BeginDragSelectedCards();
+
         isDragged = true;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if(Vector2.Distance(initialMousePosition, eventData.position) < dragThreshold)
+        {
+            return;
+        }
+        
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         CardSelectionManager.Instance.DragSelectedCards(mousePos);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (Vector2.Distance(initialMousePosition, eventData.position) < dragThreshold)
+        {
+            CardSelectionManager.Instance.EndDragSelectedCardsError();
+            return;
+        }
+        
         isDragged = false;
         CardSelectionManager.Instance.EndDragSelectedCards(this);
     }

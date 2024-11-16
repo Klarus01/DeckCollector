@@ -2053,7 +2053,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardUIController: {fileID: 629954374}
-  cardInUse: {fileID: 1717161226}
 --- !u!4 &629954373
 Transform:
   m_ObjectHideFlags: 0
@@ -2781,8 +2780,8 @@ MonoBehaviour:
   cardsOnBoard: []
   cardsAsTombstone: []
   startingUnits:
-  - {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
   - {fileID: 406492886510162063, guid: edeb8298a5e044b46badd50f5a43fde7, type: 3}
+  - {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
 --- !u!4 &936788769
 Transform:
   m_ObjectHideFlags: 0
@@ -3728,8 +3727,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efb82e2e62769b4d9aa4ded36d80ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeUIController: {fileID: 2005030701}
   animator: {fileID: 108700989}
   slideButton: {fileID: 1389088567}
+  isActive: 0
   shopButtons:
   - {fileID: 1606656655}
   - {fileID: 273168850}
@@ -4905,6 +4906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2900419147d15964bae28404ffc857e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopUIController: {fileID: 1394147497}
   animator: {fileID: 517329389}
   slideButton: {fileID: 688510708}
   upgradeButtons:
@@ -4912,6 +4914,7 @@ MonoBehaviour:
   - {fileID: 2122420258}
   - {fileID: 783080960}
   - {fileID: 1307438364}
+  isActive: 0
 --- !u!1001 &2122420254
 PrefabInstance:
   m_ObjectHideFlags: 0

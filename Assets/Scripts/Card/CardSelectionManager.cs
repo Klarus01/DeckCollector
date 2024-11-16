@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
 {
@@ -32,14 +33,6 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         card.HighlightCard(false);
     }
 
-    public void BeginDragSelectedCards()
-    {
-        foreach (var card in selectedCards)
-        {
-            card.transform.SetParent(CardManager.Instance.cardInUse);
-        }
-    }
-
     public void DragSelectedCards(Vector2 position)
     {
         foreach (var card in selectedCards)
@@ -62,6 +55,11 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         {
             PlaySelectedCards();
         }
+    }
+
+    public void EndDragSelectedCardsError()
+    {
+        ReturnAllSelectedCards(true);
     }
 
     private void SellSelectedCards()
@@ -94,7 +92,7 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         Destroy(card.gameObject);
     }
 
-    public void ReturnAllSelectedCards()
+    public void ReturnAllSelectedCards(bool isStillSelected = false)
     {
         var tempSelectedCards = new List<CardUI>(selectedCards);
         foreach (var card in tempSelectedCards)
@@ -102,8 +100,9 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
             card.isDragged = false;
             card.transform.SetParent(card.originalParent);
             card.transform.position = card.originalPosition;
-            DeselectCard(card);
+            if(!isStillSelected) DeselectCard(card);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(card.originalParent.GetComponent<RectTransform>());
         }
-        selectedCards.Clear();
+        if(!isStillSelected) selectedCards.Clear();
     }
 }

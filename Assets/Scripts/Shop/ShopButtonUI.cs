@@ -16,7 +16,7 @@ public class ShopButtonUI : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(OnButtonClick);
-        originalColor = unitImage.color;
+        originalColor = backgroundImage.color;
     }
 
     public void SetShopItem(ShopItem shopItem)
@@ -33,7 +33,6 @@ public class ShopButtonUI : MonoBehaviour
             return;
         }
         
-        StartCoroutine(ChangeBackgroundColorTemporarily(new Color(0.1f, 0.5f, 0.1f, 1f)));
         PerformCardPurchase();
     }
 
