@@ -6,9 +6,10 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     [SerializeField] protected Transform target;
     [SerializeField] protected Animator animator;
     
-    private SpriteRenderer spriteRenderer;
     private bool isAttacking;
     
+    protected int partDrop = 1;
+    protected SpriteRenderer spriteRenderer;
     protected float maxHealth;
     protected float health;
     protected float speed;
@@ -22,7 +23,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        InitializeStats();
     }
 
     protected virtual void Update()
@@ -83,9 +83,9 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         target = closestTarget;
     }
 
-    protected void DropLoot()
+    protected virtual void DropLoot()
     {
-        GameManager.Instance.PartCount++;
+        GameManager.Instance.PartCount += partDrop;
         GameManager.Instance.AddPoints(pointsForEnemy);
     }
 

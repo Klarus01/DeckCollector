@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RangedEnemy : Enemy
+public class RangedEnemy : EliteEnemy
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float shootingRange = 10f;
@@ -8,7 +8,7 @@ public class RangedEnemy : Enemy
     
     private float attackTimer;
 
-    private void Update()
+    protected override void Update()
     {
         attackTimer += Time.deltaTime;
 

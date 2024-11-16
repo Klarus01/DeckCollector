@@ -119,6 +119,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 6e209828b17c913478801fce28f1044d, type: 2}
   target: {fileID: 0}
   animator: {fileID: 0}
+  eliteLevel: 0
 --- !u!50 &2601754963408348173
 Rigidbody2D:
   serializedVersion: 4

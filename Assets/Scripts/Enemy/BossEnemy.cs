@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class BossEnemy : Enemy
+public class BossEnemy : EliteEnemy
 {
     [SerializeField] private bool canUseRangedAttack;
     [SerializeField] private GameObject projectilePrefab;
-
+    
     protected override void Attack()
     {
         if (canUseRangedAttack)
@@ -17,6 +17,12 @@ public class BossEnemy : Enemy
         }
 
         ResetAttack();
+    }
+
+    protected override void DropLoot()
+    {
+        pointsForEnemy = 1000;
+        base.DropLoot();
     }
 
     private void LaunchProjectile()

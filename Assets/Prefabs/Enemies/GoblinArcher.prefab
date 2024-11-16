@@ -119,7 +119,10 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 890022c6314a72744a94ec8852aeadff, type: 2}
   target: {fileID: 0}
   animator: {fileID: 5178949523174203252}
+  eliteLevel: 0
   projectilePrefab: {fileID: 9110335755788835741, guid: 693476a06ea46c34e8bae5ac94d65489, type: 3}
+  shootingRange: 10
+  attackCooldown: 2
 --- !u!50 &3833936271484516240
 Rigidbody2D:
   serializedVersion: 4

@@ -1,4 +1,4 @@
-public class MeleeEnemy : Enemy
+public class MeleeEnemy : EliteEnemy
 {
     protected override void Attack()
     {

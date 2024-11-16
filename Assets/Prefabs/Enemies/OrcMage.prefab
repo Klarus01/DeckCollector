@@ -119,6 +119,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 26ff34983da001b4b8888b49aab9b52b, type: 2}
   target: {fileID: 0}
   animator: {fileID: 8256411694535866732}
+  eliteLevel: 0
   projectilePrefab: {fileID: 6874143064676857306, guid: e1494cb5a5d6a2e45bf0190f89f9e091, type: 3}
   shootingRange: 10
   attackCooldown: 2
