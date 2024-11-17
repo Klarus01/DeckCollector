@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
 {
+    private float cardSpacing = 1f;
+    
     public List<CardUI> selectedCards = new();
 
     public void ToggleCardSelection(CardUI card)
@@ -76,10 +78,30 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
 
     private void PlaySelectedCards()
     {
+        if (selectedCards.Count == 0)
+            return;
+
         var tempSelectedCards = new List<CardUI>(selectedCards);
-        foreach (var card in tempSelectedCards)
+        var centerPosition = tempSelectedCards[0].transform.position;
+        var radius = 1f;
+        var angleIncrement = 360f / tempSelectedCards.Count;
+
+        for (var i = 0; i < tempSelectedCards.Count; i++)
         {
-            GameManager.Instance.deck.PlayCard(card.unit, card.transform, card);
+            var card = tempSelectedCards[i];
+
+            if (i == 0)
+            {
+                GameManager.Instance.deck.PlayCard(card.unit, centerPosition, card);
+            }
+            else
+            {
+                var angle = i * angleIncrement * Mathf.Deg2Rad;
+                var xOffset = radius * Mathf.Cos(angle);
+                var yOffset = radius * Mathf.Sin(angle);
+                var cardPosition = new Vector3(centerPosition.x + xOffset, centerPosition.y + yOffset, 0);
+                GameManager.Instance.deck.PlayCard(card.unit, cardPosition, card);
+            }
             ClearSelection(card);
         }
     }

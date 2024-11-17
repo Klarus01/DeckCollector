@@ -13,9 +13,9 @@ public class Deck : MonoBehaviour
         cardsInHand.AddRange(startingUnits);
     }
     
-    public void PlayCard(Unit unit, Transform trans, CardUI card)
+    public void PlayCard(Unit unit, Vector3 position, CardUI card)
     {
-        var newUnit = Instantiate(unit, trans.position, Quaternion.identity);
+        var newUnit = Instantiate(unit, position, Quaternion.identity);
         cardsOnBoard.Add(newUnit);
         cardsInHand.Remove(unit);
         CardManager.Instance.CardPlayed(card);
