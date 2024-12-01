@@ -794,6 +794,7 @@ MonoBehaviour:
   partsText: {fileID: 66787407}
   shopCostText: {fileID: 311462282}
   restartGameButton: {fileID: 535446965}
+  menuButton: {fileID: 1318874481}
 --- !u!1 &302318597
 GameObject:
   m_ObjectHideFlags: 0

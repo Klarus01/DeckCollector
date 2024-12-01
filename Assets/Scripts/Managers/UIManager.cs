@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -9,17 +10,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text partsText;
     [SerializeField] private TMP_Text shopCostText;
     [SerializeField] private Button restartGameButton;
+    [SerializeField] private Button menuButton;
 
     private void Start()
     {
         GameManager.Instance.OnUIUpdate += UpdateUI;
         UpdateUI();
-        restartGameButton.onClick.AddListener(OnResetButtonPressed);
+        restartGameButton.onClick.AddListener(ResetButtonPressed);
+        menuButton.onClick.AddListener(MenuButtonPressed);
     }
 
-    private void OnResetButtonPressed()
+    private void ResetButtonPressed()
     {
         GameManager.Instance.RestartGame();
+    }
+
+    private void MenuButtonPressed()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void UpdateUI()
