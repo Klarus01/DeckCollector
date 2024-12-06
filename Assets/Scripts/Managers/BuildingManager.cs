@@ -20,7 +20,7 @@ public class BuildingManager : MonoBehaviour
     
     private List<GameObject> trees = new();
 
-    private void Start()
+    public void Initialize()
     {
         mainCamera = Camera.main;
         SpawnBuildings();

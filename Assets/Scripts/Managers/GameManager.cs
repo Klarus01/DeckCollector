@@ -6,43 +6,46 @@ using UnityEngine.Serialization;
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
     [SerializeField] private GameObject completionScreen;
-    [SerializeField] private List<UpgradeButtonUI> upgradeButtons; 
-    
-    private float shopItemCost = 2;
+    [SerializeField] private List<UpgradeButtonUI> upgradeButtons;
+
+    private const float MinShopItemCost = 2;
+    private float shopItemCost = MinShopItemCost;
     private int goldCount;
     private int partCount;
-    
+
     public Deck deck;
+    public CardManager cardManager;
     public CameraManager cameraManager;
     public BuildingManager buildingManager;
     public WaveManager waveManager;
     public ScoreManager scoreManager;
     public ShopManager shopManager;
+    
     public event Action OnUIUpdate;
     public event Action OnHandUpdate;
+
+    public float ShopItemCost { get => shopItemCost; set { shopItemCost = Mathf.Max(value, 2); UpdateUI(); } }
+    public int GoldCount { get => goldCount; set { goldCount = value; UpdateUI(); } }
+    public int PartCount { get => partCount; set { partCount = value; UpdateUI(); } }
+
+    public void UpdateUI() => OnUIUpdate?.Invoke();
+
+    public void UpdateHand() => OnHandUpdate?.Invoke();
+
+    public void AddPoints(int points) => scoreManager.AddPoints(points);
     
-    public float ShopItemCost { get => shopItemCost; set { shopItemCost = Mathf.Max(value, 2); OnUIUpdate?.Invoke(); } }
-    public int GoldCount { get => goldCount; set { goldCount = value; OnUIUpdate?.Invoke(); } }
-    public int PartCount { get => partCount; set { partCount = value; OnUIUpdate?.Invoke(); } }
-
-    private void Start()
+    private void Awake()
     {
+        InitializeManagers();
+    }
+
+    private void InitializeManagers()
+    {
+        deck.Initialize();
+        cardManager.Initialize();
+        buildingManager.Initialize();
+        waveManager.Initialize();
         scoreManager.Initialize();
-    }
-
-    public void UpdateUI()
-    {
-        OnUIUpdate?.Invoke();
-    }
-
-    public void UpdateHand()
-    {
-        OnHandUpdate?.Invoke();
-    }
-
-    public void AddPoints(int points)
-    {
-        scoreManager.AddPoints(points);
     }
 
     public void ShowCompletionScreen()
@@ -54,23 +57,42 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     
     public void RestartGame()
     {
+        ResetGameState();
+        ResetUI();
+        ResetManagers();
+        ResetUpgrades();
+        cameraManager.SetUpCameraToStartingPosition();
+    }
+    
+    private void ResetGameState()
+    {
         GoldCount = 0;
         PartCount = 0;
-        shopItemCost = 2;
-
+        ShopItemCost = MinShopItemCost;
+    }
+    
+    private void ResetUI()
+    {
         UpdateUI();
-        CardManager.Instance.cardUIController.SwitchCardHolderVisibility();
-        CardManager.Instance.ResetHand();
+        cardManager.cardUIController.SwitchCardHolderVisibility();
+        completionScreen.SetActive(false);
+    }
+    
+    private void ResetManagers()
+    {
+        cardManager.ResetHand();
         scoreManager.ResetScore();
         waveManager.ResetWaves();
         shopManager.ResetShop();
+        buildingManager.ResetBuildings();
+    }
+
+    private void ResetUpgrades()
+    {
         UpgradeManager.Instance.UpgradesReset();
         foreach (var button in upgradeButtons)
         {
             button.ResetUpgradeStages();
         }
-        buildingManager.ResetBuildings();
-        completionScreen.SetActive(false);
-        cameraManager.SetUpCameraToStartingPosition();
     }
 }

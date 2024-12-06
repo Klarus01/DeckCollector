@@ -4,9 +4,8 @@ using UnityEngine;
 public class CardManager : SingletonMonobehaviour<CardManager>
 {
     public CardUIController cardUIController;
-    //public Transform cardInUse;
 
-    private void Start()
+    public void Initialize()
     {
         GameManager.Instance.OnHandUpdate += PrepareForNewDraw;
         PrepareForNewDraw();

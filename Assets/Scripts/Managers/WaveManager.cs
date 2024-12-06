@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
     private int currentStageIndex;
     private int currentWaveIndex;
 
-    private void Start()
+    public void Initialize()
     {
         StartCoroutine(StartStages());
     }

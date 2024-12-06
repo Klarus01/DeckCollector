@@ -7,8 +7,8 @@ public class Deck : MonoBehaviour
     public List<Unit> cardsOnBoard = new();
     public List<Tombstone> cardsAsTombstone = new();
     public List<Unit> startingUnits = new();
-    
-    private void Awake()
+
+    public void Initialize()
     {
         cardsInHand.AddRange(startingUnits);
     }
