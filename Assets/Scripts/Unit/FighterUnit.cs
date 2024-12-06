@@ -19,12 +19,6 @@ public class FighterUnit : Unit, IAttackable
         if (Target) MoveTowardsTarget(Target);
     }
 
-    public override void SetBaseStats()
-    {
-        base.SetBaseStats();
-        attackSpeed = unitData.attackSpeed;
-    }
-
     private void TryAttackTarget()
     {
         if (isInvisible) return;
