@@ -1313,7 +1313,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 1609068576}
   settingsButton: {fileID: 659056969}
   closeButton: {fileID: 586662837}
-  exitGameButton: {fileID: 5793118662217573667}
+  mainMenuButton: {fileID: 5793118662217573667}
   musicVolumeSlider: {fileID: 681436111}
   effectsVolumeSlider: {fileID: 402371194}
   resolutionDropdown: {fileID: 1422597054}

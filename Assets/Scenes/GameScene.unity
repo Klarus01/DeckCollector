@@ -291,7 +291,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 920054642}
   settingsButton: {fileID: 0}
   closeButton: {fileID: 1961998672}
-  exitGameButton: {fileID: 756739804}
+  mainMenuButton: {fileID: 756739804}
   musicVolumeSlider: {fileID: 632528464}
   effectsVolumeSlider: {fileID: 1916618926}
   resolutionDropdown: {fileID: 1315138629}
