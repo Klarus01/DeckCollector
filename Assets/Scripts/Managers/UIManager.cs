@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,6 +19,17 @@ public class UIManager : MonoBehaviour
         UpdateUI();
         restartGameButton.onClick.AddListener(ResetButtonPressed);
         menuButton.onClick.AddListener(MenuButtonPressed);
+        LocalizationSettings.SelectedLocaleChanged += OnLanguageChanged;
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged(UnityEngine.Localization.Locale obj)
+    {
+        UpdateUI();
     }
 
     private void ResetButtonPressed()
@@ -34,6 +46,10 @@ public class UIManager : MonoBehaviour
     {
         goldText.SetText(GameManager.Instance.GoldCount.ToString());
         partsText.SetText(GameManager.Instance.PartCount.ToString());
-        shopCostText.SetText($"Unit cost: {(int)GameManager.Instance.ShopItemCost}");
+        var localizedCost = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("SidePanels", "UnitCost", new object[] { (int)GameManager.Instance.ShopItemCost });
+        localizedCost.Completed += handle =>
+        {
+            shopCostText.SetText(handle.Result);
+        };
     }
 }

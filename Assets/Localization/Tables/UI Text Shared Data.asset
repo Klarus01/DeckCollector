@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Text Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI Text
+  m_TableCollectionNameGuidString: 577f26ff4d77ba746a4fe94fe705679e
+  m_Entries:
+  - m_Id: 38074920960
+    m_Key: PlayMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364433715200
+    m_Key: OptionsMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711642394624
+    m_Key: ExitMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4996174262272
+    m_Key: MusicOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5036586381312
+    m_Key: EffectOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5063337652224
+    m_Key: ResolutionOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5090403495936
+    m_Key: FPSOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5108967485440
+    m_Key: FullScreenOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6095878828032
+    m_Key: MainMenuOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16027772596224
+    m_Key: LanguageOptions
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 493944773303074840
+  references:
+    version: 2
+    RefIds:
+    - rid: 493944773303074840
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1733572161200

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: SidePanels_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: c9cb0b129ef78e74c8ac2c2c96af7c6b, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 493944819711475714
+  m_TableData:
+  - m_Id: 17891930112
+    m_Localized: 'Koszt jednostki: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 493944819711475714
+  - m_Id: 106144280576
+    m_Localized: "Upu\u015B\u0107 kart\u0119\ntutaj, aby sprzeda\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 225484812288
+    m_Localized: "Od\u015Bwie\u017Canie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 573691736064
+    m_Localized: 'Koszt: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 493944819711475714
+  - m_Id: 625973735424
+    m_Localized: 'Aktualnie:
+
+      HP:
+
+      DMG:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 649172430848
+    m_Localized: "Nast\u0119pny lvl:\nHP:\nDMG:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 738618313355264
+    m_Localized: MAKSYMALNY POZIOM
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 493944819711475714
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0030b192850000000030712a04000000

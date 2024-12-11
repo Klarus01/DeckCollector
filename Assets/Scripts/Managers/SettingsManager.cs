@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider effectsVolumeSlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMP_Dropdown fpsDropdown;
+    [SerializeField] private TMP_Dropdown languageDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     
     private bool isGamePaused;
@@ -64,6 +66,7 @@ public class SettingsManager : MonoBehaviour
     {
         InitializeResolutionDropdown();
         InitializeFPSDropdown();
+        InitializeLanguageDropdown();
     }
 
     private void InitializeResolutionDropdown()
@@ -90,6 +93,27 @@ public class SettingsManager : MonoBehaviour
         fpsDropdown.value = 1;
         fpsDropdown.onValueChanged.AddListener(SetFPSLimit);
     }
+    
+    private async Task InitializeLanguageDropdown()
+    {
+        await LocalizationSettings.InitializationOperation.Task;
+
+        var availableLocales = LocalizationSettings.AvailableLocales.Locales;
+
+        languageDropdown.ClearOptions();
+
+        foreach (var locale in availableLocales)
+        {
+            languageDropdown.options.Add(new TMP_Dropdown.OptionData(locale.LocaleName));
+        }
+
+        var savedLanguageIndex = PlayerPrefs.GetInt("SelectedLanguage", 0);
+        languageDropdown.value = Mathf.Clamp(savedLanguageIndex, 0, availableLocales.Count - 1);
+
+        languageDropdown.onValueChanged.AddListener(ChangeLanguage);
+    }
+
+
 
     private void InitializeToggle()
     {
@@ -154,6 +178,15 @@ public class SettingsManager : MonoBehaviour
     {
         int[] fpsValues = { -1, 30, 60, 120 };
         Application.targetFrameRate = fpsValues[index];
+    }
+
+    private void ChangeLanguage(int index)
+    {
+        var availableLocales = LocalizationSettings.AvailableLocales.Locales;
+
+        LocalizationSettings.SelectedLocale = availableLocales[index];
+
+        PlayerPrefs.SetInt("SelectedLanguage", index);
     }
 
     private void BackToMainMenu()

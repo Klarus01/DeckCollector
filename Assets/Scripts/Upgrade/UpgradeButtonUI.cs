@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UpgradeButtonUI : MonoBehaviour
@@ -10,10 +9,12 @@ public class UpgradeButtonUI : MonoBehaviour
     [SerializeField] private Image unitImage;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text costText;
-    [SerializeField] private TMP_Text currentStatsText;
-    [SerializeField] private TMP_Text nextStatsText;
+    //[SerializeField] private TMP_Text currentStatsText;
+    //[SerializeField] private TMP_Text nextStatsText;
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Image[] upgradeStages;
+    [SerializeField] private string costKey = "UpgradeCost";
+    [SerializeField] private string maxCostKey = "MaxCost";
 
     private Color originalColor;
     
@@ -24,18 +25,28 @@ public class UpgradeButtonUI : MonoBehaviour
     {
         InitializeUpgradeUI();
         button.onClick.AddListener(OnButtonClick);
-        currentStatsText.gameObject.SetActive(false);
-        nextStatsText.gameObject.SetActive(false);
+        //currentStatsText.gameObject.SetActive(false);
+        //nextStatsText.gameObject.SetActive(false);
         originalColor = backgroundImage.color;
+        LocalizationSettings.SelectedLocaleChanged += OnLanguageChanged;
     }
 
     private void InitializeUpgradeUI()
     {
         level = upgrade.upgradeLevels[upgrade.upgradeLvl];
-        UpdateButtonText();
+        UpdateButton();
         ResetUpgradeStages();
     }
 
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged(UnityEngine.Localization.Locale obj)
+    {
+        UpdateButtonText();
+    }
 
     private void OnButtonClick()
     {
@@ -48,8 +59,7 @@ public class UpgradeButtonUI : MonoBehaviour
 
         GameManager.Instance.PartCount -= level.costForNextLvl;
         UpgradeManager.Instance.OnUpgradeBuy(upgrade);
-        UpdateButtonText();
-        OnMouseEnter();
+        UpdateButton();
     }
 
     private bool TryIfUpgradeIsPossible()
@@ -59,54 +69,42 @@ public class UpgradeButtonUI : MonoBehaviour
             return false;
         }
 
-        if (level.costForNextLvl > GameManager.Instance.PartCount)
-        {
-            return false;
-        }
-
-        return true;
+        return level.costForNextLvl <= GameManager.Instance.PartCount;
     }
 
-    private void OnMouseEnter()
-    {
-        var nextLvl = upgrade.upgradeLvl + 1;
-        currentStatsText.gameObject.SetActive(true);
-        currentStatsText.SetText($"Current:\r\nHP: {level.hp}\r\nDMG: {level.dmg}");
-        
-        if (upgrade.upgradeLvl.Equals(upgrade.maxUpgradeLvl)) return;
-        
-        costText.gameObject.SetActive(false);
-        nextStatsText.gameObject.SetActive(true);
-        nextStatsText.SetText($"Next lvl:\r\nHP: {upgrade.upgradeLevels[nextLvl].hp}\r\nDMG: {upgrade.upgradeLevels[nextLvl].dmg}");
-    }
-
-    private void OnMouseExit()
-    {
-        currentStatsText.gameObject.SetActive(false);
-        nextStatsText.gameObject.SetActive(false);
-        costText.gameObject.SetActive(true);
-    }
-
-    private void UpdateButtonText()
+    private void UpdateButton()
     {
         unitImage.sprite = upgrade.unitSprite;
-        level = upgrade.upgradeLevels[upgrade.upgradeLvl];
         
-        if (upgrade.upgradeLvl.Equals(upgrade.maxUpgradeLvl))
-        {
-            costText.SetText($"MAX LEVEL");
-        }
-        else
-        {
-            costText.SetText($"Cost: {level.costForNextLvl}");
-        }
-
         for (var i = 0; i < upgrade.upgradeLvl; i++)
         {
             upgradeStages[i].color = Color.green;
         }
+
+        UpdateButtonText();
     }
 
+    private void UpdateButtonText()
+    {
+        level = upgrade.upgradeLevels[upgrade.upgradeLvl];
+        
+        if (upgrade.upgradeLvl >= upgrade.maxUpgradeLvl)
+        {
+            var localizedMaxLevel = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("SidePanels", maxCostKey);
+            localizedMaxLevel.Completed += handle =>
+            {
+                costText.SetText(handle.Result);
+            };
+        }
+        else
+        {
+            var localizedCost = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("SidePanels", costKey, new object[] { level.costForNextLvl});
+            localizedCost.Completed += handle =>
+            {
+                costText.SetText(handle.Result);
+            };
+        }
+    }
 
     public void ResetUpgradeStages()
     {
@@ -115,9 +113,9 @@ public class UpgradeButtonUI : MonoBehaviour
             stage.color = Color.white;
         }
         upgrade.upgradeLvl = 0;
-        UpdateButtonText();
+        UpdateButton();
     }
-    
+
     private IEnumerator ChangeBackgroundColorTemporarily(Color newColor)
     {
         backgroundImage.color = newColor;

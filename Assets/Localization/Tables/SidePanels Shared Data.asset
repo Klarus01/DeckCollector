@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: SidePanels Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: SidePanels
+  m_TableCollectionNameGuidString: c9cb0b129ef78e74c8ac2c2c96af7c6b
+  m_Entries:
+  - m_Id: 17891930112
+    m_Key: UnitCost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106144280576
+    m_Key: DropToSell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 225484812288
+    m_Key: Refresh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 573691736064
+    m_Key: UpgradeCost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 625973735424
+    m_Key: CurrentStats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 649172430848
+    m_Key: UpgradedStats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 738618313355264
+    m_Key: MaxCost
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 493944773303074883
+  references:
+    version: 2
+    RefIds:
+    - rid: 493944773303074883
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1733574069727

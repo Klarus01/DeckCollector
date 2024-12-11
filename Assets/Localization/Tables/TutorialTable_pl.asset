@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutorialTable_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: c418043e89b487144b143a9675458c89, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 13341110272
+    m_Localized: "Tutaj znajduj\u0105 si\u0119 ulepszenia jednostek, mo\u017Cesz
+      klikn\u0105\u0107 na ten panel lub nacisn\u0105\u0107 \u201EQ\u201D. Je\u015Bli
+      najedziesz kursorem na jednostk\u0119, wy\u015Bwietl\u0105 si\u0119 jej aktualne
+      statystyki i statystyki nast\u0119pnego poziomu."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 176180768768
+    m_Localized: "Tutaj znajduje si\u0119 sklep, w kt\xF3rym mo\u017Cesz kupi\u0107
+      jednostki, mo\u017Cesz klikn\u0105\u0107 na ten panel lub nacisn\u0105\u0107
+      \u201EE\u201D. Po zakupie jednostki natychmiast zobaczysz j\u0105 na r\u0119ce.
+      Mo\u017Cesz tu r\xF3wnie\u017C sprzeda\u0107 kart\u0119 z r\u0119ki."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245999153152
+    m_Localized: "Tutaj zobaczysz swoje karty, mo\u017Cesz je przeci\u0105ga\u0107
+      i upuszcza\u0107 na plansz\u0119, aby zagra\u0107, lub klikn\u0105\u0107 lewy
+      przycisk, aby wybra\u0107 i upu\u015Bci\u0107 kilka naraz. Gdy karty wracaj\u0105
+      do r\u0119ki, widoczny jest pasek pokazuj\u0105cy ich regeneruj\u0105ce si\u0119
+      zdrowie. Nie mo\u017Cesz zagra\u0107 karty, dop\xF3ki nie zostanie w pe\u0142ni
+      uzdrowiona."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 399904944128
+    m_Localized: "Na g\xF3rze znajduj\u0105 si\u0119 surowce. Przeci\u0105gni\u0119cie
+      robotnika na farm\u0119 przyniesie ci z\u0142oto. Cz\u0119\u015Bci potwor\xF3w
+      zdobywasz zabijaj\u0105c je. Silniejsi wrogowie daj\u0105 wi\u0119cej cz\u0119\u015Bci."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 512169684992
+    m_Localized: "Kliknij w dowolnym miejscu, aby rozpocz\u0105\u0107 gr\u0119."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutorialTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: c418043e89b487144b143a9675458c89, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 13341110272
+    m_Localized: "Here are the unit upgrades, you can click on this panel or press
+      \u201CQ\u201D. If you hover your cursor over a unit, the current stats and
+      next level stats will be displayed."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 176180768768
+    m_Localized: "Here is the store where you can buy units, you can click on this
+      panel or press \u201CE\u201D. After buying a unit, you will immediately see
+      it in your hand. You can also sell a card from your hand in it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245999153152
+    m_Localized: Here you will see your cards, you can drag and drop them on the
+      board to play, or click the left button to select and drop several at once.
+      As they return to your hand you can see a bar showing their regenerating health.
+      You can't play a card until it's fully healed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 399904944128
+    m_Localized: At the top you have your raw materials. Dragging a worker to the
+      farm will earn gold for you. You acquire monster parts by killing them. Stronger
+      enemies give you more parts.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 512169684992
+    m_Localized: Click anywhere to start the game.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

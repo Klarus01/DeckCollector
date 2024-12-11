@@ -11,7 +11,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private const float MinShopItemCost = 2;
     private float shopItemCost = MinShopItemCost;
     private int goldCount;
-    private int partCount;
+    private int partCount = 100;
 
     public Deck deck;
     public CardManager cardManager;
