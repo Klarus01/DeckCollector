@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinAnimPrefab: {fileID: 6529974360233495635, guid: 899972cb277efc243a0c3f918e5e1997, type: 3}
-  goldAvailableOnFarm: 3
+  baseInterval: 10
+  maxGoldOnFarm: 5
+  detectionRadius: 2
 --- !u!95 &8066623136492592994
 Animator:
   serializedVersion: 5

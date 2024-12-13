@@ -1,68 +1,94 @@
-using Unity.Mathematics;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class Farm : MonoBehaviour
 {
+    [Header("Farm Settings")]
     [SerializeField] private GameObject coinAnimPrefab;
-    
+    [SerializeField] private float baseInterval = 10f;
+    [SerializeField] private int maxGoldOnFarm = 5;
+    [SerializeField] private float detectionRadius = 2f;
+
     private Animator animator;
     private float timer;
-    private readonly float interval = 5f;
-    private bool isCollision;
-    private int numberOfEmployees;
-    private int goldAvailableOnFarm = 5;
+    private int currentGoldOnFarm;
+    private float totalGatheringSpeed;
+    private readonly HashSet<GathererUnit> gatherers = new();
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        currentGoldOnFarm = maxGoldOnFarm;
     }
 
     private void Update()
     {
-        CheckHowManyFarmers();
-        if (isCollision)
+        UpdateGatherers();
+        if (gatherers.Count > 0)
         {
             ManageGathering();
+        }
+        else
+        {
+            StopGatheringAnimation();
         }
     }
 
     private void ManageGathering()
     {
         animator.SetBool("isAction", true);
-        timer += numberOfEmployees * Time.deltaTime;
+        timer += totalGatheringSpeed * Time.deltaTime;
 
-        if (timer >= interval)
+        if (timer >= baseInterval)
         {
-            GameManager.Instance.GoldCount++;
-            goldAvailableOnFarm--;
-            Instantiate(coinAnimPrefab, transform);
-            if (goldAvailableOnFarm <= 0)
-            {
-                Destroy(gameObject);
-            }
+            CollectGold();
             timer = 0f;
         }
     }
 
-    private void CheckHowManyFarmers()
+    private void CollectGold()
     {
-        numberOfEmployees = 0;
-        var colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+        GameManager.Instance.GoldCount++;
+        currentGoldOnFarm--;
+        Instantiate(coinAnimPrefab, transform);
+
+        if (currentGoldOnFarm <= 0)
+        {
+            DestroyFarm();
+        }
+    }
+
+    private void UpdateGatherers()
+    {
+        totalGatheringSpeed = 0;
+    
+        var colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+        HashSet<GathererUnit> detectedGatherers = new HashSet<GathererUnit>();
 
         foreach (var coll in colliders)
         {
-            if (coll.TryGetComponent<Farmer>(out var farmer) && !farmer.isDragging)
+            if (coll.TryGetComponent<GathererUnit>(out var gatherer) && !gatherer.isDragging)
             {
-                numberOfEmployees++;
+                detectedGatherers.Add(gatherer);
+                if (!gatherers.Contains(gatherer))
+                {
+                    gatherers.Add(gatherer);
+                }
+                totalGatheringSpeed += gatherer.gatheringSpeedMultiplier;
             }
         }
 
-        if (numberOfEmployees.Equals(0))
-        {
-            animator.SetBool("isAction", false);
-        }
+        int removedCount = gatherers.RemoveWhere(gatherer => gatherer == null || !gatherer.isActiveAndEnabled || !detectedGatherers.Contains(gatherer));
+    }
 
-        isCollision = numberOfEmployees > 0;
+    
+    private void StopGatheringAnimation()
+    {
+        animator.SetBool("isAction", false);
+    }
+
+    private void DestroyFarm()
+    {
+        Destroy(gameObject);
     }
 }

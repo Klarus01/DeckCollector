@@ -20,18 +20,24 @@ MonoBehaviour:
   - costForNextLvl: 1
     hp: 2
     dmg: 0
+    gatheringSpeed: 1
   - costForNextLvl: 5
     hp: 3
     dmg: 0
+    gatheringSpeed: 1.05
   - costForNextLvl: 10
     hp: 5
     dmg: 0
+    gatheringSpeed: 1.1
   - costForNextLvl: 20
     hp: 8
     dmg: 0
+    gatheringSpeed: 1.2
   - costForNextLvl: 50
     hp: 10
     dmg: 0
+    gatheringSpeed: 1.25
   - costForNextLvl: 100
     hp: 15
     dmg: 0
+    gatheringSpeed: 1.35

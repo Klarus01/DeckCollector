@@ -18,6 +18,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown fpsDropdown;
     [SerializeField] private TMP_Dropdown languageDropdown;
     [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private MusicManager musicManager;
     
     private bool isGamePaused;
     private Resolution[] availableResolutions;
@@ -146,7 +147,9 @@ public class SettingsManager : MonoBehaviour
     private void SetMusicVolume(float value)
     {
         PlayerPrefs.SetFloat("MusicVolume", value);
+        musicManager.SetMusicVolume(value);
     }
+
 
     private void SetEffectsVolume(float value)
     {

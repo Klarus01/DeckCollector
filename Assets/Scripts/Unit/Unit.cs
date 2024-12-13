@@ -47,7 +47,7 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         ApplyUpgrade(unitData.upgrade);
     }
 
-    public void ApplyUpgrade(Upgrade upgrade)
+    public virtual void ApplyUpgrade(Upgrade upgrade)
     {
         var level = upgrade.upgradeLevels[upgrade.upgradeLvl];
 

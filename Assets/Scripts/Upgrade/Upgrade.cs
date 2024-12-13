@@ -6,7 +6,7 @@ public class Upgrade : ScriptableObject
     public Unit unit;
     public Sprite unitSprite;
     public int upgradeLvl;
-    public int maxUpgradeLvl = 3;
+    public int maxUpgradeLvl = 5;
 
     public UpgradeLevel[] upgradeLevels;
 
@@ -21,5 +21,6 @@ public class Upgrade : ScriptableObject
         public int costForNextLvl;
         public int hp;
         public int dmg;
+        public float gatheringSpeed;
     }
 }

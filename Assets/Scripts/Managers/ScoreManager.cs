@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
@@ -16,6 +17,17 @@ public class ScoreManager : MonoBehaviour
     public void Initialize()
     {
         StartScoreReduction();
+        LocalizationSettings.SelectedLocaleChanged += OnLanguageChanged;
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged(UnityEngine.Localization.Locale obj)
+    {
+        ShowFinalScore();
     }
 
     private void Update()
@@ -52,7 +64,11 @@ public class ScoreManager : MonoBehaviour
         points = CalculateFinalScore();
         var timePlayed = TimeSpan.FromSeconds(gameTime).ToString(@"hh\:mm\:ss");
         gameTimeText.SetText(timePlayed);
-        scoreText.SetText($"Score: {points}");
+        var localizedCost = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("CompletionTable", "Points", new object[] { points });
+        localizedCost.Completed += handle =>
+        {
+            scoreText.SetText(handle.Result);
+        };
     }
 
     public void ResetScore()

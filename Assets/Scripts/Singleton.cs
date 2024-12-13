@@ -28,6 +28,8 @@ public class SingletonMonobehaviour<T> : MonoBehaviour where T : Component
             return instance;
         }
     }
+    
+    [SerializeField] private bool dontDestroyOnLoad = true;
 
     protected virtual void Awake()
     {
@@ -35,7 +37,7 @@ public class SingletonMonobehaviour<T> : MonoBehaviour where T : Component
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(this.gameObject);
+            if(dontDestroyOnLoad) DontDestroyOnLoad(this.gameObject);
         }
         else
         {
