@@ -9,6 +9,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private float restTimer;
     private Vector2 initialMousePosition;
     private const float dragThreshold = 20f;
+    private bool isHighlighted;
     
     public Image cardImage;
     public Unit unit;
@@ -96,7 +97,8 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void HighlightCard(bool highlight)
     {
-        cardImage.color = highlight ? new Color(1f, 0.8f, 0.8f, 1f) : originalColor;
+        isHighlighted = highlight;
+        cardImage.color = isHighlighted ? new Color(1f, 0.4f, 0.9f, 1f) : originalColor;
     }
 
     private void SetRestSlider()
@@ -128,6 +130,6 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         }
         cardImage.color = new Color(1f, 0.92f, 0.016f, 1f);
         yield return new WaitForSeconds(0.5f);
-        cardImage.color = originalColor;
+        cardImage.color = isHighlighted ? new Color(1f, 0.4f, 0.9f, 1f) : originalColor;
     }
 }

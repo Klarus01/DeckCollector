@@ -14,30 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 2974267296073911109, guid: 14b8947baee92c348ad72e9c2a511275, type: 3}
   unitSprite: {fileID: -1837951994, guid: d79760a4fd4970548907388dc3320435, type: 3}
-  upgradeLvl: 0
+  upgradeLvl: 1
   maxUpgradeLvl: 5
   upgradeLevels:
-  - costForNextLvl: 1
+  - costForNextLvl: 5
     hp: 5
     dmg: 1
     gatheringSpeed: 0
-  - costForNextLvl: 5
-    hp: 7
+  - costForNextLvl: 10
+    hp: 10
     dmg: 2
     gatheringSpeed: 0
-  - costForNextLvl: 10
-    hp: 9
-    dmg: 4
-    gatheringSpeed: 0
   - costForNextLvl: 20
-    hp: 15
-    dmg: 5
+    hp: 10
+    dmg: 4
     gatheringSpeed: 0
   - costForNextLvl: 50
     hp: 15
-    dmg: 7
+    dmg: 6
     gatheringSpeed: 0
   - costForNextLvl: 100
-    hp: 25
+    hp: 20
+    dmg: 8
+    gatheringSpeed: 0
+  - costForNextLvl: 150
+    hp: 30
     dmg: 10
     gatheringSpeed: 0

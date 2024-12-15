@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de38769f6342f4840a9dba7fe941f105, type: 3}
   m_Name: SceletonData
   m_EditorClassIdentifier: 
-  health: 5
+  health: 7
   speed: 6
   damage: 5
   attackSpeed: 1
   rangeOfVision: 150
+  rangeOfAttack: 2

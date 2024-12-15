@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de38769f6342f4840a9dba7fe941f105, type: 3}
   m_Name: BossGoblinData
   m_EditorClassIdentifier: 
-  health: 100
+  health: 200
   speed: 4
-  damage: 4
+  damage: 3
   attackSpeed: 2
   rangeOfVision: 150
+  rangeOfAttack: 2

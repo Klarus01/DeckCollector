@@ -17,21 +17,27 @@ MonoBehaviour:
   upgradeLvl: 0
   maxUpgradeLvl: 5
   upgradeLevels:
-  - costForNextLvl: 1
+  - costForNextLvl: 5
     hp: 1
     dmg: 5
-  - costForNextLvl: 5
-    hp: 2
-    dmg: 7
+    gatheringSpeed: 0
   - costForNextLvl: 10
-    hp: 3
+    hp: 2
     dmg: 10
+    gatheringSpeed: 0
   - costForNextLvl: 20
-    hp: 4
+    hp: 3
     dmg: 15
+    gatheringSpeed: 0
   - costForNextLvl: 50
-    hp: 6
+    hp: 4
     dmg: 20
+    gatheringSpeed: 0
   - costForNextLvl: 100
-    hp: 8
+    hp: 6
     dmg: 30
+    gatheringSpeed: 0
+  - costForNextLvl: 150
+    hp: 10
+    dmg: 50
+    gatheringSpeed: 0

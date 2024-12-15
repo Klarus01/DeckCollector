@@ -16,6 +16,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     protected float damage;
     protected float attackSpeed;
     protected float rangeOfVision;
+    protected float rangeOfAttack;
     protected float timer;
     protected int pointsForEnemy = 100;
 
@@ -23,6 +24,17 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    protected void InitializeStats(float eliteMultiplier = 1f)
+    {
+        health = enemyData.health * eliteMultiplier;
+        maxHealth = health;
+        speed = enemyData.speed * eliteMultiplier;
+        damage = enemyData.damage * eliteMultiplier;
+        attackSpeed = enemyData.attackSpeed;
+        rangeOfVision = enemyData.rangeOfVision;
+        rangeOfAttack = enemyData.rangeOfAttack;
     }
 
     protected virtual void Update()
@@ -49,18 +61,25 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         if (targetUnit.isInvisible || isAttacking) return;
         
         isAttacking = true;
-        targetUnit.TakeDamage(damage);
         Attack();
     }
-
-    protected void InitializeStats(float eliteMultiplier = 1f)
+    
+    public void DealDamage()
     {
-        health = enemyData.health * eliteMultiplier;
-        maxHealth = health;
-        speed = enemyData.speed * eliteMultiplier;
-        damage = enemyData.damage * eliteMultiplier;
-        attackSpeed = enemyData.attackSpeed;
-        rangeOfVision = enemyData.rangeOfVision;
+        ResetAttack();
+        
+        if (target == null) return;
+
+        var distanceToTarget = Vector2.Distance(transform.position, target.position);
+        
+        if(distanceToTarget > rangeOfAttack) return;
+        
+        if (!target.TryGetComponent<Unit>(out var targetUnit)) return;
+        
+        if (!targetUnit.isInvisible)
+        {
+            targetUnit.TakeDamage(damage);
+        }
     }
 
     protected void FindClosestTarget()

@@ -312,7 +312,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &96412240
 PrefabInstance:
@@ -609,7 +609,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &212313721
 PrefabInstance:
@@ -827,7 +827,7 @@ RectTransform:
   - {fileID: 920054643}
   - {fileID: 447708584}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1657,7 +1657,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374355259
 GameObject:
@@ -2036,7 +2036,7 @@ Transform:
   m_Children:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &493499474
 MonoBehaviour:
@@ -2751,7 +2751,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &664744778
 GameObject:
@@ -3479,9 +3479,9 @@ MonoBehaviour:
   stages:
   - waves:
     - enemies:
-      - enemy: {fileID: 327698469797514919, guid: 7c30161efd54c864ba710770fe9e0df6, type: 3}
+      - enemy: {fileID: 4909138841947229086, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
         count: 1
-      isBossWave: 1
+      isBossWave: 0
 --- !u!4 &857382825
 Transform:
   m_ObjectHideFlags: 0
@@ -3495,7 +3495,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &871912848 stripped
 MonoBehaviour:
@@ -4173,7 +4173,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1045472732
 GameObject:
@@ -4315,7 +4315,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1079794097
 GameObject:
@@ -4767,7 +4767,53 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1180686010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180686012}
+  - component: {fileID: 1180686011}
+  m_Layer: 0
+  m_Name: TombstoneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1180686011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180686010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3cd347a39da0041a67761d52f634fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  tombstones: []
+--- !u!4 &1180686012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180686010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1204938882 stripped
 MonoBehaviour:
@@ -5697,6 +5743,83 @@ MonoBehaviour:
       - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
         count: 3
       isBossWave: 1
+  - waves:
+    - enemies:
+      - enemy: {fileID: 327698469797514919, guid: 7c30161efd54c864ba710770fe9e0df6, type: 3}
+        count: 20
+      - enemy: {fileID: 6392598805554914675, guid: a29ad95bd6162a440becfbaf7f487b9c, type: 3}
+        count: 10
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 5
+      - enemy: {fileID: 6392598805554914675, guid: a29ad95bd6162a440becfbaf7f487b9c, type: 3}
+        count: 10
+      - enemy: {fileID: 7925468007586136939, guid: c6d2b851e91378d4089e6a9eacde712a, type: 3}
+        count: 5
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 10
+      - enemy: {fileID: 4909138841947229086, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 5
+      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 327698469797514919, guid: 7c30161efd54c864ba710770fe9e0df6, type: 3}
+        count: 10
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 10
+      - enemy: {fileID: 4909138841947229086, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 10
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 10
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 7253452781151539451, guid: aed770ccf40c63d429ec6c1ee54bc88b, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: 42e28378701f6b849a5a07092111aef1, type: 3}
+        count: 10
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 10
+      - enemy: {fileID: 7925468007586136939, guid: c6d2b851e91378d4089e6a9eacde712a, type: 3}
+        count: 10
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 327698469797514919, guid: 7c30161efd54c864ba710770fe9e0df6, type: 3}
+        count: 20
+      - enemy: {fileID: 2601754963408348174, guid: 9a9db4782fa42694780e52cd307697f0, type: 3}
+        count: 10
+      - enemy: {fileID: 3309406798310206062, guid: 45a80b8a441bba7499d733945f577d36, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 4909138841947229086, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 15
+      - enemy: {fileID: 7925468007586136939, guid: c6d2b851e91378d4089e6a9eacde712a, type: 3}
+        count: 10
+      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
+        count: 1
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 3309406798310206062, guid: 45a80b8a441bba7499d733945f577d36, type: 3}
+        count: 3
+      - enemy: {fileID: 4909138841947229086, guid: e4a46b685460f674781a13e743d4b0d2, type: 3}
+        count: 7
+      - enemy: {fileID: 6392598805554914675, guid: a29ad95bd6162a440becfbaf7f487b9c, type: 3}
+        count: 10
+      - enemy: {fileID: 7925468007586136939, guid: c6d2b851e91378d4089e6a9eacde712a, type: 3}
+        count: 10
+      isBossWave: 0
+    - enemies:
+      - enemy: {fileID: 2601754963408348174, guid: df1c7ea853a75e0499af778735bc3516, type: 3}
+        count: 2
+      - enemy: {fileID: 7253452781151539451, guid: aed770ccf40c63d429ec6c1ee54bc88b, type: 3}
+        count: 2
+      isBossWave: 1
 --- !u!4 &1505673524
 Transform:
   m_ObjectHideFlags: 0
@@ -5710,7 +5833,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1505721682 stripped
 MonoBehaviour:
@@ -6185,7 +6308,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1829868043
 GameObject:
@@ -6710,6 +6833,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2000132695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2000132697}
+  - component: {fileID: 2000132696}
+  m_Layer: 0
+  m_Name: ArrowManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2000132696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000132695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9366316fceec884b91a50b2794b7ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 110518500171161089, guid: 7f9ea1a9bd3c20d4cabe896334253a71, type: 3}
+  mainCamera: {fileID: 519420031}
+--- !u!4 &2000132697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000132695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2005030698
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,7 +7440,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145216615
 GameObject:
