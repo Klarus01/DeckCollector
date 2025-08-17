@@ -10,13 +10,13 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     private Color originalColor;
     
     protected SpriteRenderer spriteRenderer;
-    protected int damage;
     protected float rangeOfAction;
     protected float rangeOfVision;
     
     public UnitData unitData;
     public Animator animator;
     public int cardValue = 2;
+    public int damage;
     public float health;
     public float maxHealth;
     public bool isInvisible;
@@ -24,6 +24,8 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     public bool isDragging;
 
     protected Transform Target { get; set; }
+
+    public Upgrade upgrade => unitData.upgrade;
 
     protected virtual void Awake()
     {

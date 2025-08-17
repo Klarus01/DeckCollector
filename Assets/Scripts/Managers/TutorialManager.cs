@@ -10,8 +10,11 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        tutorialEndButton.onClick.AddListener(TutorialEnd);
-        Time.timeScale = 0;
+        if (tutorialPanel.activeSelf)
+        {
+            tutorialEndButton.onClick.AddListener(TutorialEnd);
+            Time.timeScale = 0;
+        }
     }
 
     private void TutorialEnd()

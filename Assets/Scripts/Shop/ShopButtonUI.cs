@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 using UnityEngine.UI;
-using static GameManager;
 
 public class ShopButtonUI : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private Image unitImage;
     [SerializeField] private Image backgroundImage;
+    [SerializeField] private TMP_Text unitName;
+    [SerializeField] private TMP_Text unitStats;
 
     private Unit unit;
     private Color originalColor;
@@ -23,9 +26,11 @@ public class ShopButtonUI : MonoBehaviour
     {
         unit = shopItem.unit;
         unitImage.sprite = shopItem.unitSprite;
+        unitName.SetText(unit.name); 
+        UpdateItemText();
     }
 
-    public void OnButtonClick()
+    private void OnButtonClick()
     {
         if (!HasEnoughGold())
         {
@@ -34,6 +39,11 @@ public class ShopButtonUI : MonoBehaviour
         }
         
         PerformCardPurchase();
+    }
+
+    public void UpdateItemText()
+    {
+        unitStats.SetText($"ATK: {unit.unitData.damage}\nHP: {unit.unitData.maxHealth}");
     }
 
     private bool HasEnoughGold()

@@ -52,7 +52,7 @@ public class CardUIController : MonoBehaviour
         cardUI.unit = unit.unitData.unit;
         cardUI.cardImage.sprite = unit.unitData.cardSprite;
         cardUI.unitHealth = unit.health;
-        cardUI.unitMaxHealth = unit.maxHealth;
+        cardUI.unitMaxHealth = unit.unitData.maxHealth;
         cards.Add(cardUI);
     }
 

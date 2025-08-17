@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WaveManager : MonoBehaviour
 {
@@ -27,11 +28,14 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private float timeBetweenWaves = 10f;
     [SerializeField] private Stage[] stages;
+    [SerializeField] private UIWaveManager uiWaveManager;
     
     private List<Transform> spawnPoints = new();
     private List<Enemy> liveEnemies = new();
     private int currentStageIndex;
     private int currentWaveIndex;
+    private int totalEnemiesInWave;
+    private int defeatedEnemiesInWave;
 
     public void Initialize()
     {
@@ -59,6 +63,9 @@ public class WaveManager : MonoBehaviour
             {
                 var currentWave = currentStage.waves[currentWaveIndex];
                 Debug.Log($"Stage {currentStageIndex + 1}, Wave {currentWaveIndex + 1}");
+
+                totalEnemiesInWave = CalculateTotalEnemiesInWave(currentWave);
+                defeatedEnemiesInWave = 0;
 
                 yield return new WaitForSeconds(timeBetweenWaves);
                 FindSpawnPoints();
@@ -90,6 +97,8 @@ public class WaveManager : MonoBehaviour
                 var spawnedEnemy = Instantiate(enemyEntry.enemy, randPos, Quaternion.identity);
                 liveEnemies.Add(spawnedEnemy);
 
+                spawnedEnemy.OnDeath += HandleEnemyDefeated;
+                
                 yield return new WaitForSeconds(Random.Range(0f, 0.5f));
             }
         }
@@ -110,7 +119,7 @@ public class WaveManager : MonoBehaviour
         GameManager.Instance.buildingManager.SpawnBuildings();
         CardManager.Instance.CollectAllCardsToHand();
     }
-    
+
     public void ResetWaves()
     {
         currentWaveIndex = 0;
@@ -122,5 +131,33 @@ public class WaveManager : MonoBehaviour
     private void GameCompleted()
     {
         GameManager.Instance.ShowCompletionScreen();
+    }
+    
+    private int CalculateTotalEnemiesInWave(Wave wave)
+    {
+        return wave.enemies.Sum(enemyEntry => enemyEntry.count);
+    }
+
+    private void HandleEnemyDefeated(Enemy defeatedEnemy)
+    {
+        defeatedEnemiesInWave++;
+        liveEnemies.Remove(defeatedEnemy);
+        
+        uiWaveManager.UpdateWaveProgress(GetWaveProgress());
+    }
+
+    public float GetWaveProgress()
+    {
+        return totalEnemiesInWave > 0 ? (float)defeatedEnemiesInWave / totalEnemiesInWave : 0f;
+    }
+
+    public int GetTotalEnemiesInCurrentWave()
+    {
+        return totalEnemiesInWave;
+    }
+
+    public int GetDefeatedEnemiesInCurrentWave()
+    {
+        return defeatedEnemiesInWave;
     }
 }

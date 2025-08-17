@@ -40,7 +40,7 @@ public class CardManager : SingletonMonobehaviour<CardManager>
 
     public void BackUnitToHand(Unit unit)
     {
-        GameManager.Instance.deck.cardsInHand.Add(unit.unitData.unit);
+        GameManager.Instance.deck.cardsInHand.Add(unit);
         GameManager.Instance.deck.cardsOnBoard.Remove(unit);
         cardUIController.UnitBackToHand(unit);
     }

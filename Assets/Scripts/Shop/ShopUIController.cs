@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,6 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] private UpgradeUIController upgradeUIController;
     [SerializeField] private Animator animator;
     [SerializeField] private Button slideButton;
-    
     public bool isActive;
     public ShopButtonUI[] shopButtons;
 
@@ -20,6 +20,14 @@ public class ShopUIController : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.E)) return;
         ShowShopPanel();
         if(upgradeUIController.isActive) upgradeUIController.ShowUpgradePanelAnim();
+    }
+
+    public void UpdateUnitStats()
+    {
+        foreach(ShopButtonUI button in shopButtons)
+        {
+            button.UpdateItemText();
+        }
     }
 
     public void ShowShopPanel()

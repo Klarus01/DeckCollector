@@ -1,13 +1,14 @@
 using UnityEngine;
+using System;
 
 public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
 {
     [SerializeField] protected EnemyData enemyData;
     [SerializeField] protected Transform target;
     [SerializeField] protected Animator animator;
-    
+
     private bool isAttacking;
-    
+
     protected int partDrop = 1;
     protected SpriteRenderer spriteRenderer;
     protected float maxHealth;
@@ -19,6 +20,8 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     protected float rangeOfAttack;
     protected float timer;
     protected int pointsForEnemy = 100;
+
+    public event Action<Enemy> OnDeath;
 
     protected virtual void Start()
     {
@@ -59,23 +62,23 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     {
         if (!collision.gameObject.TryGetComponent<Unit>(out var targetUnit) || !(timer >= attackSpeed)) return;
         if (targetUnit.isInvisible || isAttacking) return;
-        
+
         isAttacking = true;
         Attack();
     }
-    
+
     public void DealDamage()
     {
         ResetAttack();
-        
+
         if (target == null) return;
 
         var distanceToTarget = Vector2.Distance(transform.position, target.position);
-        
-        if(distanceToTarget > rangeOfAttack) return;
-        
+
+        if (distanceToTarget > rangeOfAttack) return;
+
         if (!target.TryGetComponent<Unit>(out var targetUnit)) return;
-        
+
         if (!targetUnit.isInvisible)
         {
             targetUnit.TakeDamage(damage);
@@ -114,16 +117,17 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         UpdateColor();
         if (health <= 0)
         {
+            OnDeath?.Invoke(this);
+
             DropLoot();
             Destroy(gameObject);
         }
     }
-    
+
     private void UpdateColor()
     {
         var healthPercentage = health / maxHealth;
-        spriteRenderer.color = Color.Lerp(Color.red, Color.white, healthPercentage);;
-
+        spriteRenderer.color = Color.Lerp(Color.red, Color.white, healthPercentage);
     }
 
     public virtual void MoveTowardsTarget(Transform target)
@@ -131,7 +135,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         animator.SetBool("isWalking", true);
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
-    
+
     protected void ResetAttack()
     {
         isAttacking = false;

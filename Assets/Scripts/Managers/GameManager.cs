@@ -18,6 +18,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public CameraManager cameraManager;
     public BuildingManager buildingManager;
     public WaveManager waveManager;
+    public UIWaveManager uiWaveManager;
     public ScoreManager scoreManager;
     public ShopManager shopManager;
     
@@ -45,6 +46,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         cardManager.Initialize();
         buildingManager.Initialize();
         waveManager.Initialize();
+        uiWaveManager.Initialize();
         scoreManager.Initialize();
     }
 
@@ -81,8 +83,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private void ResetManagers()
     {
         cardManager.ResetHand();
-        scoreManager.ResetScore();
+        scoreManager.ResetScore(); 
         waveManager.ResetWaves();
+        uiWaveManager.ResetWaveUI();
         shopManager.ResetShop();
         buildingManager.ResetBuildings();
     }

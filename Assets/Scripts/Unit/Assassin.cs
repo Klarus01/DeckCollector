@@ -28,7 +28,6 @@ public class Assassin : FighterUnit
         }
 
         ManageInvisibility();
-
     }
 
     private void ManageInvisibility()

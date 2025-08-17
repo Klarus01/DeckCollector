@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UnitData", menuName = "New Unit Data")]
 public class UnitData : ScriptableObject
 {
+    public string unitName;
     public Unit unit;
     public Sprite cardSprite;
     public Upgrade upgrade;
