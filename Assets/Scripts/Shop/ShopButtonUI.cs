@@ -2,16 +2,17 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopButtonUI : MonoBehaviour
+public class ShopButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Button button;
     [SerializeField] private Image unitImage;
     [SerializeField] private Image backgroundImage;
     [SerializeField] private TMP_Text unitName;
     [SerializeField] private TMP_Text unitStats;
+    [SerializeField] private GameObject unitInfoPanel;
 
     private Unit unit;
     private Color originalColor;
@@ -43,7 +44,7 @@ public class ShopButtonUI : MonoBehaviour
 
     public void UpdateItemText()
     {
-        unitStats.SetText($"ATK: {unit.unitData.damage}\nHP: {unit.unitData.maxHealth}");
+        unitStats.SetText($"DMG: {unit.unitData.damage}\nHP: {unit.unitData.maxHealth}");
     }
 
     private bool HasEnoughGold()
@@ -58,7 +59,18 @@ public class ShopButtonUI : MonoBehaviour
         CardManager.Instance.NewCardBought(unit);
         gameObject.SetActive(false);
     }
-    
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        unitInfoPanel.SetActive(true);
+        unitInfoPanel.GetComponent<UnitInfo>().Initialize(unit.unitData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        unitInfoPanel.SetActive(false);
+    }
+
     private IEnumerator ChangeBackgroundColorTemporarily(Color newColor)
     {
         backgroundImage.color = newColor;

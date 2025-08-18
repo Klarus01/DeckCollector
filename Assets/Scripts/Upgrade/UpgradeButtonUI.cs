@@ -1,10 +1,8 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UpgradeButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
