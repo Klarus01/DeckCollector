@@ -13,26 +13,28 @@ MonoBehaviour:
   m_Name: Localization-Assets-Shared
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Shared
-  m_Data:
-    m_SerializedData: []
   m_GUID: 15dd565a9cbb43043877a5c3db5d64f1
   m_SerializeEntries:
-  - m_GUID: 577f26ff4d77ba746a4fe94fe705679e
-    m_Address: Assets/Localization/Tables/UI Text Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: c418043e89b487144b143a9675458c89
-    m_Address: Assets/Localization/Tables/TutorialTable Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: c9cb0b129ef78e74c8ac2c2c96af7c6b
-    m_Address: Assets/Localization/Tables/SidePanels Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
   - m_GUID: 074cb3e0385e50e499853dd2d262c9e9
     m_Address: Assets/Localization/Tables/CompletionTable Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 577f26ff4d77ba746a4fe94fe705679e
+    m_Address: Assets/Localization/Tables/UI Text Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c418043e89b487144b143a9675458c89
+    m_Address: Assets/Localization/Tables/TutorialTable Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9cb0b129ef78e74c8ac2c2c96af7c6b
+    m_Address: Assets/Localization/Tables/SidePanels Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 133a1d32febdbae4b8f4c174aa2ac6d5, type: 2}
   m_SchemaSet:

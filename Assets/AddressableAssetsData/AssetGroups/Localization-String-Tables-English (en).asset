@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Localization-String-Tables-English (en)
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-English (en)
-  m_Data:
-    m_SerializedData: []
   m_GUID: 4271c85ba65015746a7214576e2c1e24
   m_SerializeEntries:
   - m_GUID: 36c11351d0966bf47a16a3f3ea2558ab
@@ -23,24 +21,28 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     - Preload
-  - m_GUID: 73585e3f3507d084a8b4f02cfb63e711
-    m_Address: TutorialTable_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    - Preload
-  - m_GUID: 471bdf1f91f69ef4b905072b857edb31
-    m_Address: SidePanels_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3a846044a6b730447b8b263ff9317db0
     m_Address: CompletionTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 471bdf1f91f69ef4b905072b857edb31
+    m_Address: SidePanels_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73585e3f3507d084a8b4f02cfb63e711
+    m_Address: TutorialTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 133a1d32febdbae4b8f4c174aa2ac6d5, type: 2}
   m_SchemaSet:

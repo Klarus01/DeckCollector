@@ -29,7 +29,6 @@ public class FighterUnit : Unit, IAttackable
             Attack(target);
         }
     }
-
     
     public void Attack(IDamageable target)
     {

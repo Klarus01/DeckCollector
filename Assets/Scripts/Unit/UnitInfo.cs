@@ -22,7 +22,7 @@ public class UnitInfo : MonoBehaviour
         unitNameText.SetText(unit.unitName);
         hpText.SetText($"HP:\n{unit.maxHealth} -> {unit.upgrade.upgradeLevels[nextLvl].hp}");
         dmgText.SetText($"DMG:\n{unit.damage} -> {unit.upgrade.upgradeLevels[nextLvl].dmg}");
-        //abilityText
+        abilityText.SetText($"{unit.abilityName}\n{unit.abilityDescription}");
     }
 
     private int GetNextLevel()

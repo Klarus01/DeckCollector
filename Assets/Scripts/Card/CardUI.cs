@@ -85,8 +85,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
             return;
         }
         
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        CardSelectionManager.Instance.DragSelectedCards(mousePos);
+        CardSelectionManager.Instance.DragSelectedCards(eventData.position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -98,7 +97,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         }
         
         isDragged = false;
-        CardSelectionManager.Instance.EndDragSelectedCards(this);
+        CardSelectionManager.Instance.EndDragSelectedCards(eventData.position);
     }
 
     public void HighlightCard(bool highlight)

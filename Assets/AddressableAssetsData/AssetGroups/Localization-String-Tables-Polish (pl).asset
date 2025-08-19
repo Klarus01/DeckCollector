@@ -13,34 +13,36 @@ MonoBehaviour:
   m_Name: Localization-String-Tables-Polish (pl)
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-Polish (pl)
-  m_Data:
-    m_SerializedData: []
   m_GUID: 387c91fb8465cfd4b94ebad5b59447d9
   m_SerializeEntries:
-  - m_GUID: 8d8e8efd4e9317746816ce12fb5dc690
-    m_Address: UI Text_pl
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-pl
-    - Preload
   - m_GUID: 0bbc5a47c3d61bb45919d56037ffb380
     m_Address: TutorialTable_pl
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pl
     - Preload
-  - m_GUID: d1f57952f1768004787e922fabc30ecb
-    m_Address: SidePanels_pl
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d8e8efd4e9317746816ce12fb5dc690
+    m_Address: UI Text_pl
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pl
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: beae0f426684bd240b2277a981b8f874
     m_Address: CompletionTable_pl
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pl
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1f57952f1768004787e922fabc30ecb
+    m_Address: SidePanels_pl
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pl
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 133a1d32febdbae4b8f4c174aa2ac6d5, type: 2}
   m_SchemaSet:

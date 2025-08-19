@@ -22,3 +22,5 @@ MonoBehaviour:
   speed: 10
   damage: 5
   attackSpeed: 1
+  abilityName: Invisibility.
+  abilityDescription: Assasin going to invisibility for .5s when drop on to battlefield.

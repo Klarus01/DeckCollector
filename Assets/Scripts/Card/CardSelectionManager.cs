@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
 {
     private float cardSpacing = 1f;
-    
+    private Vector3 worldPosition;
+
     public List<CardUI> selectedCards = new();
 
     public void ToggleCardSelection(CardUI card)
@@ -42,20 +43,11 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
         }
     }
 
-    public void EndDragSelectedCards(CardUI referenceCard)
+    public void EndDragSelectedCards(Vector2 dropPosition)
     {
-        if (referenceCard.isAboveSellPoint)
-        {
-            SellSelectedCards();
-        }
-        else if (referenceCard.isAboveDropPoint)
-        {
-            ReturnAllSelectedCards();
-        }
-        else
-        {
-            PlaySelectedCards();
-        }
+        worldPosition = Camera.main.ScreenToWorldPoint(dropPosition);
+        worldPosition.z = 0;
+        PlaySelectedCards();
     }
 
     public void EndDragSelectedCardsError()
@@ -81,7 +73,7 @@ public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
             return;
 
         var tempSelectedCards = new List<CardUI>(selectedCards);
-        var centerPosition = tempSelectedCards[0].transform.position;
+        var centerPosition = worldPosition;
         var radius = 1f;
         var angleIncrement = 360f / tempSelectedCards.Count;
 
