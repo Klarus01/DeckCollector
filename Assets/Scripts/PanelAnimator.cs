@@ -1,5 +1,5 @@
 using UnityEngine;
-using DG.Tweening;
+//using DG.Tweening;
 using UnityEngine.UI;
 
 public class PanelAnimator : MonoBehaviour
@@ -18,31 +18,11 @@ public class PanelAnimator : MonoBehaviour
 
     void Start()
     {
-        // Ustalamy pozycjê widoczn¹ (obecna pozycja panelu)
+        // Ustalamy pozycjï¿½ widocznï¿½ (obecna pozycja panelu)
         visiblePosition = panel.anchoredPosition;
 
-        // Ustalamy pozycjê ukryt¹ poza ekranem
+        // Ustalamy pozycjï¿½ ukrytï¿½ poza ekranem
         float hiddenX = isLeftPanel ? -panel.rect.width : Screen.width + panel.rect.width;
         hiddenPosition = new Vector2(hiddenX, panel.anchoredPosition.y);
-
-        // Ustawiamy panel w pozycji ukrytej na starcie
-        panel.anchoredPosition = hiddenPosition;
-        slideButton.onClick.AddListener(TogglePanel);
-    }
-
-    public void TogglePanel()
-    {
-        if (isVisible)
-        {
-            // Chowanie panelu
-            panel.DOAnchorPos(hiddenPosition, animationDuration);
-        }
-        else
-        {
-            // Wysuwanie panelu
-            panel.DOAnchorPos(visiblePosition, animationDuration);
-        }
-
-        isVisible = !isVisible;
     }
 }
