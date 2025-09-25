@@ -26,7 +26,6 @@ public class WaveManager : MonoBehaviour
         public Wave[] waves = new Wave[5];
     }
 
-    [SerializeField] private GameObject screenBetweenWaves;
     [SerializeField] private Button nextWaveButton;
     [SerializeField] private Stage[] stages;
     [SerializeField] private UIWaveManager uiWaveManager;
@@ -42,12 +41,7 @@ public class WaveManager : MonoBehaviour
 
     public void Initialize()
     {
-        // Ukryj ekran miêdzy falami na starcie
-        if (screenBetweenWaves != null)
-            screenBetweenWaves.SetActive(false);
-
         nextWaveButton.onClick.AddListener(StartNextWave);
-        // Rozpocznij pierwsz¹ falê
         StartNextWave();
     }
 
@@ -66,13 +60,9 @@ public class WaveManager : MonoBehaviour
     public void StartNextWave()
     {
         Time.timeScale = 1f;
-        // Ukryj ekran miêdzy falami
-        if (screenBetweenWaves != null)
-            screenBetweenWaves.SetActive(false);
 
         isWaitingForNextWave = false;
 
-        // SprawdŸ, czy to koniec wszystkich fal
         if (currentStageIndex >= stages.Length)
         {
             GameCompleted();
@@ -81,13 +71,11 @@ public class WaveManager : MonoBehaviour
 
         var currentStage = stages[currentStageIndex];
 
-        // SprawdŸ, czy to koniec fal w obecnym etapie
         if (currentWaveIndex >= currentStage.waves.Length)
         {
             currentStageIndex++;
             currentWaveIndex = 0;
 
-            // SprawdŸ ponownie po zwiêkszeniu currentStageIndex
             if (currentStageIndex >= stages.Length)
             {
                 GameCompleted();
@@ -129,16 +117,12 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        // Zaczekaj na pokonanie wszystkich wrogów
         yield return StartCoroutine(WaitForWaveCompletion());
 
         if (currentWave.isBossWave)
         {
             BossWaveDefeated();
         }
-
-        // Poka¿ ekran miêdzy falami i czekaj na klikniêcie przycisku
-        ShowWaveCompleteScreen();
     }
 
     private IEnumerator WaitForWaveCompletion()
@@ -148,16 +132,6 @@ public class WaveManager : MonoBehaviour
             liveEnemies.RemoveAll(enemy => enemy == null);
             yield return new WaitForSeconds(0.1f);
         }
-    }
-
-    private void ShowWaveCompleteScreen()
-    {
-        Time.timeScale = 0f;
-        isWaitingForNextWave = true;
-
-        // Poka¿ ekran miêdzy falami
-        if (screenBetweenWaves != null)
-            screenBetweenWaves.SetActive(true);
     }
 
     private void BossWaveDefeated()
@@ -173,20 +147,14 @@ public class WaveManager : MonoBehaviour
         currentStageIndex = 0;
         StopAllCoroutines();
 
-        // Usuñ wszystkich ¿ywych wrogów
         foreach (var enemy in liveEnemies.Where(enemy => enemy != null))
         {
             Destroy(enemy.gameObject);
         }
         liveEnemies.Clear();
 
-        // Ukryj ekran miêdzy falami
-        if (screenBetweenWaves != null)
-            screenBetweenWaves.SetActive(false);
-
         isWaitingForNextWave = false;
 
-        // Rozpocznij od nowa
         StartNextWave();
     }
 

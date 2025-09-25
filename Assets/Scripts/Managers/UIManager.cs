@@ -46,10 +46,5 @@ public class UIManager : MonoBehaviour
     {
         goldText.SetText(GameManager.Instance.GoldCount.ToString());
         partsText.SetText(GameManager.Instance.PartCount.ToString());
-        var localizedCost = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("SidePanels", "UnitCost", new object[] { (int)GameManager.Instance.ShopItemCost });
-        localizedCost.Completed += handle =>
-        {
-            shopCostText.SetText(handle.Result);
-        };
     }
 }
