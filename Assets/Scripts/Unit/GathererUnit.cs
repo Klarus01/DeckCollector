@@ -8,17 +8,11 @@ public class GathererUnit : Unit, IGatherable
 
     private void Update()
     {
-        if (Target != null && Vector2.Distance(transform.position, Target.position) <= rangeOfAction)
-        {
-            if (Time.time >= gatherCooldown)
-            {
-                GatherResources();
-            }
-        }
+        target = SearchForTarget();
+        if (target) MoveTowardsTarget(target);
         else
         {
             animator.SetBool("isGathering", false);
-            MoveTowardsTarget(Target);
         }
     }
 
@@ -29,7 +23,30 @@ public class GathererUnit : Unit, IGatherable
         gatheringSpeedMultiplier = level.gatheringSpeed;
     }
 
-    public void GatherResources()
+    private Transform SearchForTarget()
+    {
+        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+
+        var closestDistance = Mathf.Infinity;
+        Transform closestTarget = null;
+
+        foreach (var target in targets)
+        {
+            if (target.TryGetComponent<Farm>(out var targetComponent))
+            {
+                var distanceToTarget = Vector2.Distance(transform.position, targetComponent.transform.position);
+                if (distanceToTarget < closestDistance)
+                {
+                    closestDistance = distanceToTarget;
+                    closestTarget = targetComponent.transform;
+                }
+            }
+        }
+
+        return closestTarget;
+    }
+
+    public virtual void UnitAction()
     {
         animator.SetBool("isGathering", true);
     }

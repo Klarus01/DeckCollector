@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class FighterUnit : Unit, IAttackable
 {
+    private bool isAtacking;
+
     protected float attackSpeed;
     protected float timer;
 
@@ -14,42 +17,41 @@ public class FighterUnit : Unit, IAttackable
 
     protected virtual void Update()
     {
-        Target = SearchForTarget();
+        target = SearchForTarget();
         if (timer < attackSpeed) timer += Time.deltaTime;
-        if (Target) MoveTowardsTarget(Target);
+        if (target) MoveTowardsTarget(target);
     }
 
-    private void TryAttackTarget()
+    public override void UnitAction()
     {
         if (isInvisible) return;
         if (isDragging) return;
-        if (!Target) return;
-        if (timer >= attackSpeed && Target.TryGetComponent<IDamageable>(out var target))
-        {
-            Attack(target);
-        }
+        if (!target) return;
+        Attack();
     }
     
-    public void Attack(IDamageable target)
+    public void Attack()
     {
-        if (!Target) return;
-
+        if (isAtacking) return;
+        Debug.Log("attack");
+        isAtacking = true;
         animator.SetTrigger("Attack");
-        target.TakeDamage(unitData.damage);
         timer = 0f;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void DealDamage()
     {
-        if (!collision.gameObject.TryGetComponent<Enemy>(out var enemy)) return;
-        if (timer >= attackSpeed) TryAttackTarget();
+        isAtacking = false;
+        if (!target) return;
+        target.TryGetComponent<IDamageable>(out var enemy);
+        enemy.TakeDamage(unitData.damage);
     }
 
     private Transform SearchForTarget()
     {
         var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
 
-        var closestDistance = Mathf.Infinity;
+        var closestDistance = rangeOfVision;
         Transform closestTarget = null;
 
         foreach (var target in targets)

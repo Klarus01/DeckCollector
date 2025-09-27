@@ -8,9 +8,9 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     
     private float speed;
     private Color originalColor;
-    
+
     protected SpriteRenderer spriteRenderer;
-    protected float rangeOfAction;
+    protected float rangeOfAction = 1.5f;
     protected float rangeOfVision;
     
     public UnitData unitData;
@@ -22,8 +22,9 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
     public bool isInvisible;
     public bool isAboveDropPoint;
     public bool isDragging;
+    public bool isInActionRange;
 
-    protected Transform Target { get; set; }
+    protected Transform target { get; set; }
 
     public Upgrade upgrade => unitData.upgrade;
 
@@ -73,11 +74,15 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         transform.position = clampedPosition;
     }
 
+    public virtual void UnitAction() { }
+
     public void MoveTowardsTarget(Transform target)
     {
         if (target != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            float distanceToTarget = Vector2.Distance(transform.position, target.position);
+            if (distanceToTarget <= rangeOfAction) UnitAction();
+            else transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
     }
 

@@ -18,7 +18,7 @@ MonoBehaviour:
   upgrade: {fileID: 11400000, guid: 5c0777fed8c17524998c5e19453b106e, type: 2}
   maxHealth: 5
   rangeOfVision: 10
-  rangeOfAction: 1
+  rangeOfAction: 1.5
   speed: 5
   damage: 1
   attackSpeed: 1

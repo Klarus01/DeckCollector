@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AxemanAttack
-  serializedVersion: 6
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -18,26 +18,28 @@ AnimationClip:
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves:
-  - curve:
+  - serializedVersion: 2
+    curve:
     - time: 0
       value: {fileID: -1492253548, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
-    - time: 0.11666667
+    - time: 0.07777778
       value: {fileID: 586272628, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
-    - time: 0.21666667
+    - time: 0.14444445
       value: {fileID: -497339954, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
-    - time: 0.33333334
+    - time: 0.22222222
       value: {fileID: 2051969167, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
-    - time: 0.45
+    - time: 0.3
       value: {fileID: 1528781769, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
-    - time: 0.55
+    - time: 0.36666667
       value: {fileID: -1638254084, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
-    - time: 0.6666667
+    - time: 0.44444445
       value: {fileID: -1492253548, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+    flags: 2
+  m_SampleRate: 90
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -51,6 +53,8 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: -1492253548, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
     - {fileID: 586272628, guid: 7dddd01a87ecc71429420a7dd6cd5ed2, type: 3}
@@ -64,7 +68,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 0.45555556
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

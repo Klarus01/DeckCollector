@@ -7,8 +7,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     [SerializeField] protected Transform target;
     [SerializeField] protected Animator animator;
 
-    private bool isAttacking;
-
+    protected bool isAttacking;
     protected int partDrop = 1;
     protected SpriteRenderer spriteRenderer;
     protected float maxHealth;
@@ -56,15 +55,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         {
             MoveTowardsTarget(target);
         }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (!collision.gameObject.TryGetComponent<Unit>(out var targetUnit) || !(timer >= attackSpeed)) return;
-        if (targetUnit.isInvisible || isAttacking) return;
-
-        isAttacking = true;
-        Attack();
     }
 
     public void DealDamage()
@@ -133,7 +123,9 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     public virtual void MoveTowardsTarget(Transform target)
     {
         animator.SetBool("isWalking", true);
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        float distanceToTarget = Vector2.Distance(transform.position, target.position);
+        if (rangeOfAttack >= distanceToTarget) Attack();
+        else transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
     protected void ResetAttack()
