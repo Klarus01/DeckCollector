@@ -17,7 +17,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     protected float attackSpeed;
     protected float rangeOfVision;
     protected float rangeOfAttack;
-    protected float timer;
+    protected float attackTimer;
     protected int pointsForEnemy = 100;
 
     public event Action<Enemy> OnDeath;
@@ -41,9 +41,9 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
 
     protected virtual void Update()
     {
-        if (timer < attackSpeed)
+        if (attackTimer < attackSpeed)
         {
-            timer += Time.deltaTime;
+            attackTimer += Time.deltaTime;
         }
 
         if (!isAttacking)
@@ -57,25 +57,16 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         }
     }
 
-    public void DealDamage()
+    private void DealDamage()
     {
-        ResetAttack();
-
-        if (target == null) return;
-
-        var distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-        if (distanceToTarget > rangeOfAttack) return;
-
+        ResetAttackCooldown();
         if (!target.TryGetComponent<Unit>(out var targetUnit)) return;
-
-        if (!targetUnit.isInvisible)
-        {
-            targetUnit.TakeDamage(damage);
-        }
+        var distanceToTarget = Vector2.Distance(transform.position, target.position);
+        if (distanceToTarget > rangeOfAttack) return;
+        if (!targetUnit.isInvisible) targetUnit.TakeDamage(damage);
     }
 
-    protected void FindClosestTarget()
+    private void FindClosestTarget()
     {
         var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
         var closestDistance = Mathf.Infinity;
@@ -124,15 +115,25 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     {
         animator.SetBool("isWalking", true);
         float distanceToTarget = Vector2.Distance(transform.position, target.position);
-        if (rangeOfAttack >= distanceToTarget) Attack();
+        if (rangeOfAttack >= distanceToTarget)
+        {
+            animator.SetBool("isWalking", false);
+            if (attackTimer < attackSpeed) return;
+            Attack();
+        }
         else transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
-    protected void ResetAttack()
+    protected void ResetAttackCooldown()
     {
         isAttacking = false;
-        timer = 0f;
+        attackTimer = 0f;
     }
 
-    protected abstract void Attack();
+    protected virtual void Attack()
+    {
+        if (isAttacking) return;
+        animator.SetTrigger("Attack");
+        isAttacking = true;
+    }
 }

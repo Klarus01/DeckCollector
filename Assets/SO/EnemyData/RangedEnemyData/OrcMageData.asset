@@ -17,4 +17,4 @@ MonoBehaviour:
   damage: 5
   attackSpeed: 1
   rangeOfVision: 200
-  rangeOfAttack: 200
+  rangeOfAttack: 20

@@ -109,7 +109,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private void SetStats()
     {
         HPText.SetText($"{Mathf.RoundToInt(unitHealth)}/{unitMaxHealth}");
-        ATKText.SetText(unit.unitData.damage.ToString());
+        ATKText.SetText(unit.upgrade.currentDamage.ToString());
     }
 
     private void SetRestSlider()
@@ -121,7 +121,7 @@ public class CardUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private void RestTimeCalculation()
     {
         if (unitMaxHealth.Equals(unitHealth)) return;
-
+        if(unitHealth < 0) unitHealth = 0;
         var penatly = unitMaxHealth - unitHealth;
         if (unitHealth.Equals(0)) restTimer = penatly * 1f;
         else restTimer = penatly * 0.75f;

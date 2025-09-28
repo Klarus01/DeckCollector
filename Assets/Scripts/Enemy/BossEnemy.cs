@@ -16,13 +16,13 @@ public class BossEnemy : EliteEnemy
             animator.SetTrigger("Attack");
         }
 
-        ResetAttack();
+        ResetAttackCooldown();
     }
 
     protected override void DropLoot()
     {
-        pointsForEnemy = 1000;
         base.DropLoot();
+        pointsForEnemy = 1000;
     }
 
     private void LaunchProjectile()

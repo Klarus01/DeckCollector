@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine;
 
 public class CardManager : SingletonMonobehaviour<CardManager>
 {
@@ -25,7 +27,7 @@ public class CardManager : SingletonMonobehaviour<CardManager>
     
     private void PrepareForNewDraw()
     {
-        cardUIController.PrepareForNewDraw(GameManager.Instance.deck.cardsInHand);
+        cardUIController.PrepareForNewDraw(GameManager.Instance.deck.cardsInHand, true);
     }
 
     public void CardPlayed(CardUI card)
@@ -48,7 +50,7 @@ public class CardManager : SingletonMonobehaviour<CardManager>
     public void NewCardBought(Unit unit)
     {
         GameManager.Instance.deck.AddCard(unit);
-        cardUIController.UnitBackToHand(unit);
+        cardUIController.UnitBackToHand(unit, true);
     }
 
     public void CollectAllCardsToHand()

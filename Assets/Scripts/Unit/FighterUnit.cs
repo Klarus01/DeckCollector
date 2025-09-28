@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FighterUnit : Unit, IAttackable
 {
-    private bool isAtacking;
+    protected bool isAttacking;
 
     protected float attackSpeed;
     protected float timer;
@@ -24,6 +24,7 @@ public class FighterUnit : Unit, IAttackable
 
     public override void UnitAction()
     {
+        if (timer < attackSpeed) return;
         if (isInvisible) return;
         if (isDragging) return;
         if (!target) return;
@@ -32,19 +33,18 @@ public class FighterUnit : Unit, IAttackable
     
     public void Attack()
     {
-        if (isAtacking) return;
-        Debug.Log("attack");
-        isAtacking = true;
+        if (isAttacking) return;
+        isAttacking = true;
         animator.SetTrigger("Attack");
         timer = 0f;
     }
 
     private void DealDamage()
     {
-        isAtacking = false;
+        isAttacking = false;
         if (!target) return;
         target.TryGetComponent<IDamageable>(out var enemy);
-        enemy.TakeDamage(unitData.damage);
+        enemy.TakeDamage(damage);
     }
 
     private Transform SearchForTarget()

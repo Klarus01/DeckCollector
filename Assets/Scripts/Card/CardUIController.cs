@@ -7,10 +7,10 @@ public class CardUIController : MonoBehaviour
     [SerializeField] private GameObject cardHolder;
     [SerializeField] private List<CardUI> cards = new();
 
-    public void PrepareForNewDraw(List<Unit> cardsToPlay)
+    public void PrepareForNewDraw(List<Unit> cardsToPlay, bool isNewHand = false)
     {
         DeleteCards();
-        CreateHand(cardsToPlay);
+        CreateHand(cardsToPlay, isNewHand);
     }
 
     public void CardPlayed(CardUI card)
@@ -32,29 +32,30 @@ public class CardUIController : MonoBehaviour
         cards.Clear();
     }
 
-    private void CreateHand(List<Unit> cardsToPlay)
+    private void CreateHand(List<Unit> cardsToPlay, bool isNewHand = false)
     {
         foreach (var unit in cardsToPlay)
         {
             var cardUI = Instantiate(cardPrefab, cardHolder.transform);
-            CreateCard(cardUI, unit);
+            CreateCard(cardUI, unit, isNewHand);
         }
     }
     
-    public void UnitBackToHand(Unit unit)
+    public void UnitBackToHand(Unit unit, bool isNewCard = false)
     {
         var cardUI = Instantiate(cardPrefab, cardHolder.transform);
-        CreateCard(cardUI, unit);
+        CreateCard(cardUI, unit, isNewCard);
     }
 
-    private void CreateCard(CardUI cardUI, Unit unit)
-    {
-        cardUI.unit = unit.unitData.unit;
-        cardUI.cardImage.sprite = unit.unitData.cardSprite;
-        cardUI.unitHealth = unit.health;
-        cardUI.unitMaxHealth = unit.unitData.maxHealth;
-        cards.Add(cardUI);
-    }
+private void CreateCard(CardUI cardUI, Unit unit, bool isNewCard = false)
+{
+    cardUI.unit = unit.unitData.unit;
+    cardUI.cardImage.sprite = unit.unitData.cardSprite;
+    cardUI.unitMaxHealth = unit.upgrade.currentHelth;
+    if (isNewCard) cardUI.unitHealth = cardUI.unitMaxHealth;
+    else cardUI.unitHealth = unit.health;
+    cards.Add(cardUI);
+}
 
     public void SwitchCardHolderVisibility()
     {

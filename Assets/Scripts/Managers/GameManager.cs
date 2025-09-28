@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,8 +11,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private const float MinShopItemCost = 2;
     private float shopItemCost = MinShopItemCost;
-    private int goldCount;
-    private int partCount;
+    private int goldCount = 100;
+    private int partCount = 100;
 
     public Deck deck;
     public CardManager cardManager;
@@ -35,8 +36,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void AddPoints(int points) => scoreManager.AddPoints(points);
     
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         InitializeManagers();
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "Upgrades", menuName = "New Upgrade")]
 public class Upgrade : ScriptableObject
@@ -7,6 +8,9 @@ public class Upgrade : ScriptableObject
     public Sprite unitSprite;
     public int upgradeLvl;
     public int maxUpgradeLvl = 5;
+
+    public int currentHelth => upgradeLevels[upgradeLvl].hp;
+    public int currentDamage => upgradeLevels[upgradeLvl].dmg;
 
     public UpgradeLevel[] upgradeLevels;
 

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class CardSelectionManager : SingletonMonobehaviour<CardSelectionManager>
 {
-    private float cardSpacing = 1f;
     private Vector3 worldPosition;
 
     public List<CardUI> selectedCards = new();

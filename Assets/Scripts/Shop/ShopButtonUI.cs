@@ -44,7 +44,7 @@ public class ShopButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void UpdateItemText()
     {
-        unitStats.SetText($"DMG: {unit.unitData.damage}\nHP: {unit.unitData.maxHealth}");
+        unitStats.SetText($"DMG: {unit.upgrade.currentDamage}\nHP: {unit.upgrade.currentHelth}");
     }
 
     private bool HasEnoughGold()
@@ -57,6 +57,7 @@ public class ShopButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         GameManager.Instance.GoldCount -= (int)GameManager.Instance.ShopItemCost;
         GameManager.Instance.ShopItemCost *= 1.25f;
         CardManager.Instance.NewCardBought(unit);
+        unitInfoPanel.SetActive(false);
         gameObject.SetActive(false);
     }
 

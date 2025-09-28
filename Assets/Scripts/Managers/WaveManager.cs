@@ -27,6 +27,7 @@ public class WaveManager : MonoBehaviour
     }
 
     [SerializeField] private Button nextWaveButton;
+    [SerializeField] private GameObject UIStats;
     [SerializeField] private Stage[] stages;
     [SerializeField] private UIWaveManager uiWaveManager;
 
@@ -48,7 +49,7 @@ public class WaveManager : MonoBehaviour
     private void FindSpawnPoints()
     {
         spawnPoints.Clear();
-        foreach (var spawner in FindObjectsOfType<Spawner>())
+        foreach (var spawner in FindObjectsByType<Spawner>(FindObjectsSortMode.None))
         {
             if (spawner.transform)
             {
@@ -60,7 +61,8 @@ public class WaveManager : MonoBehaviour
     public void StartNextWave()
     {
         Time.timeScale = 1f;
-
+        nextWaveButton.gameObject.SetActive(false);
+        UIStats.SetActive(true);
         isWaitingForNextWave = false;
 
         if (currentStageIndex >= stages.Length)
@@ -132,6 +134,10 @@ public class WaveManager : MonoBehaviour
             liveEnemies.RemoveAll(enemy => enemy == null);
             yield return new WaitForSeconds(0.1f);
         }
+
+        nextWaveButton.gameObject.SetActive(true);
+        UIStats.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     private void BossWaveDefeated()

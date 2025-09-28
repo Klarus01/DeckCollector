@@ -14,7 +14,7 @@ public class SingletonMonobehaviour<T> : MonoBehaviour where T : Component
             if (instance == null)
             {
                 // find the generic instance
-                instance = FindObjectOfType<T>();
+                instance = FindFirstObjectByType<T>();
 
                 // if it's null again create a new object
                 // and attach the generic instance

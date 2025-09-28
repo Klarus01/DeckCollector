@@ -69,6 +69,4 @@ public class EliteEnemy : Enemy
         
         transform.localScale *= sizeMultiplier;
     }
-
-    protected override void Attack() {}
 }

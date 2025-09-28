@@ -46,7 +46,7 @@ public class GathererUnit : Unit, IGatherable
         return closestTarget;
     }
 
-    public virtual void UnitAction()
+    public override void UnitAction()
     {
         animator.SetBool("isGathering", true);
     }

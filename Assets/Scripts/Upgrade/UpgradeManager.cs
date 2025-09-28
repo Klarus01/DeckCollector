@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
 {
@@ -25,10 +26,10 @@ public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
     {
         unitDictionary = new Dictionary<Type, Unit[]>
         {
-            { typeof(Farmer), FindObjectsOfType<Farmer>() },
-            { typeof(Knight), FindObjectsOfType<Knight>() },
-            { typeof(Assassin), FindObjectsOfType<Assassin>() },
-            { typeof(Axeman), FindObjectsOfType<Axeman>() }
+            { typeof(Farmer), FindObjectsByType<Farmer>(FindObjectsSortMode.None) },
+            { typeof(Knight), FindObjectsByType<Knight>(FindObjectsSortMode.None) },
+            { typeof(Assassin), FindObjectsByType<Assassin>(FindObjectsSortMode.None) },
+            { typeof(Axeman), FindObjectsByType<Axeman>(FindObjectsSortMode.None) }
         };
     }
 

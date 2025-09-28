@@ -67,7 +67,7 @@ public class SettingsManager : MonoBehaviour
     {
         InitializeResolutionDropdown();
         InitializeFPSDropdown();
-        InitializeLanguageDropdown();
+        _ = InitializeLanguageDropdown();
     }
 
     private void InitializeResolutionDropdown()

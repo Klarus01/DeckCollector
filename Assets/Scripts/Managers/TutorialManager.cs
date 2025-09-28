@@ -10,6 +10,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
+        if (isTutorialEnded) return;
         if (tutorialPanel.activeSelf)
         {
             tutorialEndButton.onClick.AddListener(TutorialEnd);
