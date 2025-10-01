@@ -34,7 +34,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void UpdateHand() => OnHandUpdate?.Invoke();
 
-    public void AddPoints(int points) => scoreManager.AddPoints(points);
+    public void AddPoints(int points) => scoreManager?.AddPoints(points);
     
     protected override void Awake()
     {
@@ -44,12 +44,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void InitializeManagers()
     {
-        deck.Initialize();
-        cardManager.Initialize();
-        buildingManager.Initialize();
-        waveManager.Initialize();
-        uiWaveManager.Initialize();
-        scoreManager.Initialize();
+        deck?.Initialize();
+        cardManager?.Initialize();
+        buildingManager?.Initialize();
+        waveManager?.Initialize();
+        uiWaveManager?.Initialize();
+        scoreManager?.Initialize();
     }
 
     public void ShowCompletionScreen()

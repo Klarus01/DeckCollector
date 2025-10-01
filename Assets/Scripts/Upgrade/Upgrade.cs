@@ -9,7 +9,7 @@ public class Upgrade : ScriptableObject
     public int upgradeLvl;
     public int maxUpgradeLvl = 5;
 
-    public int currentHelth => upgradeLevels[upgradeLvl].hp;
+    public int currentHealth => upgradeLevels[upgradeLvl].hp;
     public int currentDamage => upgradeLevels[upgradeLvl].dmg;
 
     public UpgradeLevel[] upgradeLevels;

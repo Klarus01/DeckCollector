@@ -20,7 +20,7 @@ public class UnitInfo : MonoBehaviour
     {
         int nextLvl = GetNextLevel();
         unitNameText.SetText(unit.unitName);
-        hpText.SetText($"HP:\n{unit.upgrade.currentHelth} -> {unit.upgrade.upgradeLevels[nextLvl].hp}");
+        hpText.SetText($"HP:\n{unit.upgrade.currentHealth} -> {unit.upgrade.upgradeLevels[nextLvl].hp}");
         dmgText.SetText($"DMG:\n{unit.upgrade.currentDamage} -> {unit.upgrade.upgradeLevels[nextLvl].dmg}");
         abilityText.SetText($"{unit.abilityName}\n{unit.abilityDescription}");
     }

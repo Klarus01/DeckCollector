@@ -12,10 +12,11 @@ public class Deck : MonoBehaviour
     {
         cardsInHand.AddRange(startingUnits);
     }
-    
+
     public void PlayCard(Unit unit, Vector3 position, CardUI card)
     {
         var newUnit = Instantiate(unit, position, Quaternion.identity);
+        newUnit.OnDeath += () => UnitDeath(newUnit);
         cardsOnBoard.Add(newUnit);
         cardsInHand.Remove(unit);
         CardManager.Instance.CardPlayed(card);
@@ -30,5 +31,10 @@ public class Deck : MonoBehaviour
     {
         cardsInHand.Remove(unit);
         CardManager.Instance.CardSold(card);
+    }
+
+    private void UnitDeath(Unit unit)
+    {
+        cardsOnBoard.Remove(unit);
     }
 }

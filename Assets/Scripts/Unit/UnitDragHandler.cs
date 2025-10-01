@@ -28,7 +28,7 @@ public class UnitDragHandler : MonoBehaviour
         if (!unit.animator) return;
         
         unit.animator.SetBool("isDragged", true);
-        unit.isDragging = true;
+        unit.Stats.ToggleIsDragging(true);
         isDragging = true;
     }
 
@@ -36,13 +36,13 @@ public class UnitDragHandler : MonoBehaviour
     {
         if (!isDragging) return;
         
-        unit.isDragging = false;
+        unit.Stats.ToggleIsDragging(false);
         isDragging = false;
 
         if (!unit.animator) return;
         unit.animator.SetBool("isDragged", false);
             
-        if (unit.isAboveDropPoint)
+        if (unit.Stats.IsAboveDropPoint)
         {
             CardManager.Instance.BackUnitToHand(unit);
             Destroy(unit.gameObject);

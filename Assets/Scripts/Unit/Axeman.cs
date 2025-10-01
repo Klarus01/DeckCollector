@@ -6,12 +6,12 @@ public class Axeman : FighterUnit
     {
         isAttacking = true;
 
-        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfAction);
+        var targets = Physics2D.OverlapCircleAll(transform.position, Stats.RangeOfAction);
         foreach (Collider2D target in targets)
         {
             if (target.TryGetComponent<IDamageable>(out var enemy))
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(Stats.CurrentDamage);
             }
         }
         isAttacking = false;

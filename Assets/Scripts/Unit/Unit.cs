@@ -3,30 +3,22 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour, IDamageable, IMovable
 {
-    [SerializeField] private GameObject tombstonePrefab;
     [SerializeField] private ParticleSystem placingParitcle;
     
-    private float speed;
     private Color originalColor;
 
     protected SpriteRenderer spriteRenderer;
-    protected float rangeOfAction = 1.5f;
-    protected float rangeOfVision;
     
+    public UnitStats Stats { get; private set; }
     public UnitData unitData;
     public Animator animator;
     public int cardValue = 2;
-    public int damage;
-    public float health;
-    public float maxHealth;
-    public bool isInvisible;
-    public bool isAboveDropPoint;
-    public bool isDragging;
-    public bool isInActionRange;
 
     protected Transform target { get; set; }
 
     public Upgrade upgrade => unitData.upgrade;
+
+    public event Action OnDeath;
 
     protected virtual void Awake()
     {
@@ -34,7 +26,7 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         Instantiate(placingParitcle, transform);
-        SetBaseStats();
+        InitializeStats();
     }
 
     private void LateUpdate()
@@ -42,21 +34,22 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         ClampPositionToMapLimits();
     }
 
-    public virtual void SetBaseStats()
+    public virtual void InitializeStats()
     {
-        speed = unitData.speed;
-        rangeOfAction = unitData.rangeOfAction;
-        rangeOfVision = unitData.rangeOfVision;
+        Stats = new UnitStats(
+            unitData.maxHealth,
+            unitData.damage,
+            unitData.speed,
+            unitData.rangeOfAction,
+            unitData.rangeOfVision
+        );
         ApplyUpgrade(unitData.upgrade);
     }
 
     public virtual void ApplyUpgrade(Upgrade upgrade)
     {
         var level = upgrade.upgradeLevels[upgrade.upgradeLvl];
-
-        maxHealth = level.hp;
-        health = maxHealth;
-        damage = level.dmg;
+        Stats.ApplyModifier(level);
         UpdateColor();
     }
     
@@ -81,35 +74,32 @@ public abstract class Unit : MonoBehaviour, IDamageable, IMovable
         if (target != null)
         {
             float distanceToTarget = Vector2.Distance(transform.position, target.position);
-            if (distanceToTarget <= rangeOfAction) UnitAction();
-            else transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            if (distanceToTarget <= Stats.RangeOfAction) UnitAction();
+            else transform.position = Vector2.MoveTowards(transform.position, target.position, Stats.Speed * Time.deltaTime);
         }
     }
 
     public void TakeDamage(float amount)
     {
-        health -= amount;
+        Stats.TakeDamage(amount);
         UpdateColor();
-        if (health <= 0)
+        if (Stats.CurrentHealth <= 0)
         {
             UnitDeath();
         }
     }
-
-    private void UpdateColor()
-    {
-        var healthPercentage = health / maxHealth;
-        originalColor = Color.Lerp(Color.red, Color.white, healthPercentage);
-        spriteRenderer.color = originalColor;
-
-    }
     
     private void UnitDeath()
     {
-        var tombstoneInstance = Instantiate(tombstonePrefab, transform.position, Quaternion.identity);
-        tombstoneInstance.GetComponent<Tombstone>().Initialize(this);
-        GameManager.Instance.deck.cardsOnBoard.Remove(this);
+        TombstoneManager.Instance.RegisterDeath(this, transform.position);
+        OnDeath?.Invoke();
         Destroy(gameObject);
+    }
+
+    private void UpdateColor()
+    {
+        var healthPercentage = Stats.CurrentHealth / Stats.FullHealth;
+        spriteRenderer.color = Color.Lerp(Color.red, Color.white, healthPercentage);
     }
 
     public void ReviveUnit()

@@ -5142,6 +5142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  tombstonePrefab: {fileID: 2541474329055780625, guid: bfb73bdf74238014bb5b60176f9a7903, type: 3}
   tombstones: []
 --- !u!4 &1180686012
 Transform:

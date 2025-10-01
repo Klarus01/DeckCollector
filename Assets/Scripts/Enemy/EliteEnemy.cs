@@ -34,30 +34,26 @@ public class EliteEnemy : Enemy
 
     private void ApplyEliteModifiers()
     {
-        var eliteMultiplier = 1f;
         switch (eliteLevel)
         {
             case EliteLevel.EliteEasy:
-                partDrop = 2;
-                pointsForEnemy = 200;
-                eliteMultiplier = 1.25f;
+                lootMultiplier = 1.5f;
                 SetEliteAppearance(Color.yellow, 1.1f);
                 break;
             case EliteLevel.EliteNormal:
-                partDrop = 3;
-                pointsForEnemy = 300;
-                eliteMultiplier = 1.5f;
+                lootMultiplier = 2f;
                 SetEliteAppearance(Color.blue, 1.2f);
                 break;
             case EliteLevel.EliteHard:
-                partDrop = 5;
-                pointsForEnemy = 500;
-                eliteMultiplier = 2f;
+                lootMultiplier = 3f;
                 SetEliteAppearance(new Color(0.5f, 0f, 0.5f), 1.3f);
+                break;
+            default:
+                lootMultiplier = 1f;
                 break;
         }
 
-        InitializeStats(eliteMultiplier);
+        InitializeStats(lootMultiplier);
     }
 
     private void SetEliteAppearance(Color color, float sizeMultiplier)

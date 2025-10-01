@@ -51,9 +51,9 @@ private void CreateCard(CardUI cardUI, Unit unit, bool isNewCard = false)
 {
     cardUI.unit = unit.unitData.unit;
     cardUI.cardImage.sprite = unit.unitData.cardSprite;
-    cardUI.unitMaxHealth = unit.upgrade.currentHelth;
+    cardUI.unitMaxHealth = unit.upgrade.currentHealth;
     if (isNewCard) cardUI.unitHealth = cardUI.unitMaxHealth;
-    else cardUI.unitHealth = unit.health;
+    else cardUI.unitHealth = unit.Stats.CurrentHealth;
     cards.Add(cardUI);
 }
 

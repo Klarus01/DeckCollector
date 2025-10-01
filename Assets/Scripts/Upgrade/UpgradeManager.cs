@@ -41,7 +41,7 @@ public class UpgradeManager : SingletonMonobehaviour<UpgradeManager>
         {
             foreach (var unit in key.Value)
             {
-                unit.SetBaseStats();
+                unit.InitializeStats();
             }
         }
     }

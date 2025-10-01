@@ -25,9 +25,9 @@ public class GathererUnit : Unit, IGatherable
 
     private Transform SearchForTarget()
     {
-        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+        var targets = Physics2D.OverlapCircleAll(transform.position, Stats.RangeOfVision);
 
-        var closestDistance = Mathf.Infinity;
+        var closestDistance = Stats.RangeOfVision;
         Transform closestTarget = null;
 
         foreach (var target in targets)

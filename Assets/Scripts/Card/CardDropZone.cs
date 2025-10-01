@@ -10,7 +10,7 @@ public class CardDropZone : MonoBehaviour
         }
         else if (collision.TryGetComponent<Unit>(out Unit unit))
         {
-            unit.isAboveDropPoint = true;
+            unit.Stats.ToggleIsAboveDropPoint(true);
         }
     }
 
@@ -22,7 +22,7 @@ public class CardDropZone : MonoBehaviour
         }
         else if (collision.TryGetComponent<Unit>(out Unit unit))
         {
-            unit.isAboveDropPoint = false;
+            unit.Stats.ToggleIsAboveDropPoint(false);
         }
     }
 }

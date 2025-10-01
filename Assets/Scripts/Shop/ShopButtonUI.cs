@@ -44,7 +44,7 @@ public class ShopButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void UpdateItemText()
     {
-        unitStats.SetText($"DMG: {unit.upgrade.currentDamage}\nHP: {unit.upgrade.currentHelth}");
+        unitStats.SetText($"DMG: {unit.upgrade.currentDamage}\nHP: {unit.upgrade.currentHealth}");
     }
 
     private bool HasEnoughGold()

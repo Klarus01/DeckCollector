@@ -25,8 +25,8 @@ public class FighterUnit : Unit, IAttackable
     public override void UnitAction()
     {
         if (timer < attackSpeed) return;
-        if (isInvisible) return;
-        if (isDragging) return;
+        if (Stats.IsInvisible) return;
+        if (Stats.IsDragging) return;
         if (!target) return;
         Attack();
     }
@@ -44,14 +44,14 @@ public class FighterUnit : Unit, IAttackable
         isAttacking = false;
         if (!target) return;
         target.TryGetComponent<IDamageable>(out var enemy);
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(Stats.CurrentDamage);
     }
 
     private Transform SearchForTarget()
     {
-        var targets = Physics2D.OverlapCircleAll(transform.position, rangeOfVision);
+        var targets = Physics2D.OverlapCircleAll(transform.position, Stats.RangeOfVision);
 
-        var closestDistance = rangeOfVision;
+        var closestDistance = Stats.RangeOfVision;
         Transform closestTarget = null;
 
         foreach (var target in targets)

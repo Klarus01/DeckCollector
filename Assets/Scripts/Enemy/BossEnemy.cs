@@ -4,7 +4,13 @@ public class BossEnemy : EliteEnemy
 {
     [SerializeField] private bool canUseRangedAttack;
     [SerializeField] private GameObject projectilePrefab;
-    
+
+    protected override void Start()
+    {
+        base.Start();
+        lootMultiplier = 5f;
+    }
+
     protected override void Attack()
     {
         if (canUseRangedAttack)
@@ -17,12 +23,6 @@ public class BossEnemy : EliteEnemy
         }
 
         ResetAttackCooldown();
-    }
-
-    protected override void DropLoot()
-    {
-        base.DropLoot();
-        pointsForEnemy = 1000;
     }
 
     private void LaunchProjectile()

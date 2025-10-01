@@ -67,7 +67,7 @@ public class Farm : MonoBehaviour
 
         foreach (var coll in colliders)
         {
-            if (coll.TryGetComponent<GathererUnit>(out var gatherer) && !gatherer.isDragging)
+            if (coll.TryGetComponent<GathererUnit>(out var gatherer) && !gatherer.Stats.IsDragging)
             {
                 detectedGatherers.Add(gatherer);
                 if (!gatherers.Contains(gatherer))

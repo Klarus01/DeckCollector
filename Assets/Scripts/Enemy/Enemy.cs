@@ -3,12 +3,12 @@ using System;
 
 public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
 {
+    [SerializeField] private Loot loot;
     [SerializeField] protected EnemyData enemyData;
     [SerializeField] protected Transform target;
     [SerializeField] protected Animator animator;
 
     protected bool isAttacking;
-    protected int partDrop = 1;
     protected SpriteRenderer spriteRenderer;
     protected float maxHealth;
     protected float health;
@@ -18,7 +18,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     protected float rangeOfVision;
     protected float rangeOfAttack;
     protected float attackTimer;
-    protected int pointsForEnemy = 100;
+    protected float lootMultiplier = 1f;
 
     public event Action<Enemy> OnDeath;
 
@@ -26,6 +26,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        loot.Initialize(lootMultiplier);
     }
 
     protected void InitializeStats(float eliteMultiplier = 1f)
@@ -63,7 +64,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         if (!target.TryGetComponent<Unit>(out var targetUnit)) return;
         var distanceToTarget = Vector2.Distance(transform.position, target.position);
         if (distanceToTarget > rangeOfAttack) return;
-        if (!targetUnit.isInvisible) targetUnit.TakeDamage(damage);
+        if (!targetUnit.Stats.IsInvisible) targetUnit.TakeDamage(damage);
     }
 
     private void FindClosestTarget()
@@ -73,7 +74,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         Transform closestTarget = null;
         foreach (var potentialTarget in targets)
         {
-            if (potentialTarget.TryGetComponent<Unit>(out Unit unit) && !unit.isInvisible)
+            if (potentialTarget.TryGetComponent<Unit>(out Unit unit) && !unit.Stats.IsInvisible)
             {
                 var distance = Vector2.Distance(transform.position, unit.transform.position);
                 if (distance < closestDistance)
@@ -86,12 +87,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         target = closestTarget;
     }
 
-    protected virtual void DropLoot()
-    {
-        GameManager.Instance.PartCount += partDrop;
-        GameManager.Instance.AddPoints(pointsForEnemy);
-    }
-
     public void TakeDamage(float amount)
     {
         health -= amount;
@@ -99,8 +94,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMovable
         if (health <= 0)
         {
             OnDeath?.Invoke(this);
-
-            DropLoot();
+            loot?.DropLoot();
             Destroy(gameObject);
         }
     }

@@ -16,13 +16,13 @@ public class Assassin : FighterUnit
     {
         base.Update();
 
-        if (isDragging)
+        if (Stats.IsDragging)
         {
-            isInvisible = true;
+            Stats.ToggleIsInvisible(true);
             invisibleTimer = invisible;
         }
 
-        if (!isDragging && timer < attackSpeed)
+        if (!Stats.IsDragging && timer < attackSpeed)
         {
             timer += Time.deltaTime;
         }
@@ -32,14 +32,14 @@ public class Assassin : FighterUnit
 
     private void ManageInvisibility()
     {
-        if (isInvisible)
+        if (Stats.IsInvisible)
         {
             spriteRenderer.color = new Color(1f, 1f, 1f, .5f);
             invisibleTimer -= Time.deltaTime;
             if (invisibleTimer <= 0)
             {
                 spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-                isInvisible = false;
+                Stats.ToggleIsInvisible(false);
                 invisibleTimer = invisible;
             }
         }

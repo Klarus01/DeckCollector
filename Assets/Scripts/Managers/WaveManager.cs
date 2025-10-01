@@ -178,7 +178,6 @@ public class WaveManager : MonoBehaviour
     {
         defeatedEnemiesInWave++;
         liveEnemies.Remove(defeatedEnemy);
-
         uiWaveManager.UpdateWaveProgress(GetWaveProgress());
     }
 
